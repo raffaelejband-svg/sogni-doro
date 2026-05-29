@@ -1,0 +1,816 @@
+/*
+ * style_60plus.css — Design System Accessibilità Over 60
+ * Progetto SMORFIA
+ *
+ * Palette:
+ *   Background : #0d0d1a
+ *   Gold       : #c9a84c
+ *   Text       : #e8d5b7
+ *   Accent blue: #8fb3c0
+ *   Lavender   : #b8a0d0
+ *
+ * Font size base: 20px
+ * Touch target minimo: 48px
+ * Contrasto WCAG AA garantito su tutti i colori principali.
+ */
+
+/* ══════════════════════════════════════════════
+   1. BASE E TIPOGRAFIA
+   ══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+html,
+body,
+[data-testid="stApp"] {
+    background: #0d0d1a !important;
+    color: #e8d5b7 !important;
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 20px !important;       /* base over-60: 20px */
+    line-height: 1.7;
+}
+
+/* Paragrafi e testo corrente */
+p,
+li,
+span,
+label,
+div {
+    font-size: 1rem;                  /* = 20px con base 20px */
+    line-height: 1.7;
+    color: #e8d5b7;
+}
+
+/* Titoli h1–h4 scalati da base 20px */
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    color: #c9a84c;
+    letter-spacing: 0.2em;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 40px rgba(201,168,76,0.35), 0 0 80px rgba(201,168,76,0.1);
+}
+
+h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: #c9a84c;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+    margin-bottom: 0.9rem;
+}
+
+h3 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: #e8d5b7;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+}
+
+h4 {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.4rem;
+    color: #8fb3c0;
+    margin-bottom: 0.6rem;
+}
+
+
+/* ══════════════════════════════════════════════
+   2. LAYOUT E SPAZIATURA GENEROSA
+   ══════════════════════════════════════════════ */
+
+/* Aumenta padding generale dell'app */
+[data-testid="stAppViewContainer"] > .main {
+    padding: 2rem 2.5rem !important;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* Spazio tra blocchi Streamlit */
+[data-testid="stVerticalBlock"] > [data-testid="stVerticalBlockBorderWrapper"],
+[data-testid="stVerticalBlock"] > div {
+    margin-bottom: 1.5rem !important;
+}
+
+/* Evita elementi troppo vicini in colonne */
+[data-testid="stHorizontalBlock"] {
+    gap: 1.5rem !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   3. INPUT TEXTAREA — GRANDE E LEGGIBILE
+   ══════════════════════════════════════════════ */
+
+textarea {
+    background: #12122a !important;
+    color: #e8d5b7 !important;
+    border: 2px solid #c9a84c55 !important;
+    border-radius: 14px !important;
+    font-family: 'Crimson Text', Georgia, serif !important;
+    font-size: 1.2rem !important;        /* 24px */
+    line-height: 1.8 !important;
+    padding: 1rem 1.2rem !important;
+    min-height: 120px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+textarea:focus {
+    border-color: #c9a84c !important;
+    box-shadow: 0 0 18px rgba(201,168,76,0.3) !important;
+    outline: none !important;
+}
+
+textarea::placeholder {
+    color: #7a6a50 !important;
+    font-style: italic;
+    font-size: 1.1rem !important;
+}
+
+/* Label degli input */
+[data-testid="stTextArea"] label p,
+[data-testid="stTextInput"] label p {
+    font-family: 'Cinzel', serif !important;
+    font-size: 1.1rem !important;
+    color: #c9a84c !important;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   4. BOTTONI — TOUCH TARGET AMPIO
+   ══════════════════════════════════════════════ */
+
+/* Tutti i bottoni: touch target ≥ 48px, arrotondamento generoso */
+[data-testid="stButton"] > button {
+    min-height: 48px !important;
+    min-width: 48px !important;
+    border-radius: 12px !important;
+    font-family: 'Cinzel', serif !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.08em !important;
+    padding: 0.75rem 1.8rem !important;
+    cursor: pointer;
+    transition: all 0.2s ease !important;
+}
+
+/* Bottone primario */
+[data-testid="stButton"] > button[kind="primary"] {
+    background: linear-gradient(135deg, #8b6914, #c9a84c) !important;
+    color: #0d0d1a !important;
+    font-weight: 700 !important;
+    border: none !important;
+    min-height: 60px !important;
+    font-size: 1.3rem !important;
+    padding: 0.9rem 2.5rem !important;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 24px rgba(201,168,76,0.35) !important;
+}
+
+[data-testid="stButton"] > button[kind="primary"]:hover {
+    box-shadow: 0 8px 36px rgba(201,168,76,0.55) !important;
+    transform: translateY(-2px) !important;
+}
+
+[data-testid="stButton"] > button[kind="primary"]:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 12px rgba(201,168,76,0.4) !important;
+}
+
+/* Bottone secondario */
+[data-testid="stButton"] > button:not([kind="primary"]) {
+    background: #1a1a2e !important;
+    color: #c9a84c !important;
+    border: 2px solid #c9a84c55 !important;
+    min-height: 52px !important;
+    font-size: 1.1rem !important;
+}
+
+[data-testid="stButton"] > button:not([kind="primary"]):hover {
+    border-color: #c9a84c !important;
+    background: #22223a !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   5. TABS — PIÙ GRANDI E CLICCABILI
+   ══════════════════════════════════════════════ */
+
+[data-testid="stTabs"] [data-testid="stTab"] {
+    font-family: 'Cinzel', serif !important;
+    font-size: 1.05rem !important;
+    color: #7a6a50 !important;
+    letter-spacing: 0.05em !important;
+    padding: 0.75rem 1.2rem !important;
+    min-height: 48px !important;
+}
+
+[data-testid="stTabs"] [data-testid="stTab"][aria-selected="true"] {
+    color: #c9a84c !important;
+    border-bottom: 3px solid #c9a84c !important;
+}
+
+[data-testid="stTabsContent"] {
+    background: transparent !important;
+    border: none !important;
+    padding-top: 1.5rem !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   6. METRIC — NUMERI GRANDI
+   ══════════════════════════════════════════════ */
+
+[data-testid="stMetric"] {
+    background: #12122a;
+    border: 1px solid #c9a84c33;
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+    text-align: center;
+}
+
+[data-testid="stMetricLabel"] p {
+    font-family: 'Cinzel', serif !important;
+    font-size: 0.9rem !important;
+    color: #7a6a50 !important;
+}
+
+[data-testid="stMetricValue"] {
+    font-family: 'Cinzel', serif !important;
+    color: #c9a84c !important;
+    font-size: 2.5rem !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   7. ALERT / MESSAGGI DI ERRORE — GRANDI E CHIARI
+   ══════════════════════════════════════════════ */
+
+[data-testid="stAlert"] {
+    border-radius: 14px !important;
+    padding: 1.2rem 1.6rem !important;
+    font-size: 1.15rem !important;
+    line-height: 1.6 !important;
+}
+
+/* Errore: bordo rosso ben visibile */
+[data-testid="stAlert"][data-baseweb="notification"][kind="error"],
+div[data-testid="stAlert"] > div[data-testid="alertError"] {
+    border: 2px solid #e05a5a !important;
+    font-weight: 600;
+}
+
+/* Warning: bordo ambra */
+[data-testid="stAlert"][data-baseweb="notification"][kind="warning"],
+div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
+    border: 2px solid #c9a84c !important;
+    font-weight: 600;
+}
+
+/* Info */
+[data-testid="stAlert"][data-baseweb="notification"][kind="info"] {
+    border: 2px solid #8fb3c0 !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   8. SPINNER
+   ══════════════════════════════════════════════ */
+
+[data-testid="stSpinner"] > div {
+    color: #c9a84c !important;
+    font-size: 1.1rem !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   9. CLASSI PERSONALIZZATE OVER-60
+   ══════════════════════════════════════════════ */
+
+/* ── .passo-numero ──
+   Cerchio dorato con numero grande — per guide visive step-by-step */
+.passo-numero {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b6914, #c9a84c);
+    color: #0d0d1a;
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 0 18px rgba(201,168,76,0.45);
+    margin-right: 1rem;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+/* Riga passo completa (opzionale) */
+.passo-riga {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.4rem 0;
+    padding: 1rem 1.4rem;
+    background: #12122a;
+    border-radius: 14px;
+    border: 1px solid #c9a84c22;
+}
+
+.passo-testo {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.15rem;
+    color: #e8d5b7;
+    line-height: 1.6;
+}
+
+/* ── .numero-lotto ──
+   Card enorme per visualizzare i numeri del lotto */
+.numero-lotto {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #14142e 0%, #1e1e40 100%);
+    border: 2px solid #c9a84c;
+    border-radius: 18px;
+    padding: 1.4rem 1.2rem 1rem;
+    margin: 0.5rem;
+    min-width: 100px;
+    min-height: 110px;
+    box-shadow:
+        0 0 24px rgba(201,168,76,0.30),
+        0 6px 30px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(201,168,76,0.15);
+    transition: transform 0.18s, box-shadow 0.18s;
+    cursor: default;
+}
+
+.numero-lotto:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 0 40px rgba(201,168,76,0.50),
+        0 12px 40px rgba(0,0,0,0.6);
+}
+
+/* Il numero grande dentro la card */
+.numero-lotto .cifra {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #c9a84c;
+    line-height: 1;
+    text-shadow:
+        0 0 20px rgba(201,168,76,0.6),
+        0 0 60px rgba(201,168,76,0.25);
+}
+
+/* Etichetta sotto il numero */
+.numero-lotto .etichetta {
+    font-family: 'Crimson Text', serif;
+    font-size: 0.85rem;
+    color: #8fb3c0;
+    margin-top: 0.5rem;
+    letter-spacing: 0.04em;
+    text-align: center;
+}
+
+/* Contenitore flex per più numeri affiancati */
+.numeri-lotto-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+/* ── .risultato-principale ──
+   Box prominente per i risultati principali */
+.risultato-principale {
+    background: linear-gradient(135deg, #0f0f22 0%, #16163a 100%);
+    border: 2px solid #c9a84c66;
+    border-radius: 18px;
+    padding: 2rem 2.4rem;
+    margin: 1.8rem 0;
+    box-shadow:
+        0 0 40px rgba(201,168,76,0.12),
+        0 8px 32px rgba(0,0,0,0.5);
+    font-family: 'Crimson Text', serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #e8d5b7;
+}
+
+.risultato-principale .titolo-risultato {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: #c9a84c;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #c9a84c33;
+}
+
+.risultato-principale p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 0.6rem;
+}
+
+/* ── .bottone-grande ──
+   Bottone extra-large per azioni principali */
+.bottone-grande {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, #8b6914, #c9a84c);
+    color: #0d0d1a;
+    font-family: 'Cinzel', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 16px;
+    padding: 1rem 2.8rem;
+    min-height: 64px;
+    min-width: 200px;
+    box-shadow: 0 4px 28px rgba(201,168,76,0.40);
+    cursor: pointer;
+    transition: all 0.22s ease;
+    text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.bottone-grande:hover {
+    box-shadow: 0 8px 40px rgba(201,168,76,0.60);
+    transform: translateY(-3px);
+    color: #0d0d1a;
+    text-decoration: none;
+}
+
+.bottone-grande:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 14px rgba(201,168,76,0.45);
+}
+
+/* Variante secondaria del bottone grande */
+.bottone-grande.secondario {
+    background: transparent;
+    color: #c9a84c;
+    border: 2px solid #c9a84c;
+    box-shadow: none;
+}
+
+.bottone-grande.secondario:hover {
+    background: #c9a84c15;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+    color: #c9a84c;
+}
+
+/* ── .testo-semplice ──
+   Blocco di testo grande, leggibile, spaziato — non troppo denso */
+.testo-semplice {
+    font-family: 'Crimson Text', Georgia, serif;
+    font-size: 1.2rem;
+    line-height: 1.9;
+    color: #e8d5b7;
+    max-width: 72ch;          /* larghezza ottimale lettura */
+    margin: 0 auto 1.5rem;
+    letter-spacing: 0.015em;
+}
+
+.testo-semplice p {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    line-height: 1.9;
+}
+
+.testo-semplice strong,
+.testo-semplice b {
+    color: #c9a84c;
+    font-weight: 700;
+}
+
+.testo-semplice em,
+.testo-semplice i {
+    color: #b8a0d0;
+}
+
+/* ══════════════════════════════════════════════
+   10. CLASSI DI SUPPORTO ESISTENTI (adattate over-60)
+   ══════════════════════════════════════════════ */
+
+/* Card simbolo — più spaziosa */
+.sym-card {
+    background: linear-gradient(135deg, #0f0f22 0%, #12122a 100%);
+    border-left: 4px solid #c9a84c;
+    border-radius: 0 14px 14px 0;
+    padding: 1.2rem 1.6rem;
+    margin: 0.8rem 0;
+    transition: border-color 0.2s;
+}
+
+.sym-card:hover { border-left-color: #e8c86c; }
+
+.sym-name {
+    font-family: 'Cinzel', serif;
+    color: #c9a84c;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.sym-arrow { color: #5a4a35; font-size: 1.1rem; }
+
+.sym-nums {
+    color: #8fb3c0;
+    font-size: 1.1rem;
+    margin-top: 0.3rem;
+}
+
+.sym-detail {
+    color: #9e8a6a;
+    font-size: 1rem;
+    margin-top: 0.35rem;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.sym-ronchetti {
+    color: #b8a0d0;
+    font-size: 1rem;
+    font-style: italic;
+    margin-top: 0.5rem;
+    border-top: 1px solid #b8a0d022;
+    padding-top: 0.4rem;
+    line-height: 1.6;
+}
+
+/* Card numero — versione over-60 */
+.num-card {
+    background: linear-gradient(145deg, #14142e 0%, #1a1a38 100%);
+    border: 2px solid #c9a84c44;
+    border-radius: 16px;
+    text-align: center;
+    padding: 1.6rem 0.6rem 1.2rem;
+    margin: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(201,168,76,0.1);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.num-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 36px rgba(201,168,76,0.25);
+}
+
+.num-big {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    color: #c9a84c;
+    line-height: 1;
+    text-shadow: 0 0 24px rgba(201,168,76,0.5);
+}
+
+.num-planet {
+    font-size: 0.9rem;
+    color: #7a6a50;
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+}
+
+.num-origin {
+    font-size: 0.9rem;
+    color: #9e8a6a;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+}
+
+/* Score row — più alta per touch */
+.score-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    margin: 5px 0;
+    background: #0f0f22;
+    border: 1px solid #1a1a35;
+    min-height: 52px;
+}
+
+.score-num {
+    font-family: 'Cinzel', serif;
+    color: #c9a84c;
+    font-size: 1.6rem;
+    min-width: 48px;
+    text-align: right;
+}
+
+.score-bar-wrap {
+    flex: 1;
+    background: #1a1a35;
+    border-radius: 6px;
+    height: 8px;
+}
+
+.score-bar-fill {
+    height: 8px;
+    background: linear-gradient(90deg, #8b6914, #c9a84c);
+    border-radius: 6px;
+}
+
+.score-val {
+    color: #9e8a6a;
+    font-size: 0.9rem;
+    min-width: 70px;
+}
+
+.score-sp {
+    color: #9e8a6a;
+    font-size: 0.95rem;
+    font-style: italic;
+    flex: 2;
+}
+
+/* Separatore mistico */
+.mystic-sep {
+    text-align: center;
+    color: #3a3a5a;
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    margin: 2rem 0;
+}
+
+/* Notice di fondo */
+.notice {
+    background: #09091a;
+    border: 1px solid #c9a84c20;
+    border-radius: 12px;
+    padding: 1.2rem 1.8rem;
+    font-size: 0.95rem;
+    color: #5a4a35;
+    font-style: italic;
+    text-align: center;
+    margin-top: 2.5rem;
+    line-height: 1.7;
+}
+
+/* Header app */
+.smorfia-header {
+    text-align: center;
+    padding: 2.8rem 0 2rem;
+    border-bottom: 1px solid #c9a84c22;
+    margin-bottom: 2.5rem;
+}
+
+.smorfia-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    color: #c9a84c;
+    letter-spacing: 0.2em;
+    text-shadow: 0 0 40px rgba(201,168,76,0.35), 0 0 80px rgba(201,168,76,0.1);
+    margin: 0;
+    line-height: 1.15;
+}
+
+.smorfia-subtitle {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.15rem;
+    color: #7a6a50;
+    font-style: italic;
+    margin-top: 0.6rem;
+    letter-spacing: 0.05em;
+}
+
+.smorfia-stars {
+    font-size: 1.4rem;
+    letter-spacing: 0.3em;
+    color: #c9a84c66;
+    margin-bottom: 0.4rem;
+}
+
+/* Sezione esoterica */
+.eso-section {
+    background: #09091a;
+    border: 1px solid #c9a84c1a;
+    border-radius: 14px;
+    padding: 1.6rem 2rem;
+    margin: 1rem 0;
+    font-family: 'Crimson Text', serif;
+    font-size: 1.1rem;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    color: #c8b89a;
+}
+
+.eso-section-title {
+    font-family: 'Cinzel', serif;
+    color: #c9a84c;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    opacity: 0.85;
+}
+
+/* Badge */
+.badge {
+    display: inline-block;
+    font-size: 0.85rem;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin: 0 4px;
+}
+
+.badge-gold { background: #c9a84c22; color: #c9a84c; border: 1px solid #c9a84c44; }
+.badge-blue { background: #8fb3c022; color: #8fb3c0; border: 1px solid #8fb3c044; }
+
+/* Comparison items */
+.comparison-item {
+    background: #0f0f22;
+    border: 1px solid #1a1a35;
+    border-radius: 10px;
+    padding: 0.8rem 1.2rem;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #9e8a6a;
+    line-height: 1.6;
+}
+
+.comparison-item strong { color: #c9a84c; }
+.shared-nums { color: #8fb3c0; font-weight: 600; }
+
+/* Combo header */
+.combo-header {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #c9a84c;
+    letter-spacing: 0.1em;
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #c9a84c22;
+}
+
+.combo-note {
+    color: #7a6a50;
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-top: 0.3rem;
+}
+
+
+/* ══════════════════════════════════════════════
+   11. UTILITY DI ACCESSIBILITÀ
+   ══════════════════════════════════════════════ */
+
+/* Focus visibile per navigazione da tastiera */
+:focus-visible {
+    outline: 3px solid #c9a84c !important;
+    outline-offset: 3px !important;
+}
+
+/* Garantisce touch target 48px su tutti i link e button generici */
+a,
+button {
+    min-height: 48px;
+    min-width: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Testo selezionato */
+::selection {
+    background: rgba(201,168,76,0.30);
+    color: #e8d5b7;
+}
+
+/* Scrollbar stilizzata — più larga per over 60 */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0d0d1a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c9a84c55;
+    border-radius: 8px;
+    border: 2px solid #0d0d1a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #c9a84c99;
+}
+
+/* Nasconde padding top default Streamlit */
+[data-testid="stAppViewContainer"] > .main > div:first-child { padding-top: 0 !important; }
+[data-testid="stHeader"] { display: none; }

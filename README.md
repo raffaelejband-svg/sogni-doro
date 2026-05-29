@@ -1,4 +1,4 @@
-# 🌙 SMORFIA — Il Sistema dei Sogni
+# 🌙 Sogni d'Oro
 
 > Racconti un sogno → riconosce simboli → consulta 7 fonti esoteriche → propone numeri per Lotto, MillionDAY e SuperEnalotto.
 
@@ -21,8 +21,8 @@
 ## Avvio locale
 
 ```bash
-git clone https://github.com/TUO_USERNAME/smorfia-sogni
-cd smorfia-sogni
+git clone https://github.com/TUO_USERNAME/sogni-doro
+cd sogni-doro
 pip install -r requirements.txt
 streamlit run app.py
 ```
