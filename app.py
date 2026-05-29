@@ -874,7 +874,7 @@ if analyze and dream_input.strip():
         )
     with col_kofi:
         st.markdown(
-            """<a href="https://ko-fi.com/sognidoro" target="_blank"
+            """<a href="https://ko-fi.com/sognienumeri" target="_blank"
                style="display:flex; align-items:center; justify-content:center;
                       min-height:60px; text-align:center;
                       background:linear-gradient(135deg,#7a5a10,#c9a84c);
@@ -1095,9 +1095,9 @@ st.markdown("""
   🌙 Sogni d'Oro — Solo intrattenimento · Vietato ai minori di 18 anni<br>
   7 fonti esoteriche &nbsp;·&nbsp; Smorfia napoletana &nbsp;·&nbsp; Capacelli 1881
   &nbsp;·&nbsp; Sefer Yetzira &nbsp;·&nbsp; Sepharial (1920) &nbsp;·&nbsp; Ronchetti (1922)<br>
-  <a href="https://ko-fi.com/sognidoro" target="_blank"
+  <a href="https://ko-fi.com/sognienumeri" target="_blank"
      style="color:#c9a84c55; text-decoration:none; font-size:0.75rem;">
-    ☕ ko-fi.com/sognidoro
+    ☕ ko-fi.com/sognienumeri
   </a>
 </div>
 """, unsafe_allow_html=True)
