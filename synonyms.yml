@@ -1,0 +1,822 @@
+# Dizionario sinonimi per il chatbot Smorfia
+# Formato: simbolo_canonico: [varianti, sinonimi, metafore, parole correlate]
+# Il simbolo canonico deve corrispondere a una voce nell'indice Smorfia.
+# Modificabile liberamente senza toccare il codice Python.
+
+# --- NATURA ED ELEMENTI ---
+
+acqua:
+  - mare
+  - oceano
+  - fiume
+  - lago
+  - pioggia
+  - rubinetto
+  - bagnato
+  - bagnarsi
+  - sorgente
+  - cascata
+  - pozzanghera
+  - stagno
+  - ruscello
+  - umido
+  - alluvione
+  - inondazione
+  - diluvio
+  - fontana
+  - pozzo
+  - doccia
+  - vasca
+  - nuotare
+  - annegare
+  - bere
+  - sete
+  - lacrima
+  - lacrime
+
+fuoco:
+  - fiamma
+  - incendio
+  - bruciare
+  - bruciava
+  - bruciato
+  - ardere
+  - caldissimo
+  - calore
+  - brace
+  - cenere
+  - candela
+  - torcia
+  - camino
+  - sigaretta
+  - accendere
+  - scoppio
+  - esplosione
+  - fumo
+
+aria:
+  - vento
+  - brezza
+  - tempesta
+  - tifone
+  - uragano
+  - bufera
+  - soffio
+  - respiro
+  - respirare
+  - ciclone
+
+terra:
+  - campo
+  - campagna
+  - prato
+  - giardino
+  - fango
+  - argilla
+  - sabbia
+  - deserto
+  - bosco
+  - foresta
+  - suolo
+  - pavimento
+  - terreno
+
+luna:
+  - notte
+  - buio
+  - oscurità
+  - ombra
+  - luna piena
+  - lunare
+  - satellite
+
+sole:
+  - luce
+  - luminoso
+  - giorno
+  - alba
+  - tramonto
+  - crepuscolo
+  - aurora
+  - raggi
+  - splendere
+
+cielo:
+  - nuvola
+  - nubi
+  - nuvoloso
+  - stellato
+  - stelle
+  - firmamento
+  - paradiso
+  - alto
+  - volare
+  - nuvolaglia
+
+# --- ANIMALI ---
+
+cane:
+  - cani
+  - cucciolo
+  - cagnolino
+  - abbaiare
+  - abbaia
+  - randagio
+  - randagia
+  - randagi
+
+gatto:
+  - gatti
+  - micio
+  - gattino
+  - felino
+  - miagolare
+
+serpente:
+  - vipera
+  - cobra
+  - boa
+  - biscia
+  - rettile
+  - serpe
+  - strisciare
+
+cavallo:
+  - cavalli
+  - puledro
+  - stallone
+  - giumenta
+  - destriero
+  - galoppo
+  - galoppare
+
+aquila:
+  - falco
+  - rapace
+  - corvo
+  - avvoltoio
+  - rapace
+  - planare
+
+leone:
+  - tigre
+  - leopardo
+  - pantera
+  - felino
+  - fiera
+  - belva
+
+toro:
+  - mucca
+  - bue
+  - vitello
+  - bovino
+  - mandria
+
+uccello:
+  - uccelli
+  - rondine
+  - passero
+  - colomba
+  - piccione
+  - cicogna
+  - gallo
+  - gallina
+  - pollo
+  - papera
+  - cigno
+  - volare
+
+pesce:
+  - pesci
+  - pescatore
+  - pesca
+  - mare
+  - amo
+  - rete
+
+# --- PERSONE E RUOLI ---
+
+madre:
+  - mamma
+  - mammà
+  - genitrice
+  - matriarca
+
+padre:
+  - papa
+  - papà
+  - babbo
+  - genitore
+  - paterno
+
+genitore:
+  - madre
+  - padre
+  - mamma
+  - papa
+  - papà
+  - babbo
+  - mamma
+  - genitori
+  - genitrice
+
+figlio:
+  - bambino
+  - bimbo
+  - neonato
+  - piccolo
+  - prole
+  - figlio maschio
+
+figlia:
+  - bimba
+  - bambina
+  - neonata
+  - piccola
+  - prole
+  - figlia femmina
+
+bambino:
+  - bimbo
+  - bimba
+  - bambina
+  - neonato
+  - neonata
+  - infante
+  - piccino
+  - pargolo
+
+fratello:
+  - sorella
+  - fratelli
+  - sorelle
+  - fratellino
+  - sorellina
+  - sibling
+
+nonno:
+  - nonna
+  - nonni
+  - anziano
+  - vecchio
+  - vecchia
+  - avo
+  - ava
+
+donna:
+  - ragazza
+  - moglie
+  - femmina
+  - signora
+  - dama
+  - matriarca
+  - vedova
+
+uomo:
+  - ragazzo
+  - marito
+  - maschio
+  - signore
+  - gentiluomo
+
+amico:
+  - amica
+  - amici
+  - compagno
+  - conoscente
+  - compagna
+
+nemico:
+  - rivale
+  - avversario
+  - nemici
+  - antagonista
+
+prete:
+  - parroco
+  - sacerdote
+  - don
+  - frate
+  - monaco
+  - vescovo
+  - cardinale
+  - papa
+  - chiesa
+
+re:
+  - regina
+  - imperatore
+  - sovrano
+  - monarca
+  - principe
+  - principessa
+  - corona
+  - trono
+
+soldato:
+  - militare
+  - esercito
+  - guerra
+  - battaglia
+  - combattere
+  - fucile
+  - pistola
+  - arma
+
+# --- LUOGHI ---
+
+abitazione:
+  - casa
+  - appartamento
+  - stanza
+  - palazzo
+  - edificio
+  - dimora
+  - villa
+  - alloggio
+
+chiesa:
+  - cattedrale
+  - duomo
+  - cappella
+  - tempio
+  - sinagoga
+  - moschea
+  - altare
+  - preghiera
+
+cimitero:
+  - tomba
+  - sepolcro
+  - lapide
+  - funerale
+  - morte
+  - morto
+  - morire
+  - defunto
+  - bara
+  - feretro
+
+strada:
+  - via
+  - cammino
+  - sentiero
+  - viaggio
+  - percorso
+  - vicolo
+  - viale
+  - autostrada
+  - cammino
+
+montagna:
+  - monte
+  - collina
+  - vetta
+  - cima
+  - precipizio
+  - burrone
+  - roccia
+  - pietra
+  - sasso
+
+mare:
+  - oceano
+  - spiaggia
+  - onda
+  - spiagge
+  - costa
+  - porto
+  - barca
+  - nave
+  - barca
+  - naufrago
+  - naufragio
+
+# --- AZIONI ONIRICHE ---
+
+cadere:
+  - caduta
+  - precipitare
+  - cascare
+  - rotolare
+  - scivolare
+  - ruzzolare
+
+correre:
+  - corsa
+  - fuggire
+  - scappare
+  - inseguire
+  - inseguimento
+  - veloce
+
+volare:
+  - volo
+  - planare
+  - librarsi
+  - levitare
+  - fluttuare
+  - galleggiare
+
+perdere:
+  - perdita
+  - smarrire
+  - dimenticare
+  - abbandonare
+
+trovare:
+  - ritrovare
+  - scoprire
+  - incontrare
+  - rinvenire
+
+abbracciare:
+  - abbraccio
+  - abbracciavo
+  - abbracciato
+  - stretta
+  - stringere
+
+piangere:
+  - pianto
+  - lacrime
+  - singhiozzo
+  - piangeva
+  - in lacrime
+
+ridere:
+  - riso
+  - risata
+  - rideva
+  - sorriso
+  - sorridere
+
+morire:
+  - morte
+  - morto
+  - morta
+  - defunto
+  - cadavere
+  - spirare
+  - scomparire
+
+nascere:
+  - nascita
+  - neonato
+  - partorire
+  - venire al mondo
+
+# --- OGGETTI E SIMBOLI ---
+
+chiave:
+  - chiavi
+  - serratura
+  - porta chiusa
+  - aprire
+  - sbloccato
+
+coltello:
+  - lama
+  - pugnale
+  - spada
+  - accoltellare
+  - accoltellato
+  - ferita
+  - tagliare
+  - pugnalare
+
+denaro:
+  - soldi
+  - monete
+  - banconote
+  - ricchezza
+  - oro
+  - argento
+  - tesoro
+  - bancomat
+  - borsa
+  - portafoglio
+
+libro:
+  - lettura
+  - pagina
+  - testo
+  - scrivere
+  - scrittura
+  - lettera
+  - messaggio
+  - email
+  - parola
+
+porta:
+  - portone
+  - uscita
+  - entrata
+  - soglia
+  - aprire
+  - chiudere
+
+scala:
+  - scalinata
+  - gradini
+  - salire
+  - scendere
+  - ascensore
+
+specchio:
+  - riflesso
+  - immagine
+  - doppio
+  - gemello
+  - identità
+
+orologio:
+  - tempo
+  - ore
+  - minuti
+  - campana
+  - ticchettio
+  - sveglia
+
+croce:
+  - crocifisso
+  - religione
+  - cristiano
+  - vangelo
+  - preghiera
+  - benedizione
+
+# --- CORPO UMANO ---
+
+mano:
+  - mani
+  - dita
+  - pollice
+  - palmo
+  - pugno
+  - toccare
+  - accarezzare
+
+occhio:
+  - occhi
+  - sguardo
+  - guardare
+  - vista
+  - vedono
+  - vedere
+  - cieco
+
+dente:
+  - denti
+  - dentista
+  - molare
+  - canino
+  - masticare
+
+capelli:
+  - capello
+  - chioma
+  - treccia
+  - testa
+  - taglio capelli
+  - calvo
+  - parrucca
+
+sangue:
+  - ferita
+  - emorragia
+  - sanguinare
+  - rosso vivo
+  - vena
+  - arteria
+
+cuore:
+  - amore
+  - petto
+  - battito
+  - palpito
+  - affetto
+  - sentimento
+
+# --- EMOZIONI E STATI ---
+
+paura:
+  - terrore
+  - spavento
+  - angoscia
+  - ansia
+  - fobia
+  - orrore
+  - tremere
+  - trema
+
+gioia:
+  - felicità
+  - allegria
+  - euforia
+  - contentezza
+  - esultanza
+  - celebrare
+  - festeggiare
+
+tristezza:
+  - malinconia
+  - dolore
+  - afflizione
+  - disperazione
+  - sofferenza
+  - lutto
+
+rabbia:
+  - ira
+  - furore
+  - collera
+  - arrabbiato
+  - irritato
+  - furia
+
+# --- COLORI ---
+
+bianco:
+  - candido
+  - pallido
+  - chiaro
+  - neve
+  - latte
+  - purezza
+
+nero:
+  - scuro
+  - buio
+  - oscuro
+  - tenebre
+  - notte nera
+  - carbone
+
+rosso:
+  - scarlatto
+  - cremisi
+  - sangue
+  - rubino
+  - fiamma
+  - fuoco rosso
+
+verde:
+  - smeraldo
+  - erba
+  - prato
+  - natura
+  - bosco verde
+  - foglia
+
+oro:
+  - dorato
+  - giallo splendente
+  - aurea
+  - prezioso
+  - ricchezza
+  - regale
+
+# --- CIBO E BEVANDE ---
+
+pane:
+  - farina
+  - grano
+  - spiga
+  - nutrire
+  - sfamare
+  - forno
+  - fornai
+
+vino:
+  - bere
+  - uva
+  - calice
+  - bicchiere
+  - ubriaco
+  - ubriachezza
+  - sbronzo
+
+carne:
+  - macelleria
+  - bistecca
+  - maiale
+  - agnello
+  - sangue
+
+frutto:
+  - frutta
+  - mela
+  - pera
+  - uva
+  - ciliegia
+  - fico
+  - fico
+  - melograno
+
+# --- SIMBOLI RONCHETTI (1922) — aggiunte iconologiche ---
+
+civetta:
+  - gufo
+  - allocco
+  - nottola
+  - rapace notturno
+  - uccello della notte
+  - malaugurio
+
+cipresso:
+  - cimitero
+  - albero della morte
+  - pino funerario
+  - pianta funebre
+
+avvoltoio:
+  - grifone
+  - rapace carrioniero
+  - uccello del destino
+
+aquila:
+  - falco
+  - rapace
+  - corvo
+  - avvoltoio
+  - planare
+  - uccello reale
+  - falcone
+  - sparviero
+
+gallo:
+  - gallina
+  - pollaio
+  - canto del gallo
+  - alba
+  - risveglio
+
+colomba:
+  - piccione
+  - pace
+  - spirito santo
+  - messaggera
+  - bianca
+
+formica:
+  - formiche
+  - formicaio
+  - piccolo insetto
+  - lavoro
+
+stelle:
+  - stelle
+  - costellazione
+  - firmamento
+  - astri
+  - stella polare
+  - via lattea
+  - universo
+  - cosmo
+
+angelo:
+  - angeli
+  - arcangelo
+  - gabriele
+  - michele
+  - raphaele
+  - messaggero celeste
+  - creatura alata
+  - spirito
+
+demonio:
+  - diavolo
+  - satana
+  - lucifero
+  - demoni
+  - mostro
+  - entità oscura
+  - male
+
+corona:
+  - diadema
+  - scettro
+  - trono
+  - regno
+  - autorità
+  - potere reale
+
+abbondanza:
+  - cornucopia
+  - ricchezza
+  - prosperità
+  - pienezza
+  - raccolto abbondante
+  - riserve
+
+torre:
+  - castello
+  - fortezza
+  - bastione
+  - rocca
+  - campanile
+
+# Fine synonyms.yml — versione con aggiunte Ronchetti 2026-05-28
+  - albero da frutto

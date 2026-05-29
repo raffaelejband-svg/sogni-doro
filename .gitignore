@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+venv/
+.venv/
+
+# PDF sorgenti (troppo grandi per git)
+*.pdf
+
+# Raw markdown estratti dai PDF (enormi, non servono a runtime)
+"Obsidian Vault SMORFIA/02_Raw/"
+Obsidian Vault SMORFIA/02_Raw/
+
+# Output sogni analizzati (generati localmente)
+"Obsidian Vault SMORFIA/06_Output/Sogni analizzati/"
+Obsidian Vault SMORFIA/06_Output/Sogni analizzati/
+
+# Tutta la vault Obsidian (non serve in produzione — i CSV sono in data/)
+"Obsidian Vault SMORFIA/"
+Obsidian Vault SMORFIA/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Streamlit cache locale
+.streamlit/secrets.toml
