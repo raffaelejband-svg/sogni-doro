@@ -508,19 +508,19 @@ def render_response(dream: str, matches: list[Match]) -> str:
 
     # ------------------------------------------------------------------ combinazioni con lettura
     lines.append("")
-    lines.append(f"Cinquina Lotto: {format_combo(lotto)}")
+    lines.append(f"Numeri 1-90 (5 numeri): {format_combo(lotto)}")
     righe_lotto = _spiega_combo(lotto, scores)
     if righe_lotto:
         lines.extend(righe_lotto)
 
     lines.append("")
-    lines.append(f"Cinquina MillionDAY: {format_combo(millionday)}")
+    lines.append(f"Numeri 1-55 (5 numeri): {format_combo(millionday)}")
     righe_md = _spiega_combo(millionday, scores)
     if righe_md:
         lines.extend(righe_md)
 
     lines.append("")
-    lines.append(f"Sestina SuperEnalotto: {format_combo(superenalotto)}")
+    lines.append(f"Numeri 1-90 (6 numeri): {format_combo(superenalotto)}")
     righe_se = _spiega_combo(superenalotto, scores)
     if righe_se:
         lines.extend(righe_se)
@@ -535,7 +535,7 @@ def render_response(dream: str, matches: list[Match]) -> str:
         lines.append("")
 
     lines.append(
-        "Nota: questa e una lettura simbolica basata sui testi del vault, non una previsione certa di estrazioni casuali."
+        "Nota: questa e una lettura simbolica e culturale basata su tradizioni popolari. Non costituisce pubblicita di giochi, consulenza di gioco, ne previsione di estrazioni. Il gioco e vietato ai minori di 18 anni. Numero Verde: 800 274 274."
     )
     return "\n".join(lines)
 
@@ -548,7 +548,8 @@ def save_markdown(dream: str, response: str) -> Path:
         "---\n"
         "tags:\n"
         "  - sogni\n"
-        "  - smorfia\n"
+        "  - simboli\n"
+        "  - lettura-simbolica\n"
         "  - output\n"
         "---\n\n"
         "# Sogno analizzato\n\n"

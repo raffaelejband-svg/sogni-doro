@@ -43,6 +43,46 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+# ── Age-gate 18+ obbligatorio ────────────────────────────────────────────────
+if "eta_confermata" not in st.session_state:
+    st.session_state["eta_confermata"] = False
+
+if not st.session_state["eta_confermata"]:
+    st.markdown("""
+<div style="min-height:100vh; display:flex; align-items:center; justify-content:center;
+            background:#0d0d1a; flex-direction:column; gap:2rem; padding:2rem;">
+  <div style="font-family:'Cinzel',serif; font-size:clamp(2rem,5vw,3.5rem);
+              color:#c9a84c; text-align:center; text-shadow:0 0 30px rgba(201,168,76,0.4);">
+    🌙 Sogni d'Oro
+  </div>
+  <div style="background:#1a1a2e; border:1px solid #c9a84c33; border-radius:16px;
+              padding:2.5rem 3rem; max-width:500px; text-align:center;">
+    <div style="font-family:'Cinzel',serif; font-size:1.3rem; color:#c9a84c; margin-bottom:1rem;">
+      🔞 Accesso riservato ai maggiorenni
+    </div>
+    <div style="font-family:'Crimson Text',serif; font-size:1.05rem; color:#9e8a6a;
+                line-height:1.7; margin-bottom:1.5rem;">
+      Questa applicazione contiene riferimenti a giochi con vincite in denaro.<br>
+      <strong style="color:#cc5555;">Il gioco è vietato ai minori di 18 anni</strong><br>
+      e può causare dipendenza patologica.<br><br>
+      Numero Verde gratuito: <strong style="color:#ff9999;">800 274 274</strong>
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+    confermato = st.checkbox(
+        "✅  Confermo di avere almeno 18 anni e di aver letto l'avviso sul gioco responsabile",
+        key="check_18"
+    )
+
+    col1, col2, col3 = st.columns([1,2,1])
+    with col2:
+        if st.button("Entra in Sogni d'Oro →", type="primary", use_container_width=True, disabled=not confermato):
+            st.session_state["eta_confermata"] = True
+            st.rerun()
+    st.stop()
+
 # ══════════════════════════════════════════════════════════════════════════════
 # CSS — ACCESSIBILE, FONT GRANDI, BOTTONI ENORMI
 # ══════════════════════════════════════════════════════════════════════════════
@@ -563,7 +603,7 @@ def _render_combo_gioco(label: str, combo: tuple[int, ...], nota: str = "") -> N
 st.markdown("""
 <div class="app-header">
   <div class="app-title">🌙 Sogni d'Oro</div>
-  <div class="app-tagline">✨ I sogni della notte diventano i tuoi numeri fortunati</div>
+  <div class="app-tagline">✨ I sogni della notte diventano la tua lettura simbolica</div>
   <div class="app-welcome">
     Benvenuto! Questo strumento è semplice da usare: ti basta scrivere
     quello che hai sognato — anche poche parole vanno benissimo —
@@ -607,7 +647,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-analyze = st.button("🔮  SCOPRI I TUOI NUMERI", type="primary", use_container_width=True)
+analyze = st.button("🔮  GENERA LA TUA LETTURA SIMBOLICA", type="primary", use_container_width=True)
 
 st.markdown('<div class="sep">✦ &nbsp; ✦ &nbsp; ✦</div>', unsafe_allow_html=True)
 
@@ -762,15 +802,15 @@ if analyze and dream_input.strip():
     # ────────────────────────────────────────────────────────────────────────
 
     st.markdown("""
-<div class="numeri-header" style="font-size:1.3rem;">🎱 PRONTO PER GIOCARE?</div>
+<div class="numeri-header" style="font-size:1.3rem;">🎱 SEQUENZE NUMERICHE DAL TUO SOGNO</div>
 <div class="numeri-sottotitolo">
-  Qui trovi le combinazioni già pronte per i giochi più diffusi
+  Qui trovi le sequenze già pronte, elaborate dalla lettura simbolica
 </div>
 """, unsafe_allow_html=True)
 
-    _render_combo_gioco("Lotto  (5 numeri, ruota 1–90)", lotto)
-    _render_combo_gioco("MillionDAY  (5 numeri, pool 1–55)", millionday)
-    _render_combo_gioco("SuperEnalotto  (6 numeri, pool 1–90)", superenalotto)
+    _render_combo_gioco("Sequenza 5 numeri — da 1 a 90", lotto)
+    _render_combo_gioco("Sequenza 5 numeri — da 1 a 55", millionday)
+    _render_combo_gioco("Sequenza 6 numeri — da 1 a 90", superenalotto)
 
     st.markdown("""
 <div class="avviso">
@@ -812,7 +852,7 @@ if analyze and dream_input.strip():
     full_response = _dc.render_response(dream, matches)
     md_content = (
         "---\n"
-        "tags: [sogni, numeri, lotto, output]\n"
+        "tags: [sogni, numeri, lettura-simbolica, output]\n"
         f"data: {_dt.now().isoformat(timespec='seconds')}\n"
         "---\n\n"
         "# Sogno analizzato — Sogni d'Oro\n\n"
@@ -977,12 +1017,12 @@ Sogni d'Oro è un'applicazione a scopo <em>puramente ricreativo e culturale</em>
 Le corrispondenze tra sogni e numeri si basano su tradizioni popolari italiane e testi
 di pubblico dominio (Smorfia napoletana, Libro dei sogni di Capacelli 1881, Sefer Yetzira,
 Sepharial 1920, Ronchetti 1922). Nessun algoritmo ha capacità predittive reali sulle
-estrazioni del Lotto, SuperEnalotto, MillionDAY o di qualsiasi altro gioco.</p>
+estrazioni di qualsiasi gioco con vincite in denaro.</p>
 
 <p><strong style="color:#c9a84c;">2. Nessuna consulenza di gioco</strong><br>
 I numeri proposti dall'app <em>non costituiscono</em> consulenza finanziaria, strategia di
-gioco o previsione di estrazioni. L'app non ha alcun legame con Lottomatica, Sisal,
-o qualsiasi concessionario autorizzato dall'ADM. Non siamo un servizio di pronostici.</p>
+gioco o previsione di estrazioni. L'app non ha alcun legame con alcun concessionario
+autorizzato dall'ADM. Non siamo un servizio di pronostici.</p>
 
 <p><strong style="color:#c9a84c;">3. Nessuna responsabilità per perdite</strong><br>
 Il gestore di Sogni d'Oro non è responsabile, in nessun caso e in nessuna misura,
@@ -1038,6 +1078,8 @@ st.markdown("""
   🔞 <strong>Il gioco è vietato ai minori di 18 anni e può causare dipendenza patologica.</strong>
   &nbsp;·&nbsp; Numero Verde gratuito: <strong>800 274 274</strong>
   &nbsp;·&nbsp; Solo intrattenimento — nessuna previsione reale di estrazioni.
+  &nbsp;·&nbsp; <a href="https://www.adm.gov.it" style="color:#cc5555;">adm.gov.it</a>
+  &nbsp;·&nbsp; <a href="https://www.giocaresponsabile.it" style="color:#cc5555;">giocaresponsabile.it</a>
 </div>
 """, unsafe_allow_html=True)
 

@@ -1,0 +1,78 @@
+# Provenance del livello cabalistico/simbolico.
+# Scopo: rendere tracciabili le corrispondenze usate da cabala_layer.py.
+# Campi:
+# - confidence: high = testo primario/struttura chiara; medium = sintesi interpretativa; low = mapping operativo da verificare.
+
+sources:
+  sefer_yetzira:
+    title: "Sefer Yetzira - traduzione"
+    raw_note: "Obsidian Vault SMORFIA/02_Raw/Sefer Yetzira traduzione RAW.md"
+    source_note: "Obsidian Vault SMORFIA/01_Fonti/Sefer Yetzira traduzione.md"
+    role: "Fonte primaria per 10 Sefirot, 22 lettere, lettere madri/doppie/semplici, elementi e direzioni."
+  semprini:
+    title: "Danilo Semprini - Sefer Yetzirah"
+    raw_note: "Obsidian Vault SMORFIA/02_Raw/Semprini RAW.md"
+    source_note: "Obsidian Vault SMORFIA/01_Fonti/Semprini.md"
+    role: "Commento filosofico-linguistico; utile per sintesi, interpretazioni e collegamenti con Abulafia."
+  guenon:
+    title: "Rene Guenon - Esoterismo ed exoterismo"
+    raw_note: "Obsidian Vault SMORFIA/02_Raw/Rene Guenon - Esoterismo ed exoterismo RAW.md"
+    source_note: "Obsidian Vault SMORFIA/01_Fonti/Rene Guenon - Esoterismo ed exoterismo.md"
+    role: "Cornice teorica per separare livello exoterico, esoterico e metafisico."
+  sepharial:
+    title: "Sepharial - The Kabala Of Numbers"
+    raw_note: "Obsidian Vault SMORFIA/02_Raw/Sepharial - The Kabala Of Numbers RAW.md"
+    source_note: "Obsidian Vault SMORFIA/01_Fonti/Sepharial - The Kabala Of Numbers.md"
+    role: "Fonte numerologica per cifre planetarie e significati dei numeri."
+  ronchetti:
+    title: "Ronchetti - Dizionario Illustrato dei Simboli"
+    raw_note: "Obsidian Vault SMORFIA/02_Raw/Ronchetti - Dizionario Illustrato dei Simboli RAW.md"
+    source_note: "Obsidian Vault SMORFIA/01_Fonti/Ronchetti - Dizionario Illustrato dei Simboli.md"
+    role: "Fonte iconologica per simboli, immagini, attributi e allegorie."
+
+assertion_groups:
+  sefirot:
+    implemented_in: "cabala_layer.py:SEFIROT"
+    sources: ["sefer_yetzira", "semprini"]
+    confidence: "medium"
+    note: "La struttura delle 10 Sefirot e primaria; colori, patriarchi e letture sintetiche sono interpretative."
+  lettere_madri:
+    implemented_in: "cabala_layer.py:LETTERE_MADRI"
+    sources: ["sefer_yetzira", "semprini"]
+    confidence: "high"
+    note: "Triade Alef/Mem/Shin e associazioni elemento-corpo sono centrali nel corpus."
+  lettere_doppie:
+    implemented_in: "cabala_layer.py:LETTERE_DOPPIE"
+    sources: ["sefer_yetzira", "semprini"]
+    confidence: "medium"
+    note: "Le associazioni pianeta/giorno/dono/opposto vanno verificate pagina per pagina."
+  lettere_semplici:
+    implemented_in: "cabala_layer.py:LETTERE_SEMPLICI"
+    sources: ["sefer_yetzira", "semprini"]
+    confidence: "medium"
+    note: "Le associazioni zodiacali e corporee sono operative, da mantenere tracciabili."
+  numeri_sacri:
+    implemented_in: "cabala_layer.py:NUMERI_SACRI"
+    sources: ["sefer_yetzira", "semprini"]
+    confidence: "medium"
+    note: "Sintesi ragionata dei numeri ricorrenti; non sostituisce citazioni puntuali."
+  sepharial_cifre:
+    implemented_in: "cabala_layer.py:SEPHARIAL_CIFRE"
+    sources: ["sepharial"]
+    confidence: "medium"
+    note: "Mapping operativo cifre-pianeti-significati; da collegare a pagine/capitoli in una versione successiva."
+  sepharial_significati:
+    implemented_in: "cabala_layer.py:SEPHARIAL_SIGNIFICATI"
+    sources: ["sepharial"]
+    confidence: "medium"
+    note: "Significati numerici 1-84; va mantenuta la distinzione fra fonte e rielaborazione italiana."
+  ronchetti_simboli:
+    implemented_in: "cabala_layer.py:RONCHETTI_SIMBOLI"
+    sources: ["ronchetti"]
+    confidence: "medium"
+    note: "Selezione manuale di simboli chiave; prossimo passo ideale: indice CSV esteso Ronchetti."
+  guenon_livelli:
+    implemented_in: "cabala_layer.py:formatta_lettura"
+    sources: ["guenon"]
+    confidence: "medium"
+    note: "Cornice interpretativa; usare come struttura di lettura, non come fonte numerica."

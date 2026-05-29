@@ -1,0 +1,120 @@
+# =============================================================================
+# sogni-doro.service — Systemd unit file per l'app Streamlit "Sogni d'Oro"
+#
+# Installazione:
+#   sudo cp sogni-doro.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable sogni-doro
+#   sudo systemctl start sogni-doro
+#
+# Variabili da personalizzare prima dell'installazione:
+#   APP_USER → utente di sistema dedicato (es. sognidoro)
+#   APP_DIR  → directory dell'applicazione (es. /var/www/sogni-doro)
+# =============================================================================
+
+[Unit]
+# Descrizione leggibile del servizio
+Description=Sogni d'Oro — App Streamlit interpretazione sogni e Smorfia
+
+# Il servizio viene avviato DOPO che la rete e' disponibile.
+# Questo garantisce che eventuali connessioni a DB remoti o API esterne
+# siano gia' raggiungibili al momento del boot.
+After=network.target
+
+# (Opzionale) Se usi PostgreSQL o SQLite sul sistema locale, decommenta:
+# After=network.target postgresql.service
+
+
+[Service]
+# --------------------------------------------------------------------------
+# Identita' del processo
+# --------------------------------------------------------------------------
+
+# Utente sotto cui gira l'app. NON usare root per sicurezza.
+# Sostituisci APP_USER con il nome utente reale (es. sognidoro).
+User=APP_USER
+
+# Gruppo corrispondente all'utente
+Group=APP_USER
+
+# --------------------------------------------------------------------------
+# Directory di lavoro
+# --------------------------------------------------------------------------
+
+# Directory che contiene app.py e il resto del codice.
+# Sostituisci APP_DIR con il percorso reale (es. /var/www/sogni-doro).
+WorkingDirectory=APP_DIR
+
+# --------------------------------------------------------------------------
+# Comando di avvio
+# --------------------------------------------------------------------------
+
+# Avvia Streamlit in modalita' headless (nessuna finestra browser automatica)
+# e in ascolto solo su localhost:8501.
+# Nginx (o altro reverse proxy) gestira' il traffico pubblico verso questa porta.
+ExecStart=APP_DIR/venv/bin/streamlit run app.py \
+    --server.port=8501 \
+    --server.headless=true \
+    --server.address=127.0.0.1
+
+# --------------------------------------------------------------------------
+# Variabili d'ambiente
+# --------------------------------------------------------------------------
+
+# Aggiunge la directory dell'app al path Python (utile per import relativi)
+Environment="PYTHONPATH=APP_DIR"
+
+# Carica variabili aggiuntive da file .env (secrets, chiavi API, ecc.)
+# Il file deve avere permessi 600 e appartenere ad APP_USER.
+EnvironmentFile=-APP_DIR/.env
+
+# Forza Streamlit a girare headless anche tramite variabile d'ambiente
+Environment="STREAMLIT_SERVER_HEADLESS=true"
+Environment="STREAMLIT_SERVER_PORT=8501"
+Environment="STREAMLIT_SERVER_ADDRESS=127.0.0.1"
+
+# --------------------------------------------------------------------------
+# Politica di riavvio automatico
+# --------------------------------------------------------------------------
+
+# Riavvia sempre il servizio se si ferma, qualunque sia il codice di uscita.
+# Utile per crash imprevisti o aggiornamenti falliti.
+Restart=always
+
+# Attende 5 secondi prima di ogni tentativo di riavvio, per evitare
+# loop frenetici in caso di errore persistente.
+RestartSec=5
+
+# --------------------------------------------------------------------------
+# Logging
+# --------------------------------------------------------------------------
+
+# Invia stdout e stderr al journal di systemd.
+# Per leggere i log: journalctl -u sogni-doro -f
+StandardOutput=journal
+StandardError=journal
+
+# Aggiunge un identificatore leggibile nei log del journal
+SyslogIdentifier=sogni-doro
+
+# --------------------------------------------------------------------------
+# Limiti di sicurezza (hardening minimale)
+# --------------------------------------------------------------------------
+
+# Impedisce al processo di acquisire nuovi privilegi
+NoNewPrivileges=true
+
+# Protegge il filesystem di sistema in lettura
+ProtectSystem=strict
+
+# Rende /home, /root e /run/user non accessibili al servizio
+ProtectHome=true
+
+# Percorsi con permesso di scrittura esplicito (log, dati, uploads)
+ReadWritePaths=APP_DIR
+
+
+[Install]
+# Il servizio viene abilitato nel target multi-user (equivalente al runlevel 3/5),
+# cioe' si avvia automaticamente al boot in modalita' server normale.
+WantedBy=multi-user.target
