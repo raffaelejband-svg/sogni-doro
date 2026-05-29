@@ -367,8 +367,87 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     margin: 2rem 0;
 }
 
-/* ── spinner ── */
-[data-testid="stSpinner"] > div { color: #c9a84c !important; }
+/* ── spinner nativo (nascosto — usiamo il nostro overlay) ── */
+[data-testid="stSpinner"] { display: none !important; }
+
+/* ══ LOADING OVERLAY — pioggia dorata ══ */
+.sogni-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 5, 20, 0.97);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.pioggia {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+@keyframes caduta {
+    0%   { transform: translateY(-120px) scale(0.8); opacity: 0; }
+    8%   { opacity: 1; }
+    85%  { opacity: 0.7; }
+    100% { transform: translateY(110vh) scale(1.1); opacity: 0; }
+}
+.moneta {
+    position: absolute;
+    top: -80px;
+    color: #c9a84c;
+    animation: caduta linear infinite;
+    user-select: none;
+}
+@keyframes brilla-msg {
+    0%, 100% { opacity: 0.75; text-shadow: 0 0 20px rgba(201,168,76,0.4); }
+    50%       { opacity: 1;    text-shadow: 0 0 60px rgba(201,168,76,0.9),
+                                            0 0 120px rgba(201,168,76,0.3); }
+}
+.loading-titolo {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: #c9a84c;
+    z-index: 2;
+    text-align: center;
+    padding: 0 1.5rem;
+    animation: brilla-msg 2s ease-in-out infinite;
+    line-height: 1.3;
+}
+.loading-sub {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.15rem;
+    color: #7a6a50;
+    font-style: italic;
+    z-index: 2;
+    margin-top: 1.2rem;
+    animation: brilla-msg 2s ease-in-out infinite 0.6s;
+}
+@keyframes tre-punti {
+    0%  { content: ''; }
+    25% { content: '.'; }
+    50% { content: '..'; }
+    75% { content: '...'; }
+}
+.puntini::after {
+    content: '';
+    animation: tre-punti 1.4s steps(4, end) infinite;
+}
+@keyframes cerchio-gira {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+.loading-ruota {
+    width: 56px; height: 56px;
+    border: 3px solid #c9a84c22;
+    border-top-color: #c9a84c;
+    border-radius: 50%;
+    animation: cerchio-gira 1s linear infinite;
+    z-index: 2;
+    margin-top: 2rem;
+}
 
 /* ── alert ── */
 [data-testid="stAlert"] { border-radius: 10px !important; font-size: 1.05rem !important; }
@@ -504,11 +583,46 @@ if analyze and not dream_input.strip():
 if analyze and dream_input.strip():
     dream = dream_input.strip()
 
+    # ── SCHERMATA DI CARICAMENTO — pioggia dorata ────────────────────────────
+    _MONETE = [
+        # (left%, simbolo, font-size, delay-s, duration-s)
+        ( 3, "✦",  "1.3rem", 0.0, 2.8), ( 9, "7",   "2.2rem", 0.5, 3.4),
+        (15, "☽",  "1.6rem", 1.0, 2.5), (21, "★",   "2.0rem", 1.7, 3.1),
+        (27, "22", "1.5rem", 0.2, 2.9), (33, "✨",  "2.4rem", 1.3, 3.6),
+        (39, "90", "1.8rem", 0.8, 2.7), (45, "☆",   "1.4rem", 2.0, 3.2),
+        (51, "33", "2.1rem", 0.4, 2.6), (57, "✦",   "1.6rem", 1.5, 3.0),
+        (63, "★",  "1.9rem", 0.9, 2.4), (69, "☽",   "2.3rem", 2.2, 3.5),
+        (75, "77", "1.7rem", 0.3, 2.8), (81, "✨",  "1.5rem", 1.1, 3.3),
+        (87, "13", "2.0rem", 1.8, 2.6), (93, "✦",   "1.4rem", 0.6, 3.1),
+        ( 6, "★",  "1.8rem", 2.5, 2.9), (12, "☆",   "2.2rem", 2.8, 3.4),
+        (18, "7",  "1.5rem", 2.1, 2.5), (24, "✦",   "1.9rem", 3.0, 3.2),
+        (30, "☽",  "1.6rem", 2.4, 2.7), (36, "★",   "2.0rem", 3.2, 3.6),
+        (42, "44", "1.7rem", 2.7, 2.8), (48, "✨",  "1.4rem", 3.4, 3.0),
+        (54, "☆",  "2.1rem", 2.9, 3.3), (60, "90",  "1.8rem", 3.1, 2.6),
+        (66, "✦",  "1.5rem", 3.5, 2.9), (72, "★",   "2.3rem", 2.6, 3.5),
+        (78, "☽",  "1.6rem", 3.3, 2.7), (84, "7",   "2.0rem", 2.3, 3.1),
+        (90, "✦",  "1.7rem", 3.8, 2.8), (96, "✨",  "1.9rem", 3.6, 3.4),
+    ]
+    _pioggia_html = "".join(
+        f'<span class="moneta" style="left:{l}%;font-size:{fs};'
+        f'animation-delay:{d}s;animation-duration:{dur}s">{ch}</span>'
+        for l, ch, fs, d, dur in _MONETE
+    )
+    _loading = st.empty()
+    _loading.markdown(f"""
+<div class="sogni-overlay">
+  <div class="pioggia">{_pioggia_html}</div>
+  <div class="loading-titolo">🌙 Sto leggendo i tuoi sogni<span class="puntini"></span></div>
+  <div class="loading-sub">Consultando le 7 fonti antiche</div>
+  <div class="loading-ruota"></div>
+</div>
+""", unsafe_allow_html=True)
+
     # ── carica indici (cache dopo il primo avvio) ────────────────────────────
     try:
-        with st.spinner("Sto cercando i simboli del tuo sogno… un momento…"):
-            entries = _load_entries()
+        entries = _load_entries()
     except FileNotFoundError as exc:
+        _loading.empty()
         st.error(f"Non riesco a trovare i file con i simboli.\n\n{exc}")
         st.stop()
 
@@ -529,6 +643,9 @@ if analyze and dream_input.strip():
             s = m.entry.symbol
             if s not in num_to_simboli[n]:
                 num_to_simboli[n].append(s)
+
+    # ── RIMUOVI LA SCHERMATA DI CARICAMENTO ─────────────────────────────────
+    _loading.empty()
 
     # ════════════════════════════════════════════════════════════════════════
     # PASSO 3 — I TUOI RISULTATI
