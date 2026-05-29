@@ -56,10 +56,13 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
 
-/* ── base ── */
+/* ── base — pergamena antica ── */
 html, body, [data-testid="stApp"] {
-    background: #0d0d1a !important;
-    color: #e8d5b7 !important;
+    background:
+        radial-gradient(circle at 18% 12%, rgba(255,250,235,0.6), transparent 55%),
+        radial-gradient(circle at 85% 80%, rgba(210,190,150,0.25), transparent 50%),
+        #ece0c4 !important;
+    color: #3a2e1c !important;
     font-family: 'Crimson Text', Georgia, serif;
     font-size: 20px !important;
 }
@@ -73,35 +76,33 @@ footer { display: none !important; }
 .app-header {
     text-align: center;
     padding: 2.5rem 1rem 2rem;
-    border-bottom: 2px solid #c9a84c33;
+    border-bottom: 2px solid #9a7b2e33;
     margin-bottom: 2.5rem;
 }
-/* ── logo (st.image) — incorniciato come medaglione luminoso ── */
+/* ── logo (st.image) — emblema su pergamena, nessuna cornice ── */
 [data-testid="stImage"] img {
-    border-radius: 24px;
-    border: 1px solid #c9a84c44;
-    box-shadow: 0 10px 50px rgba(201,168,76,0.28), 0 0 0 6px rgba(13,13,26,0.6);
     margin-top: 1.5rem;
+    filter: drop-shadow(0 6px 14px rgba(80,60,35,0.18));
 }
 .app-title {
     font-family: 'Cinzel', serif;
     font-size: clamp(2.4rem, 6vw, 4.5rem);
-    color: #c9a84c;
+    color: #9a7b2e;
     letter-spacing: 0.15em;
-    text-shadow: 0 0 40px rgba(201,168,76,0.4);
+    text-shadow: 0 0 40px rgba(150,118,40,0.4);
     margin: 0;
     line-height: 1.1;
 }
 .app-tagline {
     font-family: 'Crimson Text', serif;
     font-size: 1.3rem;
-    color: #c8b89a;
+    color: #4a3a24;
     margin-top: 0.8rem;
     font-style: italic;
 }
 .app-welcome {
     font-size: 1.15rem;
-    color: #9e8a6a;
+    color: #6f5a3a;
     margin-top: 1rem;
     line-height: 1.7;
     max-width: 600px;
@@ -113,7 +114,7 @@ footer { display: none !important; }
 .step-label {
     font-family: 'Cinzel', serif;
     font-size: 1.3rem;
-    color: #c9a84c;
+    color: #9a7b2e;
     letter-spacing: 0.1em;
     margin: 2rem 0 0.6rem;
     display: flex;
@@ -124,8 +125,8 @@ footer { display: none !important; }
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #c9a84c;
-    color: #0d0d1a;
+    background: #9a7b2e;
+    color: #2b2114;
     font-family: 'Cinzel', serif;
     font-weight: 700;
     font-size: 1.1rem;
@@ -136,16 +137,16 @@ footer { display: none !important; }
 }
 .step-instruction {
     font-size: 1.1rem;
-    color: #9e8a6a;
+    color: #6f5a3a;
     margin-bottom: 0.8rem;
     font-style: italic;
 }
 
 /* ── textarea grande ── */
 textarea {
-    background: #12122a !important;
-    color: #e8d5b7 !important;
-    border: 2px solid #c9a84c55 !important;
+    background: #f5ecd6 !important;
+    color: #3a2e1c !important;
+    border: 2px solid #9a7b2e55 !important;
     border-radius: 12px !important;
     font-family: 'Crimson Text', serif !important;
     font-size: 1.25rem !important;
@@ -153,15 +154,15 @@ textarea {
     padding: 1rem !important;
 }
 textarea:focus {
-    border-color: #c9a84caa !important;
-    box-shadow: 0 0 16px rgba(201,168,76,0.25) !important;
+    border-color: #9a7b2eaa !important;
+    box-shadow: 0 0 16px rgba(150,118,40,0.25) !important;
 }
 textarea::placeholder { color: #5a4a35 !important; font-style: italic !important; }
 
 /* ── BOTTONE PRINCIPALE — enorme ── */
 [data-testid="stButton"] > button[kind="primary"] {
-    background: linear-gradient(135deg, #7a5a10, #c9a84c) !important;
-    color: #0d0d1a !important;
+    background: linear-gradient(135deg, #7a5a10, #9a7b2e) !important;
+    color: #2b2114 !important;
     font-family: 'Cinzel', serif !important;
     font-weight: 700 !important;
     letter-spacing: 0.12em !important;
@@ -169,20 +170,20 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     border-radius: 12px !important;
     min-height: 70px !important;
     font-size: 1.4rem !important;
-    box-shadow: 0 6px 30px rgba(201,168,76,0.4) !important;
+    box-shadow: 0 6px 30px rgba(150,118,40,0.4) !important;
     transition: all 0.2s ease !important;
     width: 100% !important;
 }
 [data-testid="stButton"] > button[kind="primary"]:hover {
-    box-shadow: 0 10px 40px rgba(201,168,76,0.6) !important;
+    box-shadow: 0 10px 40px rgba(150,118,40,0.6) !important;
     transform: translateY(-2px) !important;
 }
 
 /* ── bottoni secondari ── */
 [data-testid="stButton"] > button:not([kind="primary"]) {
-    background: #1a1a2e !important;
-    color: #c9a84c !important;
-    border: 2px solid #c9a84c55 !important;
+    background: #f3e8cf !important;
+    color: #9a7b2e !important;
+    border: 2px solid #9a7b2e55 !important;
     border-radius: 10px !important;
     font-family: 'Cinzel', serif !important;
     font-size: 1.1rem !important;
@@ -191,9 +192,9 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 
 /* ── download button ── */
 [data-testid="stDownloadButton"] > button {
-    background: #1a1a2e !important;
-    color: #c9a84c !important;
-    border: 2px solid #c9a84c55 !important;
+    background: #f3e8cf !important;
+    color: #9a7b2e !important;
+    border: 2px solid #9a7b2e55 !important;
     border-radius: 10px !important;
     font-family: 'Cinzel', serif !important;
     font-size: 1.1rem !important;
@@ -205,16 +206,16 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .numeri-header {
     font-family: 'Cinzel', serif;
     font-size: 1.6rem;
-    color: #c9a84c;
+    color: #9a7b2e;
     text-align: center;
     letter-spacing: 0.12em;
     margin: 2rem 0 0.5rem;
     padding-bottom: 0.6rem;
-    border-bottom: 2px solid #c9a84c33;
+    border-bottom: 2px solid #9a7b2e33;
 }
 .numeri-sottotitolo {
     text-align: center;
-    color: #9e8a6a;
+    color: #6f5a3a;
     font-size: 1rem;
     margin-bottom: 1.5rem;
     font-style: italic;
@@ -222,25 +223,25 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 
 /* ── card numero grande ── */
 .num-grande-card {
-    background: linear-gradient(145deg, #14142e 0%, #1a1a38 100%);
-    border: 2px solid #c9a84c55;
+    background: linear-gradient(145deg, #efe2c6 0%, #f0e4ca 100%);
+    border: 2px solid #9a7b2e55;
     border-radius: 16px;
     text-align: center;
     padding: 1.6rem 0.5rem 1.2rem;
     margin: 4px;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.15);
+    box-shadow: 0 6px 24px rgba(80,60,35,0.5), inset 0 1px 0 rgba(150,118,40,0.15);
 }
 .num-grande-cifra {
     font-family: 'Cinzel', serif;
     font-size: 3.5rem;
-    color: #c9a84c;
+    color: #9a7b2e;
     line-height: 1;
-    text-shadow: 0 0 24px rgba(201,168,76,0.5);
+    text-shadow: 0 0 24px rgba(150,118,40,0.5);
     font-weight: 700;
 }
 .num-grande-da {
     font-size: 0.85rem;
-    color: #7a6a50;
+    color: #6f5a3a;
     margin-top: 0.6rem;
     font-style: italic;
 }
@@ -249,11 +250,11 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .gioco-header {
     font-family: 'Cinzel', serif;
     font-size: 1.1rem;
-    color: #c9a84c;
+    color: #9a7b2e;
     letter-spacing: 0.08em;
     margin: 1.8rem 0 0.5rem;
     padding-bottom: 0.3rem;
-    border-bottom: 1px solid #c9a84c22;
+    border-bottom: 1px solid #9a7b2e22;
 }
 .gioco-nota {
     color: #5a4a35;
@@ -264,8 +265,8 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 
 /* ── card numero gioco ── */
 .num-gioco-card {
-    background: #12122a;
-    border: 1px solid #c9a84c33;
+    background: #f5ecd6;
+    border: 1px solid #9a7b2e33;
     border-radius: 12px;
     text-align: center;
     padding: 1rem 0.3rem 0.8rem;
@@ -274,7 +275,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .num-gioco-cifra {
     font-family: 'Cinzel', serif;
     font-size: 2.2rem;
-    color: #c9a84c;
+    color: #9a7b2e;
     line-height: 1;
     font-weight: 700;
 }
@@ -288,15 +289,15 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .simboli-header {
     font-family: 'Cinzel', serif;
     font-size: 1.4rem;
-    color: #c9a84c;
+    color: #9a7b2e;
     letter-spacing: 0.1em;
     margin: 2.5rem 0 0.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #c9a84c22;
+    border-bottom: 2px solid #9a7b2e22;
 }
 .simbolo-riga {
-    background: #12122a;
-    border-left: 4px solid #c9a84c;
+    background: #f5ecd6;
+    border-left: 4px solid #9a7b2e;
     border-radius: 0 10px 10px 0;
     padding: 0.9rem 1.2rem;
     margin: 0.5rem 0;
@@ -304,12 +305,12 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 }
 .simbolo-nome {
     font-family: 'Cinzel', serif;
-    color: #c9a84c;
+    color: #9a7b2e;
     font-weight: 700;
     font-size: 1.1rem;
 }
 .simbolo-numeri {
-    color: #8fb3c0;
+    color: #6f5a3a;
     font-size: 1rem;
     margin-top: 0.2rem;
 }
@@ -322,8 +323,8 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 
 /* ── sezione esoterica opzionale ── */
 .eso-container {
-    background: #09091a;
-    border: 1px solid #c9a84c22;
+    background: #f7f0db;
+    border: 1px solid #9a7b2e22;
     border-radius: 14px;
     padding: 1.6rem 1.8rem;
     margin: 0.6rem 0;
@@ -331,11 +332,11 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     font-size: 1.05rem;
     line-height: 1.85;
     white-space: pre-wrap;
-    color: #c8b89a;
+    color: #4a3a24;
 }
 .eso-titolo-sezione {
     font-family: 'Cinzel', serif;
-    color: #c9a84c;
+    color: #9a7b2e;
     font-size: 0.85rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -349,12 +350,12 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     100% { opacity: 1; transform: translateY(0); }
 }
 .interpret-wrap {
-    background: radial-gradient(circle at 50% 0%, #1a1838 0%, #0c0c1e 70%);
-    border: 1px solid #c9a84c33;
+    background: radial-gradient(circle at 50% 0%, #f0e4ca 0%, #f0e4c8 70%);
+    border: 1px solid #9a7b2e33;
     border-radius: 20px;
     padding: 2.2rem 2rem 2rem;
     margin: 1rem 0 1.5rem;
-    box-shadow: 0 10px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(201,168,76,0.04);
+    box-shadow: 0 10px 50px rgba(80,60,35,0.5), inset 0 0 60px rgba(150,118,40,0.04);
     animation: interpret-entra 0.7s ease both;
     position: relative;
     overflow: hidden;
@@ -364,7 +365,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     position: absolute;
     top: -10px; right: 14px;
     font-size: 6rem;
-    color: #c9a84c0d;
+    color: #9a7b2e0d;
     pointer-events: none;
 }
 .interpret-kicker {
@@ -372,7 +373,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     font-size: 0.8rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #c9a84c;
+    color: #9a7b2e;
     opacity: 0.75;
     text-align: center;
     margin-bottom: 0.6rem;
@@ -380,25 +381,25 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .interpret-apertura {
     font-family: 'Cinzel', serif;
     font-size: clamp(1.3rem, 3.4vw, 1.8rem);
-    color: #e8d5b7;
+    color: #3a2e1c;
     text-align: center;
     line-height: 1.45;
     margin: 0 auto 1.6rem;
     max-width: 560px;
-    text-shadow: 0 0 30px rgba(201,168,76,0.18);
+    text-shadow: 0 0 30px rgba(150,118,40,0.18);
 }
 .interpret-simbolo {
     font-family: 'Crimson Text', serif;
     font-size: 1.18rem;
     line-height: 1.85;
-    color: #d8c6a6;
+    color: #4a3a24;
     padding: 0.9rem 0 0.9rem 1.3rem;
-    border-left: 3px solid #c9a84c55;
+    border-left: 3px solid #9a7b2e55;
     margin: 0.5rem 0;
     animation: interpret-entra 0.7s ease both;
 }
 .interpret-simbolo b {
-    color: #c9a84c;
+    color: #9a7b2e;
     font-family: 'Cinzel', serif;
     font-weight: 600;
 }
@@ -406,19 +407,19 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     font-family: 'Crimson Text', serif;
     font-size: 1.22rem;
     line-height: 1.9;
-    color: #e8d5b7;
+    color: #3a2e1c;
     font-style: italic;
     text-align: center;
     margin: 1.8rem auto 0.5rem;
     max-width: 580px;
     padding-top: 1.4rem;
-    border-top: 1px solid #c9a84c22;
+    border-top: 1px solid #9a7b2e22;
 }
 .interpret-ponte {
     font-family: 'Cinzel', serif;
     font-size: 1.05rem;
     letter-spacing: 0.04em;
-    color: #c9a84c;
+    color: #9a7b2e;
     text-align: center;
     margin: 1.6rem auto 0;
     opacity: 0.9;
@@ -426,7 +427,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .reveal-arrow {
     text-align: center;
     font-size: 2rem;
-    color: #c9a84c;
+    color: #9a7b2e;
     margin: 0.8rem 0 0.4rem;
     animation: reveal-bob 1.8s ease-in-out infinite;
 }
@@ -437,22 +438,22 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 
 /* ── expander "Vuoi sapere di più?" ── */
 [data-testid="stExpander"] {
-    background: #0f0f22 !important;
-    border: 1px solid #c9a84c22 !important;
+    background: #f4ead2 !important;
+    border: 1px solid #9a7b2e22 !important;
     border-radius: 12px !important;
     margin-top: 2rem !important;
 }
 [data-testid="stExpander"] summary {
     font-family: 'Cinzel', serif !important;
-    color: #c9a84c !important;
+    color: #9a7b2e !important;
     font-size: 1.2rem !important;
     padding: 1rem 1.4rem !important;
 }
 
 /* ── avviso / notice ── */
 .avviso {
-    background: #09091a;
-    border: 1px solid #c9a84c11;
+    background: #f7f0db;
+    border: 1px solid #9a7b2e11;
     border-radius: 10px;
     padding: 1rem 1.5rem;
     font-size: 0.95rem;
@@ -465,7 +466,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 /* ── separatore ── */
 .sep {
     text-align: center;
-    color: #3a3a5a;
+    color: #b8a06a;
     font-size: 1.3rem;
     letter-spacing: 0.5em;
     margin: 2rem 0;
@@ -478,7 +479,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .sogni-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(5, 5, 20, 0.97);
+    background: rgba(242,233,208, 0.97);
     z-index: 9999;
     display: flex;
     flex-direction: column;
@@ -501,19 +502,19 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .moneta {
     position: absolute;
     top: -80px;
-    color: #c9a84c;
+    color: #9a7b2e;
     animation: caduta linear infinite;
     user-select: none;
 }
 @keyframes brilla-msg {
-    0%, 100% { opacity: 0.75; text-shadow: 0 0 20px rgba(201,168,76,0.4); }
-    50%       { opacity: 1;    text-shadow: 0 0 60px rgba(201,168,76,0.9),
-                                            0 0 120px rgba(201,168,76,0.3); }
+    0%, 100% { opacity: 0.75; text-shadow: 0 0 20px rgba(150,118,40,0.4); }
+    50%       { opacity: 1;    text-shadow: 0 0 60px rgba(150,118,40,0.9),
+                                            0 0 120px rgba(150,118,40,0.3); }
 }
 .loading-titolo {
     font-family: 'Cinzel', serif;
     font-size: clamp(1.8rem, 4vw, 3rem);
-    color: #c9a84c;
+    color: #9a7b2e;
     z-index: 2;
     text-align: center;
     padding: 0 1.5rem;
@@ -523,7 +524,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .loading-sub {
     font-family: 'Crimson Text', serif;
     font-size: 1.15rem;
-    color: #7a6a50;
+    color: #6f5a3a;
     font-style: italic;
     z-index: 2;
     margin-top: 1.2rem;
@@ -545,8 +546,8 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 }
 .loading-ruota {
     width: 56px; height: 56px;
-    border: 3px solid #c9a84c22;
-    border-top-color: #c9a84c;
+    border: 3px solid #9a7b2e22;
+    border-top-color: #9a7b2e;
     border-radius: 50%;
     animation: cerchio-gira 1s linear infinite;
     z-index: 2;
@@ -558,9 +559,9 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 
 /* ── scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #0d0d1a; }
-::-webkit-scrollbar-thumb { background: #c9a84c44; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #c9a84c88; }
+::-webkit-scrollbar-track { background: #e0d2b0; }
+::-webkit-scrollbar-thumb { background: #9a7b2e44; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #9a7b2e88; }
 
 /* ══ BOTTONE FISSO "TORNA SU" ══ */
 .btn-torna-su {
@@ -569,8 +570,8 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     right: 1.8rem;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #8b6914, #c9a84c);
-    color: #0d0d1a !important;
+    background: linear-gradient(135deg, #7a5e18, #9a7b2e);
+    color: #2b2114 !important;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -578,21 +579,21 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     font-size: 1.6rem;
     font-weight: 900;
     text-decoration: none !important;
-    box-shadow: 0 4px 24px rgba(201,168,76,0.5);
+    box-shadow: 0 4px 24px rgba(150,118,40,0.5);
     z-index: 1000;
     transition: transform 0.2s, box-shadow 0.2s;
     line-height: 1;
 }
 .btn-torna-su:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 32px rgba(201,168,76,0.7);
+    box-shadow: 0 8px 32px rgba(150,118,40,0.7);
 }
 .btn-torna-su-etichetta {
     position: fixed;
     bottom: 5rem;
     right: 1.3rem;
     font-size: 0.7rem;
-    color: #c9a84c88;
+    color: #9a7b2e88;
     font-family: 'Cinzel', serif;
     letter-spacing: 0.05em;
     text-align: center;
@@ -615,8 +616,8 @@ st.markdown("""
 
 html, body, [data-testid="stApp"] {
     background:
-        linear-gradient(180deg, #10122a 0%, #171023 42%, #21131a 100%) !important;
-    color: #fff3dc !important;
+        linear-gradient(180deg, #f3e8cf 0%, #efe2c6 42%, #e9dcc0 100%) !important;
+    color: #2b2114 !important;
     font-family: "Crimson Text", Georgia, serif !important;
 }
 
@@ -639,13 +640,13 @@ html, body, [data-testid="stApp"] {
     position: relative;
     padding: 1.35rem 1.2rem 1.55rem !important;
     margin: 0 0 2rem !important;
-    border: 1px solid rgba(231, 190, 92, 0.22) !important;
+    border: 1px solid rgba(176,138,46, 0.22) !important;
     border-radius: 22px;
     background:
-        linear-gradient(135deg, rgba(255, 244, 214, 0.08), rgba(111, 206, 198, 0.06)),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 34px),
-        #111328;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.08);
+        linear-gradient(135deg, rgba(255,250,238,0.6), rgba(154,123,46,0.05)),
+        repeating-linear-gradient(90deg, rgba(120,94,40,0.03) 0 1px, transparent 1px 34px),
+        #f6eed8;
+    box-shadow: 0 16px 44px rgba(80,60,35,0.16), inset 0 1px 0 rgba(255,255,255,0.5);
     overflow: hidden;
 }
 
@@ -658,7 +659,7 @@ html, body, [data-testid="stApp"] {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(90deg, transparent 0%, rgba(235, 197, 98, 0.18) 50%, transparent 100%);
+        linear-gradient(90deg, transparent 0%, rgba(176,138,46, 0.18) 50%, transparent 100%);
     transform: translateX(-100%);
     animation: scan-luce 8s ease-in-out infinite;
     pointer-events: none;
@@ -677,18 +678,18 @@ html, body, [data-testid="stApp"] {
 .app-title {
     font-size: clamp(2.15rem, 6vw, 3.35rem) !important;
     letter-spacing: 0.045em !important;
-    color: #f1c85b !important;
+    color: #b0892e !important;
     white-space: nowrap;
 }
 
 .app-tagline {
-    color: #93ddd2 !important;
+    color: #7a5e18 !important;
     font-size: clamp(1.1rem, 3.8vw, 1.45rem) !important;
     font-style: normal !important;
 }
 
 .app-welcome {
-    color: #f8e7c7 !important;
+    color: #2b2114 !important;
     font-size: clamp(1.02rem, 3.3vw, 1.18rem) !important;
     max-width: 720px !important;
     line-height: 1.5 !important;
@@ -703,9 +704,9 @@ html, body, [data-testid="stApp"] {
 }
 
 .trust-pill {
-    border: 1px solid rgba(147, 221, 210, 0.35);
-    color: #c8fff7;
-    background: rgba(14, 31, 43, 0.64);
+    border: 1px solid rgba(154,123,46, 0.35);
+    color: #2b2114;
+    background: rgba(240,231,206, 0.64);
     border-radius: 999px;
     padding: 0.35rem 0.7rem;
     font-size: 0.85rem;
@@ -713,18 +714,18 @@ html, body, [data-testid="stApp"] {
 }
 
 .dream-console {
-    border: 1px solid rgba(241, 200, 91, 0.24);
+    border: 1px solid rgba(176,138,46, 0.24);
     background:
         linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)),
-        rgba(9, 12, 29, 0.74);
+        rgba(240,231,206, 0.74);
     border-radius: 18px;
     padding: 1.1rem;
-    box-shadow: 0 18px 60px rgba(0,0,0,0.26);
+    box-shadow: 0 18px 60px rgba(80,60,35,0.26);
     margin-bottom: 1rem;
 }
 
 .micro-title {
-    color: #f1c85b;
+    color: #b0892e;
     font-family: "Cinzel", serif;
     font-weight: 700;
     letter-spacing: 0.04em;
@@ -733,61 +734,61 @@ html, body, [data-testid="stApp"] {
 }
 
 .micro-copy {
-    color: #ddc9a6;
+    color: #5c4a30;
     font-size: 0.98rem;
     line-height: 1.55;
     margin-bottom: 0.8rem;
 }
 
 .step-label {
-    color: #f1c85b !important;
+    color: #b0892e !important;
     letter-spacing: 0.04em !important;
 }
 
 .step-num {
-    background: linear-gradient(135deg, #f1c85b, #93ddd2) !important;
+    background: linear-gradient(135deg, #b0892e, #7a5e18) !important;
 }
 
 .step-instruction {
-    color: #d9c5a0 !important;
+    color: #5c4a30 !important;
     font-style: normal !important;
 }
 
 textarea {
-    background: rgba(7, 10, 28, 0.92) !important;
-    color: #fff4dc !important;
-    border: 2px solid rgba(241, 200, 91, 0.38) !important;
+    background: rgba(245,236,214, 0.92) !important;
+    color: #2b2114 !important;
+    border: 2px solid rgba(176,138,46, 0.38) !important;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.06) !important;
 }
 
 textarea:focus {
-    border-color: #93ddd2 !important;
-    box-shadow: 0 0 0 4px rgba(147, 221, 210, 0.14), 0 18px 50px rgba(0,0,0,0.22) !important;
+    border-color: #7a5e18 !important;
+    box-shadow: 0 0 0 4px rgba(154,123,46, 0.14), 0 18px 50px rgba(80,60,35,0.22) !important;
 }
 
 [data-testid="stButton"] > button[kind="primary"] {
-    background: linear-gradient(135deg, #f1c85b, #93ddd2) !important;
-    color: #111328 !important;
+    background: linear-gradient(135deg, #b0892e, #7a5e18) !important;
+    color: #2b2114 !important;
     letter-spacing: 0.06em !important;
     border-radius: 16px !important;
-    box-shadow: 0 14px 44px rgba(147, 221, 210, 0.22), 0 10px 38px rgba(241, 200, 91, 0.28) !important;
+    box-shadow: 0 14px 44px rgba(154,123,46, 0.22), 0 10px 38px rgba(176,138,46, 0.28) !important;
 }
 
 [data-testid="stButton"] > button[kind="primary"] p {
-    color: #111328 !important;
+    color: #2b2114 !important;
     font-weight: 800 !important;
 }
 
 [data-testid="stButton"] > button:not([kind="primary"]),
 [data-testid="stDownloadButton"] > button {
-    background: rgba(14, 21, 44, 0.82) !important;
-    border-color: rgba(147, 221, 210, 0.34) !important;
-    color: #c8fff7 !important;
+    background: rgba(240,231,206, 0.82) !important;
+    border-color: rgba(154,123,46, 0.34) !important;
+    color: #2b2114 !important;
 }
 
 [data-testid="stButton"] > button:not([kind="primary"]) p,
 [data-testid="stDownloadButton"] > button p {
-    color: #c8fff7 !important;
+    color: #2b2114 !important;
 }
 
 .quick-prompts {
@@ -798,23 +799,23 @@ textarea:focus {
 }
 
 .quick-label {
-    color: #93ddd2;
+    color: #7a5e18;
     font-size: 0.92rem;
     margin-bottom: -0.2rem;
 }
 
 .sogni-overlay {
     background:
-        linear-gradient(180deg, rgba(7, 8, 22, 0.98), rgba(22, 14, 28, 0.98)) !important;
+        linear-gradient(180deg, rgba(240,231,206, 0.98), rgba(235,225,200, 0.98)) !important;
 }
 
 .loading-titolo {
-    color: #f1c85b !important;
+    color: #b0892e !important;
     max-width: 780px;
 }
 
 .loading-sub {
-    color: #c8fff7 !important;
+    color: #2b2114 !important;
     font-size: 1.12rem !important;
     max-width: 720px;
     text-align: center;
@@ -824,15 +825,15 @@ textarea:focus {
     width: min(760px, 88vw);
     z-index: 2;
     margin-top: 1.6rem;
-    border: 1px solid rgba(147, 221, 210, 0.24);
+    border: 1px solid rgba(154,123,46, 0.24);
     border-radius: 18px;
     overflow: hidden;
     background: rgba(255,255,255,0.045);
-    box-shadow: 0 20px 70px rgba(0,0,0,0.38);
+    box-shadow: 0 20px 70px rgba(80,60,35,0.38);
 }
 
 .dream-reader-head {
-    color: #ddc9a6;
+    color: #5c4a30;
     font-size: 0.86rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -858,11 +859,11 @@ textarea:focus {
     display: inline-flex;
     align-items: center;
     min-height: 42px;
-    border: 1px solid rgba(241, 200, 91, 0.28);
+    border: 1px solid rgba(176,138,46, 0.28);
     border-radius: 999px;
     padding: 0.35rem 0.75rem;
-    color: #fff4dc;
-    background: rgba(13, 18, 42, 0.82);
+    color: #2b2114;
+    background: rgba(240,231,206, 0.82);
     font-size: clamp(1rem, 3.5vw, 1.25rem);
 }
 
@@ -873,18 +874,18 @@ textarea:focus {
 
 .result-spotlight {
     text-align: center;
-    border: 1px solid rgba(241, 200, 91, 0.26);
+    border: 1px solid rgba(176,138,46, 0.26);
     border-radius: 20px;
     padding: 1.25rem 1rem;
     background:
-        linear-gradient(145deg, rgba(241, 200, 91, 0.09), rgba(147, 221, 210, 0.055)),
-        rgba(10, 13, 31, 0.8);
-    box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+        linear-gradient(145deg, rgba(255,250,238, 0.7), rgba(154,123,46, 0.06)),
+        rgba(246, 238, 216, 0.95);
+    box-shadow: 0 14px 40px rgba(80,60,35,0.14);
     margin: 1rem 0 1.4rem;
 }
 
 .result-kicker {
-    color: #93ddd2;
+    color: #7a5e18;
     text-transform: uppercase;
     font-family: "Cinzel", serif;
     font-size: 0.9rem;
@@ -894,9 +895,9 @@ textarea:focus {
 .num-grande-card,
 .num-gioco-card,
 .simbolo-riga {
-    background: rgba(10, 14, 34, 0.88) !important;
-    border-color: rgba(241, 200, 91, 0.28) !important;
-    box-shadow: 0 18px 44px rgba(0,0,0,0.23), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+    background: rgba(240,231,206, 0.88) !important;
+    border-color: rgba(176,138,46, 0.28) !important;
+    box-shadow: 0 18px 44px rgba(80,60,35,0.23), inset 0 1px 0 rgba(255,255,255,0.06) !important;
 }
 
 .number-grid {
@@ -921,35 +922,35 @@ textarea:focus {
 
 .num-grande-cifra,
 .num-gioco-cifra {
-    color: #f1c85b !important;
+    color: #b0892e !important;
 }
 
 .num-grande-da,
 .num-gioco-pianeta,
 .simbolo-fonte,
 .gioco-nota {
-    color: #bda986 !important;
+    color: #6f5a3a !important;
 }
 
 .simbolo-numeri {
-    color: #93ddd2 !important;
+    color: #7a5e18 !important;
 }
 
 .share-panel {
-    border: 1px solid rgba(147, 221, 210, 0.26);
+    border: 1px solid rgba(154,123,46, 0.26);
     border-radius: 18px;
-    background: rgba(9, 16, 34, 0.78);
+    background: rgba(240,231,206, 0.78);
     padding: 1rem;
     margin: 1.2rem 0;
 }
 
 .responsible-note {
-    border: 1px solid rgba(241, 200, 91, 0.22);
-    border-left: 5px solid #93ddd2;
+    border: 1px solid rgba(176,138,46, 0.22);
+    border-left: 5px solid #7a5e18;
     background: rgba(255,255,255,0.045);
     border-radius: 12px;
     padding: 0.8rem 1rem;
-    color: #e8d5b7;
+    color: #3a2e1c;
     font-size: 0.9rem;
     line-height: 1.55;
     margin-top: 1rem;
@@ -1202,7 +1203,7 @@ def _render_combo_gioco(label: str, combo: tuple[int, ...], nota: str = "") -> N
 
 # ── Logo: caricato dal file (st.image è affidabile su Streamlit Cloud,
 #    a differenza del base64 inline che veniva scartato nel rendering HTML) ──
-_logo_file = ROOT / "static" / "logo_sogni_numeri.png"
+_logo_file = ROOT / "static" / "logo_pergamena.png"
 _lc1, _lc2, _lc3 = st.columns([1, 2, 1])
 with _lc2:
     if _logo_file.exists():
@@ -1493,7 +1494,7 @@ if analyze and dream_input.strip():
 
     st.markdown("""
 <div class="simboli-header">I simboli riconosciuti</div>
-<div style="color:#9e8a6a; font-size:1.05rem; margin-bottom:1.5rem; font-style:italic; line-height:1.7;">
+<div style="color:#6f5a3a; font-size:1.05rem; margin-bottom:1.5rem; font-style:italic; line-height:1.7;">
   Qui vedi da quali immagini del sogno nasce la lettura. Ogni simbolo porta con sé
   una o più corrispondenze numeriche nella tradizione.
 </div>
@@ -1517,12 +1518,12 @@ if analyze and dream_input.strip():
 
         st.markdown(f"""
 <div class="simbolo-riga" style="padding:1.2rem 1.4rem; margin-bottom:1rem;
-     border-left:3px solid #c9a84c55; border-radius:0 12px 12px 0;">
+     border-left:3px solid #9a7b2e55; border-radius:0 12px 12px 0;">
   <div class="simbolo-nome" style="font-size:1.25rem; margin-bottom:0.4rem;">
-    <span style="color:#c9a84c44; font-size:0.9rem; margin-right:0.5rem;">{idx:02d}</span>
+    <span style="color:#9a7b2e44; font-size:0.9rem; margin-right:0.5rem;">{idx:02d}</span>
     {simbolo}
   </div>
-  <div style="font-family:'Crimson Text',serif; font-size:1rem; color:#c8b89a;
+  <div style="font-family:'Crimson Text',serif; font-size:1rem; color:#4a3a24;
               line-height:1.7; margin-bottom:0.5rem; font-style:italic;">
     {_html.escape(match.entry.detail) if match.entry.detail else
      f"Simbolo onirico tramandato dalla tradizione — {simbolo.lower()} porta con sé un'energia numerica precisa."}
@@ -1587,10 +1588,10 @@ if analyze and dream_input.strip():
             """<a href="https://ko-fi.com/sognienumeri" target="_blank"
                style="display:flex; align-items:center; justify-content:center;
                       min-height:60px; text-align:center;
-                      background:linear-gradient(135deg,#7a5a10,#c9a84c);
-                      color:#0d0d1a; font-family:'Cinzel',serif; font-weight:700;
+                      background:linear-gradient(135deg,#7a5a10,#9a7b2e);
+                      color:#2b2114; font-family:'Cinzel',serif; font-weight:700;
                       font-size:1.1rem; padding:0.8rem 1rem; border-radius:10px;
-                      text-decoration:none; box-shadow:0 4px 20px rgba(201,168,76,0.3);">
+                      text-decoration:none; box-shadow:0 4px 20px rgba(150,118,40,0.3);">
                ☕ Offrimi un caffè — grazie!
             </a>""",
             unsafe_allow_html=True,
@@ -1604,7 +1605,7 @@ if analyze and dream_input.strip():
 
     with st.expander("✦  Vuoi sapere di più?  —  Lettura simbolica approfondita"):
         st.markdown(
-            '<div style="color:#9e8a6a; font-size:1rem; margin-bottom:1rem; font-style:italic;">'
+            '<div style="color:#6f5a3a; font-size:1rem; margin-bottom:1rem; font-style:italic;">'
             'Questa sezione è per chi è curioso: contiene una lettura più approfondita '
             'basata su testi esoterici e cabalistici. È facoltativa — i numeri che ti '
             'servono li hai già visti qui sopra.'
@@ -1648,7 +1649,7 @@ if analyze and dream_input.strip():
             else:
                 if sections and sections[0][0] == "":
                     st.markdown(f"""
-<div class="eso-container" style="border-color:#c9a84c44; text-align:center;">
+<div class="eso-container" style="border-color:#9a7b2e44; text-align:center;">
 {sections[0][1]}
 </div>
 """, unsafe_allow_html=True)
@@ -1674,7 +1675,7 @@ if analyze and dream_input.strip():
     st.markdown('<div style="height:2rem"></div>', unsafe_allow_html=True)
     st.markdown("""
 <div style="text-align:center; font-family:'Crimson Text',serif; font-size:1.1rem;
-            color:#7a6a50; font-style:italic; margin-bottom:1rem;">
+            color:#6f5a3a; font-style:italic; margin-bottom:1rem;">
   Vuoi analizzare un altro sogno?
 </div>
 """, unsafe_allow_html=True)
@@ -1696,31 +1697,31 @@ st.markdown('<div style="height: 2rem"></div>', unsafe_allow_html=True)
 with st.expander("⚖️  Note legali e informazioni"):
     st.markdown("""
 <div style="font-family:'Crimson Text',Georgia,serif; font-size:1rem;
-            color:#9e8a6a; line-height:1.8;">
+            color:#6f5a3a; line-height:1.8;">
 
-<p><strong style="color:#c9a84c;">1. Scopo culturale e ricreativo</strong><br>
+<p><strong style="color:#9a7b2e;">1. Scopo culturale e ricreativo</strong><br>
 Sogni e Numeri è un'applicazione a scopo <em>puramente culturale ed esplorativo</em>.
 Le corrispondenze tra sogni e numeri si basano su tradizioni popolari italiane e testi
 di pubblico dominio (Smorfia napoletana, Capacelli 1881, Sefer Yetzira,
 Sepharial 1920, Ronchetti 1922). I numeri prodotti sono frutto di lettura simbolica
 e non hanno alcuna valenza predittiva.</p>
 
-<p><strong style="color:#c9a84c;">2. Privacy e dati personali</strong><br>
+<p><strong style="color:#9a7b2e;">2. Privacy e dati personali</strong><br>
 Sogni e Numeri <em>non raccoglie, non archivia e non trasmette</em> dati personali.
 Il testo del sogno viene elaborato in tempo reale e non viene conservato.
 Non utilizziamo cookie di profilazione. La piattaforma di hosting è Streamlit
 Community Cloud (Snowflake Inc.) —
-<a href="https://streamlit.io/privacy-policy" target="_blank" style="color:#c9a84c;">Privacy Policy</a>.</p>
+<a href="https://streamlit.io/privacy-policy" target="_blank" style="color:#9a7b2e;">Privacy Policy</a>.</p>
 
-<p><strong style="color:#c9a84c;">3. Proprietà intellettuale</strong><br>
+<p><strong style="color:#9a7b2e;">3. Proprietà intellettuale</strong><br>
 Le fonti (Smorfia napoletana, Capacelli 1881, Sefer Yetzira, Sepharial 1920, Ronchetti 1922)
 sono opere di pubblico dominio. Il codice e la grafica sono di proprietà del gestore.
 È vietata la riproduzione senza autorizzazione scritta.</p>
 
-<p><strong style="color:#c9a84c;">4. Legge applicabile</strong><br>
+<p><strong style="color:#9a7b2e;">4. Legge applicabile</strong><br>
 L'applicazione è gestita dall'Italia. Si applica la legge italiana.</p>
 
-<p style="color:#5a4a35; font-size:0.85rem; margin-top:1.5rem; border-top:1px solid #2a2a3a; padding-top:1rem;">
+<p style="color:#5a4a35; font-size:0.85rem; margin-top:1.5rem; border-top:1px solid #e6d8ba; padding-top:1rem;">
   <em>Ultimo aggiornamento: 2026.</em>
 </p>
 
@@ -1740,13 +1741,13 @@ L'applicazione è gestita dall'Italia. Si applica la legge italiana.</p>
 
 st.markdown('<div style="height: 1rem"></div>', unsafe_allow_html=True)
 st.markdown("""
-<div style="text-align:center; color:#2a2a4a; font-size:0.82rem; font-style:italic;
-            border-top:1px solid #1a1a35; padding-top:1.2rem; line-height:2.2;">
+<div style="text-align:center; color:#e6d8ba; font-size:0.82rem; font-style:italic;
+            border-top:1px solid #f0e4ca; padding-top:1.2rem; line-height:2.2;">
   🌙 Sogni e Numeri — Lettura simbolica dei sogni<br>
   7 fonti esoteriche &nbsp;·&nbsp; Smorfia napoletana &nbsp;·&nbsp; Capacelli 1881
   &nbsp;·&nbsp; Sefer Yetzira &nbsp;·&nbsp; Sepharial (1920) &nbsp;·&nbsp; Ronchetti (1922)<br>
   <a href="https://ko-fi.com/sognienumeri" target="_blank"
-     style="color:#c9a84c55; text-decoration:none; font-size:0.75rem;">
+     style="color:#9a7b2e55; text-decoration:none; font-size:0.75rem;">
     ☕ Sostieni il progetto — ko-fi.com/sognienumeri
   </a>
 </div>
