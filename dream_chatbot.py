@@ -540,6 +540,138 @@ def render_response(dream: str, matches: list[Match]) -> str:
     return "\n".join(lines)
 
 
+# ──────────────────────────────────────────────────────────────────────────────
+# LETTURA NARRATIVA DEL SOGNO (interpretazione che precede i numeri)
+# ──────────────────────────────────────────────────────────────────────────────
+
+# Aperture evocative — scelte in modo deterministico dal testo del sogno
+_APERTURE = [
+    "Il tuo sogno non è muto: ha parlato, e la tradizione ha ascoltato.",
+    "Ogni sogno è un messaggio cifrato. Ecco cosa sussurrano le sue immagini.",
+    "Le immagini che hai visto nel sonno portano con sé un significato antico.",
+    "C'è una voce dentro il tuo sogno. Proviamo a darle parole.",
+    "Dietro le immagini del tuo sogno si nasconde una trama di significati.",
+]
+
+# Connettivi narrativi per introdurre ogni simbolo
+_CONNETTIVI = [
+    "Al centro della scena appare {sim}.",
+    "Il tuo sogno si accende attorno a {sim}.",
+    "Tra le immagini emerge con forza {sim}.",
+    "Un segno parla più forte degli altri: {sim}.",
+    "La tradizione si ferma su {sim}.",
+    "Ritorna, nel racconto, l'immagine di {sim}.",
+]
+
+# Frasi di chiusura/ponte verso i numeri
+_PONTI = [
+    "Da queste immagini la tradizione fa nascere i numeri. Eccoli.",
+    "Ogni simbolo porta con sé una cifra. È il momento di scoprirle.",
+    "Ora le immagini si trasformano in numeri. Guarda cosa ne emerge.",
+    "I simboli hanno parlato: adesso lasciamo che diventino numeri.",
+    "Dalla lettura del sogno ai suoi numeri il passo è breve. Eccoli.",
+]
+
+
+def _seed_from_dream(dream: str) -> int:
+    """Seme deterministico: lo stesso sogno produce sempre la stessa lettura."""
+    return int(hashlib.sha256(dream.strip().lower().encode("utf-8")).hexdigest(), 16)
+
+
+def _pick(options: list[str], seed: int, salt: int = 0) -> str:
+    return options[(seed + salt) % len(options)]
+
+
+def build_interpretation(dream: str, matches: list[Match]) -> dict:
+    """Costruisce una lettura narrativa del sogno a partire dai simboli riconosciuti.
+
+    Ritorna un dizionario pronto per essere reso a schermo:
+        {
+          "apertura": str,                       # frase d'apertura evocativa
+          "simboli":  [(nome, frase), ...],      # i simboli principali, narrati
+          "sintesi":  str,                       # messaggio complessivo del sogno
+          "ponte":    str,                       # frase di passaggio verso i numeri
+          "n_simboli": int,                      # quanti simboli totali riconosciuti
+        }
+    Non è una previsione: è una lettura simbolica e culturale delle fonti.
+    """
+    seed = _seed_from_dream(dream)
+
+    if not matches:
+        return {
+            "apertura": "Il tuo racconto è ancora avvolto nel mistero.",
+            "simboli": [],
+            "sintesi": (
+                "Non ho riconosciuto immagini abbastanza nitide in questo sogno. "
+                "Prova a raccontarlo con qualche dettaglio in più: una persona, un animale, "
+                "un luogo, un oggetto, un colore. Più immagini offri, più la lettura diventa ricca."
+            ),
+            "ponte": "",
+            "n_simboli": 0,
+        }
+
+    # I simboli principali (i primi per rilevanza), deduplicati per nome
+    principali: list[Match] = []
+    visti: set[str] = set()
+    for m in matches:
+        chiave = normalize(m.entry.symbol)
+        if chiave in visti:
+            continue
+        visti.add(chiave)
+        principali.append(m)
+        if len(principali) >= 4:
+            break
+
+    simboli_narrati: list[tuple[str, str]] = []
+    for i, m in enumerate(principali):
+        nome = m.entry.symbol.strip().capitalize()
+        connettivo = _pick(_CONNETTIVI, seed, salt=i).format(sim=f"«{nome}»")
+        dettaglio = (m.entry.detail or "").strip()
+        if dettaglio:
+            # Ripulisci e accorcia il dettaglio della fonte
+            dettaglio = dettaglio[0].upper() + dettaglio[1:]
+            if len(dettaglio) > 220:
+                dettaglio = dettaglio[:220].rsplit(" ", 1)[0] + "…"
+            frase = f"{connettivo} {dettaglio}"
+        else:
+            frase = (
+                f"{connettivo} Un'immagine che la tradizione popolare custodisce da generazioni, "
+                f"carica di un significato che attraversa il tempo."
+            )
+        if not frase.rstrip().endswith((".", "…", "!", "?")):
+            frase += "."
+        simboli_narrati.append((nome, frase))
+
+    # Sintesi: intreccia i nomi dei simboli principali in un messaggio unico
+    nomi = [n for n, _ in simboli_narrati]
+    if len(nomi) == 1:
+        elenco = nomi[0]
+    elif len(nomi) == 2:
+        elenco = f"{nomi[0]} e {nomi[1]}"
+    else:
+        elenco = ", ".join(nomi[:-1]) + f" e {nomi[-1]}"
+
+    chiusure = [
+        f"Messi insieme, {elenco.lower()} disegnano un sogno che invita a guardare dentro di sé "
+        "con fiducia: la tradizione legge in queste immagini un segno di attesa e di possibilità.",
+        f"Il filo che unisce {elenco.lower()} parla di un passaggio, di qualcosa che si muove nella "
+        "tua vita e chiede attenzione. È un sogno che porta energia.",
+        f"Tra {elenco.lower()} si intravede un messaggio di speranza: la tradizione invita a coltivare "
+        "ciò che hai visto nel sonno, perché i segni non arrivano mai per caso.",
+        f"Le immagini di {elenco.lower()} compongono un racconto interiore: un richiamo a fidarti del "
+        "tuo istinto e a riconoscere i segnali che la vita ti manda.",
+    ]
+    sintesi = _pick(chiusure, seed, salt=7)
+
+    return {
+        "apertura": _pick(_APERTURE, seed),
+        "simboli": simboli_narrati,
+        "sintesi": sintesi,
+        "ponte": _pick(_PONTI, seed, salt=3),
+        "n_simboli": len(matches),
+    }
+
+
 def save_markdown(dream: str, response: str) -> Path:
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

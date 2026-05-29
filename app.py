@@ -14,6 +14,9 @@ Avvio:
 from __future__ import annotations
 
 import sys
+import html as _html
+import re
+import time
 from collections import Counter, defaultdict
 from datetime import datetime as _dt
 from pathlib import Path
@@ -332,6 +335,98 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     opacity: 0.8;
 }
 
+/* ── INTERPRETAZIONE DEL SOGNO (prima dei numeri) ── */
+@keyframes interpret-entra {
+    0%   { opacity: 0; transform: translateY(18px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+.interpret-wrap {
+    background: radial-gradient(circle at 50% 0%, #1a1838 0%, #0c0c1e 70%);
+    border: 1px solid #c9a84c33;
+    border-radius: 20px;
+    padding: 2.2rem 2rem 2rem;
+    margin: 1rem 0 1.5rem;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.5), inset 0 0 60px rgba(201,168,76,0.04);
+    animation: interpret-entra 0.7s ease both;
+    position: relative;
+    overflow: hidden;
+}
+.interpret-wrap::before {
+    content: "☽";
+    position: absolute;
+    top: -10px; right: 14px;
+    font-size: 6rem;
+    color: #c9a84c0d;
+    pointer-events: none;
+}
+.interpret-kicker {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    opacity: 0.75;
+    text-align: center;
+    margin-bottom: 0.6rem;
+}
+.interpret-apertura {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.3rem, 3.4vw, 1.8rem);
+    color: #e8d5b7;
+    text-align: center;
+    line-height: 1.45;
+    margin: 0 auto 1.6rem;
+    max-width: 560px;
+    text-shadow: 0 0 30px rgba(201,168,76,0.18);
+}
+.interpret-simbolo {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.18rem;
+    line-height: 1.85;
+    color: #d8c6a6;
+    padding: 0.9rem 0 0.9rem 1.3rem;
+    border-left: 3px solid #c9a84c55;
+    margin: 0.5rem 0;
+    animation: interpret-entra 0.7s ease both;
+}
+.interpret-simbolo b {
+    color: #c9a84c;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+}
+.interpret-sintesi {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.22rem;
+    line-height: 1.9;
+    color: #e8d5b7;
+    font-style: italic;
+    text-align: center;
+    margin: 1.8rem auto 0.5rem;
+    max-width: 580px;
+    padding-top: 1.4rem;
+    border-top: 1px solid #c9a84c22;
+}
+.interpret-ponte {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    color: #c9a84c;
+    text-align: center;
+    margin: 1.6rem auto 0;
+    opacity: 0.9;
+}
+.reveal-arrow {
+    text-align: center;
+    font-size: 2rem;
+    color: #c9a84c;
+    margin: 0.8rem 0 0.4rem;
+    animation: reveal-bob 1.8s ease-in-out infinite;
+}
+@keyframes reveal-bob {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50%      { transform: translateY(8px); opacity: 1; }
+}
+
 /* ── expander "Vuoi sapere di più?" ── */
 [data-testid="stExpander"] {
     background: #0f0f22 !important;
@@ -504,6 +599,383 @@ _css60_path = ROOT / "static" / "style_60plus.css"
 if _css60_path.exists():
     st.markdown(f"<style>{_css60_path.read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+/* ═════════════════════════════════════════════════════════════════════════════
+   Product polish layer — portale web premium, mobile-first
+   ═════════════════════════════════════════════════════════════════════════════ */
+
+html, body, [data-testid="stApp"] {
+    background:
+        linear-gradient(180deg, #10122a 0%, #171023 42%, #21131a 100%) !important;
+    color: #fff3dc !important;
+    font-family: "Crimson Text", Georgia, serif !important;
+}
+
+[data-testid="stAppViewContainer"] > .main {
+    max-width: 1040px !important;
+}
+
+[data-testid="stAppViewContainer"] .block-container {
+    max-width: 980px !important;
+    padding-top: 1rem !important;
+    padding-bottom: 2.5rem !important;
+}
+
+.element-container:has(style),
+.element-container:has(.btn-torna-su) {
+    margin-bottom: 0 !important;
+}
+
+.app-header {
+    position: relative;
+    padding: 1.35rem 1.2rem 1.55rem !important;
+    margin: 0 0 2rem !important;
+    border: 1px solid rgba(231, 190, 92, 0.22) !important;
+    border-radius: 22px;
+    background:
+        linear-gradient(135deg, rgba(255, 244, 214, 0.08), rgba(111, 206, 198, 0.06)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 34px),
+        #111328;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.08);
+    overflow: hidden;
+}
+
+.app-header > div:first-child {
+    display: none !important;
+}
+
+.app-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, transparent 0%, rgba(235, 197, 98, 0.18) 50%, transparent 100%);
+    transform: translateX(-100%);
+    animation: scan-luce 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.app-header::after {
+    display: none;
+}
+
+@keyframes scan-luce {
+    0%, 20% { transform: translateX(-100%); opacity: 0; }
+    35%, 70% { opacity: 1; }
+    100% { transform: translateX(100%); opacity: 0; }
+}
+
+.app-title {
+    font-size: clamp(2.15rem, 6vw, 3.35rem) !important;
+    letter-spacing: 0.045em !important;
+    color: #f1c85b !important;
+    white-space: nowrap;
+}
+
+.app-tagline {
+    color: #93ddd2 !important;
+    font-size: clamp(1.1rem, 3.8vw, 1.45rem) !important;
+    font-style: normal !important;
+}
+
+.app-welcome {
+    color: #f8e7c7 !important;
+    font-size: clamp(1.02rem, 3.3vw, 1.18rem) !important;
+    max-width: 720px !important;
+    line-height: 1.5 !important;
+}
+
+.trust-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.55rem;
+    margin-top: 0.8rem;
+}
+
+.trust-pill {
+    border: 1px solid rgba(147, 221, 210, 0.35);
+    color: #c8fff7;
+    background: rgba(14, 31, 43, 0.64);
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.85rem;
+    line-height: 1.2;
+}
+
+.dream-console {
+    border: 1px solid rgba(241, 200, 91, 0.24);
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)),
+        rgba(9, 12, 29, 0.74);
+    border-radius: 18px;
+    padding: 1.1rem;
+    box-shadow: 0 18px 60px rgba(0,0,0,0.26);
+    margin-bottom: 1rem;
+}
+
+.micro-title {
+    color: #f1c85b;
+    font-family: "Cinzel", serif;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.micro-copy {
+    color: #ddc9a6;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin-bottom: 0.8rem;
+}
+
+.step-label {
+    color: #f1c85b !important;
+    letter-spacing: 0.04em !important;
+}
+
+.step-num {
+    background: linear-gradient(135deg, #f1c85b, #93ddd2) !important;
+}
+
+.step-instruction {
+    color: #d9c5a0 !important;
+    font-style: normal !important;
+}
+
+textarea {
+    background: rgba(7, 10, 28, 0.92) !important;
+    color: #fff4dc !important;
+    border: 2px solid rgba(241, 200, 91, 0.38) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+
+textarea:focus {
+    border-color: #93ddd2 !important;
+    box-shadow: 0 0 0 4px rgba(147, 221, 210, 0.14), 0 18px 50px rgba(0,0,0,0.22) !important;
+}
+
+[data-testid="stButton"] > button[kind="primary"] {
+    background: linear-gradient(135deg, #f1c85b, #93ddd2) !important;
+    color: #111328 !important;
+    letter-spacing: 0.06em !important;
+    border-radius: 16px !important;
+    box-shadow: 0 14px 44px rgba(147, 221, 210, 0.22), 0 10px 38px rgba(241, 200, 91, 0.28) !important;
+}
+
+[data-testid="stButton"] > button[kind="primary"] p {
+    color: #111328 !important;
+    font-weight: 800 !important;
+}
+
+[data-testid="stButton"] > button:not([kind="primary"]),
+[data-testid="stDownloadButton"] > button {
+    background: rgba(14, 21, 44, 0.82) !important;
+    border-color: rgba(147, 221, 210, 0.34) !important;
+    color: #c8fff7 !important;
+}
+
+[data-testid="stButton"] > button:not([kind="primary"]) p,
+[data-testid="stDownloadButton"] > button p {
+    color: #c8fff7 !important;
+}
+
+.quick-prompts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.55rem;
+    margin: 0.7rem 0 1rem;
+}
+
+.quick-label {
+    color: #93ddd2;
+    font-size: 0.92rem;
+    margin-bottom: -0.2rem;
+}
+
+.sogni-overlay {
+    background:
+        linear-gradient(180deg, rgba(7, 8, 22, 0.98), rgba(22, 14, 28, 0.98)) !important;
+}
+
+.loading-titolo {
+    color: #f1c85b !important;
+    max-width: 780px;
+}
+
+.loading-sub {
+    color: #c8fff7 !important;
+    font-size: 1.12rem !important;
+    max-width: 720px;
+    text-align: center;
+}
+
+.dream-reader {
+    width: min(760px, 88vw);
+    z-index: 2;
+    margin-top: 1.6rem;
+    border: 1px solid rgba(147, 221, 210, 0.24);
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.045);
+    box-shadow: 0 20px 70px rgba(0,0,0,0.38);
+}
+
+.dream-reader-head {
+    color: #ddc9a6;
+    font-size: 0.86rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.65rem 0.9rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.dream-stream {
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 0.95rem 0;
+}
+
+.stream-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 200%;
+    animation: parole-scorrono 13s linear infinite;
+}
+
+.stream-word {
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+    border: 1px solid rgba(241, 200, 91, 0.28);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    color: #fff4dc;
+    background: rgba(13, 18, 42, 0.82);
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+}
+
+@keyframes parole-scorrono {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+.result-spotlight {
+    text-align: center;
+    border: 1px solid rgba(241, 200, 91, 0.26);
+    border-radius: 20px;
+    padding: 1.25rem 1rem;
+    background:
+        linear-gradient(145deg, rgba(241, 200, 91, 0.09), rgba(147, 221, 210, 0.055)),
+        rgba(10, 13, 31, 0.8);
+    box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+    margin: 1rem 0 1.4rem;
+}
+
+.result-kicker {
+    color: #93ddd2;
+    text-transform: uppercase;
+    font-family: "Cinzel", serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+}
+
+.num-grande-card,
+.num-gioco-card,
+.simbolo-riga {
+    background: rgba(10, 14, 34, 0.88) !important;
+    border-color: rgba(241, 200, 91, 0.28) !important;
+    box-shadow: 0 18px 44px rgba(0,0,0,0.23), inset 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+    gap: 0.75rem;
+    align-items: stretch;
+    margin: 0.9rem 0 1.2rem;
+}
+
+.number-grid.compact {
+    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+    gap: 0.55rem;
+}
+
+.number-grid .num-grande-card,
+.number-grid .num-gioco-card {
+    margin: 0 !important;
+    min-width: 0;
+    height: 100%;
+}
+
+.num-grande-cifra,
+.num-gioco-cifra {
+    color: #f1c85b !important;
+}
+
+.num-grande-da,
+.num-gioco-pianeta,
+.simbolo-fonte,
+.gioco-nota {
+    color: #bda986 !important;
+}
+
+.simbolo-numeri {
+    color: #93ddd2 !important;
+}
+
+.share-panel {
+    border: 1px solid rgba(147, 221, 210, 0.26);
+    border-radius: 18px;
+    background: rgba(9, 16, 34, 0.78);
+    padding: 1rem;
+    margin: 1.2rem 0;
+}
+
+.responsible-note {
+    border: 1px solid rgba(241, 200, 91, 0.22);
+    border-left: 5px solid #93ddd2;
+    background: rgba(255,255,255,0.045);
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    color: #e8d5b7;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-top: 1rem;
+}
+
+@media (max-width: 760px) {
+    [data-testid="stAppViewContainer"] > .main {
+        padding: 1rem 0.85rem !important;
+    }
+    .app-header {
+        border-radius: 16px;
+        padding: 1.4rem 0.85rem 1.7rem !important;
+    }
+    .quick-prompts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .btn-torna-su,
+    .btn-torna-su-etichetta {
+        display: none !important;
+    }
+    .num-grande-card {
+        padding: 1rem 0.25rem 0.8rem !important;
+    }
+    .num-grande-cifra {
+        font-size: 2.45rem !important;
+    }
+    .number-grid,
+    .number-grid.compact {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+</style>
+""", unsafe_allow_html=True)
+
 # ── Bottone fisso "Torna su" — sempre visibile ────────────────────────────────
 st.markdown("""
 <a href="#" class="btn-torna-su" title="Torna all'inizio">▲</a>
@@ -518,6 +990,47 @@ st.markdown("""
 @st.cache_resource(show_spinner="Caricamento in corso, attendi qualche secondo…")
 def _load_entries():
     return _dc.load_indexes()
+
+
+def _dream_words_for_animation(dream: str, limit: int = 16) -> list[str]:
+    """Estrae parole leggibili da mostrare nell'animazione di elaborazione."""
+    seen: set[str] = set()
+    words: list[str] = []
+    for raw in re.findall(r"[A-Za-zÀ-ÖØ-öø-ÿ0-9]{3,}", dream):
+        norm = _dc.normalize(raw)
+        if not norm or norm in _dc.STOPWORDS or norm in seen:
+            continue
+        seen.add(norm)
+        words.append(raw.strip()[:26])
+        if len(words) >= limit:
+            break
+    return words or ["sogno", "simboli", "numeri", "messaggio"]
+
+
+def _word_stream_html(dream: str) -> str:
+    words = _dream_words_for_animation(dream)
+    chips = "".join(f'<span class="stream-word">{_html.escape(word)}</span>' for word in words)
+    return chips + chips
+
+
+def _format_interpret_frase(nome: str, frase: str) -> str:
+    """Rende sicura la frase narrativa e mette in risalto il nome del simbolo «Nome»."""
+    safe = _html.escape(frase)
+    nome_safe = _html.escape(nome)
+    # il builder racchiude il nome tra «virgolette»: lo trasformiamo in grassetto dorato
+    return safe.replace(f"«{nome_safe}»", f"<b>{nome_safe}</b>")
+
+
+def _format_share_text(dream: str, combo: tuple[int, ...], matches: list[_dc.Match]) -> str:
+    numeri = " - ".join(f"{n:02d}" for n in combo)
+    simboli = ", ".join(m.entry.symbol for m in matches[:5])
+    return (
+        "Ho raccontato questo sogno a Sogni e Numeri:\n"
+        f"\"{dream}\"\n\n"
+        f"Numeri simbolici: {numeri}\n"
+        f"Simboli trovati: {simboli if simboli else 'nessuno'}\n\n"
+        "Lettura culturale e ricreativa, non predittiva."
+    )
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -545,16 +1058,16 @@ def _render_combo_gioco(label: str, combo: tuple[int, ...], nota: str = "") -> N
     st.markdown(f'<div class="gioco-header">🎱 {label}</div>', unsafe_allow_html=True)
     if nota:
         st.markdown(f'<div class="gioco-nota">{nota}</div>', unsafe_allow_html=True)
-    cols = st.columns(len(combo))
-    for col, n in zip(cols, combo):
+    cards: list[str] = []
+    for n in combo:
         pianeta, _, _ = _sp_info(n)
-        with col:
-            st.markdown(f"""
+        cards.append(f"""
 <div class="num-gioco-card">
   <div class="num-gioco-cifra">{n:02d}</div>
-  <div class="num-gioco-pianeta">{pianeta if pianeta else "&nbsp;"}</div>
+  <div class="num-gioco-pianeta">{_html.escape(pianeta) if pianeta else "&nbsp;"}</div>
 </div>
-""", unsafe_allow_html=True)
+""")
+    st.markdown(f'<div class="number-grid compact">{"".join(cards)}</div>', unsafe_allow_html=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -569,12 +1082,17 @@ st.markdown("""
          alt="Sogni e Numeri">
   </div>
   <div class="app-title">Sogni e Numeri</div>
-  <div class="app-tagline">✨ Ogni sogno porta un messaggio — scopri cosa ti vuole dire</div>
+  <div class="app-tagline">Racconta il sogno. Guarda i simboli. Scopri i numeri.</div>
   <div class="app-welcome">
-    Benvenuto nel portale dell'interpretazione onirica. Racconta il tuo sogno con parole semplici:
-    persone, animali, luoghi, oggetti, sensazioni. Il sistema consulterà sette fonti antiche
-    — dalla Smorfia napoletana alla Cabala ebraica — per restituirti il significato simbolico
-    nascosto nella tua notte.
+    Un'esperienza web ispirata alla Smorfia, alla tradizione popolare e ai testi simbolici antichi.
+    Scrivi anche poche parole: persone, luoghi, animali, oggetti o sensazioni.
+    Il resto lo fa il motore di lettura.
+  </div>
+  <div class="trust-strip">
+    <span class="trust-pill">Nessuna registrazione</span>
+    <span class="trust-pill">Funziona da telefono</span>
+    <span class="trust-pill">Lettura immediata</span>
+    <span class="trust-pill">Tradizione e simboli</span>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -587,19 +1105,39 @@ st.markdown("""
 st.markdown("""
 <div class="step-label">
   <span class="step-num">1</span>
-  &nbsp;Scrivi il tuo sogno qui sotto
+  &nbsp;Racconta il sogno
 </div>
-<div class="step-instruction">
-  Usa parole semplici. Puoi scrivere liberamente: persone, animali, luoghi,
-  oggetti, colori, sensazioni. Anche un solo elemento va bene.
+<div class="dream-console">
+  <div class="micro-title">Bastano poche parole</div>
+  <div class="micro-copy">
+    Scrivi quello che ricordi: una persona, un luogo, un animale, un colore, una sensazione.
+    Il motore riconosce i simboli e costruisce la lettura.
+  </div>
 </div>
 """, unsafe_allow_html=True)
+
+if "dream_text" not in st.session_state:
+    st.session_state.dream_text = ""
+
+st.markdown('<div class="quick-label">Non sai da dove partire? Prova un esempio:</div>', unsafe_allow_html=True)
+example_cols = st.columns(4)
+_EXAMPLES = [
+    ("Acqua", "Ho sognato acqua chiara, una casa vecchia e mia madre che mi chiamava."),
+    ("Padre", "Ho sognato mio padre sorridente davanti a una porta illuminata."),
+    ("Cane", "Ho sognato un cane bianco che correva in una strada lunga."),
+    ("Mare", "Ho sognato il mare di notte, una barca e tante monete."),
+]
+for col, (label, text) in zip(example_cols, _EXAMPLES):
+    with col:
+        if st.button(label, use_container_width=True):
+            st.session_state.dream_text = text
 
 dream_input = st.text_area(
     label="Il tuo sogno",
     label_visibility="collapsed",
     placeholder="Per esempio: ho sognato un cavallo bianco che correva sul mare, c'era anche mia madre…",
     height=180,
+    key="dream_text",
 )
 
 
@@ -610,11 +1148,11 @@ dream_input = st.text_area(
 st.markdown("""
 <div class="step-label">
   <span class="step-num">2</span>
-  &nbsp;Premi il bottone qui sotto
+  &nbsp;Avvia la lettura
 </div>
 """, unsafe_allow_html=True)
 
-analyze = st.button("🔮  GENERA LA TUA LETTURA SIMBOLICA", type="primary", use_container_width=True)
+analyze = st.button("GENERA LA LETTURA DEL SOGNO", type="primary", use_container_width=True)
 
 st.markdown('<div class="sep">✦ &nbsp; ✦ &nbsp; ✦</div>', unsafe_allow_html=True)
 
@@ -659,15 +1197,21 @@ if analyze and dream_input.strip():
         f'animation-delay:{d}s;animation-duration:{dur}s">{ch}</span>'
         for l, ch, fs, d, dur in _MONETE
     )
+    _stream_html = _word_stream_html(dream)
     _loading = st.empty()
     _loading.markdown(f"""
 <div class="sogni-overlay">
   <div class="pioggia">{_pioggia_html}</div>
-  <div class="loading-titolo">🌙 Sto leggendo i tuoi sogni<span class="puntini"></span></div>
-  <div class="loading-sub">Consultando le 7 fonti antiche</div>
+  <div class="loading-titolo">Sto leggendo il tuo sogno<span class="puntini"></span></div>
+  <div class="loading-sub">Le parole diventano simboli, i simboli diventano numeri.</div>
+  <div class="dream-reader">
+    <div class="dream-reader-head">Parole individuate nel sogno</div>
+    <div class="dream-stream"><div class="stream-track">{_stream_html}</div></div>
+  </div>
   <div class="loading-ruota"></div>
 </div>
 """, unsafe_allow_html=True)
+    time.sleep(1.1)
 
     # ── carica indici (cache dopo il primo avvio) ────────────────────────────
     try:
@@ -705,7 +1249,7 @@ if analyze and dream_input.strip():
     st.markdown("""
 <div class="step-label">
   <span class="step-num">3</span>
-  &nbsp;Ecco i tuoi risultati
+  &nbsp;La tua lettura è pronta
 </div>
 """, unsafe_allow_html=True)
 
@@ -717,13 +1261,40 @@ if analyze and dream_input.strip():
         st.stop()
 
     # ────────────────────────────────────────────────────────────────────────
+    # SEZIONE 0 — L'INTERPRETAZIONE DEL SOGNO (prima dei numeri)
+    # ────────────────────────────────────────────────────────────────────────
+
+    interpretazione = _dc.build_interpretation(dream, matches)
+
+    _simboli_html = "".join(
+        f'<div class="interpret-simbolo" style="animation-delay:{0.15 * (i + 1):.2f}s;">'
+        f'{_format_interpret_frase(nome, frase)}'
+        f'</div>'
+        for i, (nome, frase) in enumerate(interpretazione["simboli"])
+    )
+
+    st.markdown(f"""
+<div class="interpret-wrap">
+  <div class="interpret-kicker">La lettura del tuo sogno</div>
+  <div class="interpret-apertura">{_html.escape(interpretazione["apertura"])}</div>
+  {_simboli_html}
+  <div class="interpret-sintesi">{_html.escape(interpretazione["sintesi"])}</div>
+  <div class="interpret-ponte">{_html.escape(interpretazione["ponte"])}</div>
+</div>
+<div class="reveal-arrow">⌄</div>
+""", unsafe_allow_html=True)
+
+    # ────────────────────────────────────────────────────────────────────────
     # SEZIONE A — I TUOI NUMERI DI OGGI (top 10 per score)
     # ────────────────────────────────────────────────────────────────────────
 
     st.markdown("""
-<div class="numeri-header">✦ I NUMERI DEL TUO SOGNO ✦</div>
+<div class="result-spotlight">
+  <div class="result-kicker">E adesso… i numeri</div>
+  <div class="numeri-header">I numeri del tuo sogno</div>
 <div class="numeri-sottotitolo">
-  Ogni simbolo onirico porta con sé un numero — radice della sua energia nella tradizione simbolica
+  I numeri più forti emersi dai simboli che hai scritto
+</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -731,16 +1302,16 @@ if analyze and dream_input.strip():
     if top_scores:
         # prima riga: primi 5 numeri in grande
         primo_blocco = top_scores[:5]
-        cols = st.columns(len(primo_blocco))
-        for col, (numero, _score) in zip(cols, primo_blocco):
+        cards = []
+        for numero, _score in primo_blocco:
             simboli_origine = ", ".join(num_to_simboli[numero][:2]) if num_to_simboli[numero] else "—"
-            with col:
-                st.markdown(f"""
+            cards.append(f"""
 <div class="num-grande-card">
   <div class="num-grande-cifra">{numero:02d}</div>
-  <div class="num-grande-da">{simboli_origine}</div>
+  <div class="num-grande-da">{_html.escape(simboli_origine)}</div>
 </div>
-""", unsafe_allow_html=True)
+""")
+        st.markdown(f'<div class="number-grid">{"".join(cards)}</div>', unsafe_allow_html=True)
 
         # seconda riga: numeri 6-10 (leggermente più piccoli)
         if len(top_scores) > 5:
@@ -751,16 +1322,16 @@ if analyze and dream_input.strip():
                 '</div>',
                 unsafe_allow_html=True,
             )
-            cols2 = st.columns(len(secondo_blocco))
-            for col, (numero, _score) in zip(cols2, secondo_blocco):
+            cards2 = []
+            for numero, _score in secondo_blocco:
                 simboli_origine = ", ".join(num_to_simboli[numero][:2]) if num_to_simboli[numero] else "—"
-                with col:
-                    st.markdown(f"""
+                cards2.append(f"""
 <div class="num-grande-card" style="padding:1rem 0.3rem 0.8rem;">
   <div class="num-grande-cifra" style="font-size:2.6rem;">{numero:02d}</div>
-  <div class="num-grande-da">{simboli_origine}</div>
+  <div class="num-grande-da">{_html.escape(simboli_origine)}</div>
 </div>
-""", unsafe_allow_html=True)
+""")
+            st.markdown(f'<div class="number-grid compact">{"".join(cards2)}</div>', unsafe_allow_html=True)
 
     st.markdown('<div class="sep">· · ·</div>', unsafe_allow_html=True)
 
@@ -769,19 +1340,20 @@ if analyze and dream_input.strip():
     # ────────────────────────────────────────────────────────────────────────
 
     st.markdown("""
-<div class="numeri-header" style="font-size:1.3rem;">🔢 SEQUENZE SIMBOLICHE DEL SOGNO</div>
+<div class="numeri-header" style="font-size:1.3rem;">Sequenze simboliche del sogno</div>
 <div class="numeri-sottotitolo">
-  Combinazioni numeriche generate dall'energia simbolica dei tuoi elementi onirici
+  Tre sequenze pronte, generate dai simboli più rilevanti
 </div>
 """, unsafe_allow_html=True)
 
-    _render_combo_gioco("Sequenza di 5 numeri — radici 1–90", lotto)
-    _render_combo_gioco("Sequenza di 5 numeri — radici 1–55", millionday)
-    _render_combo_gioco("Sequenza di 6 numeri — radici 1–90", superenalotto)
+    _render_combo_gioco("5 numeri tradizionali — 1-90", lotto)
+    _render_combo_gioco("5 numeri compatti — 1-55", millionday)
+    _render_combo_gioco("6 numeri tradizionali — 1-90", superenalotto)
 
     st.markdown("""
-<div class="avviso">
-  ✦ &nbsp; Questa è una lettura simbolica basata su tradizioni esoteriche antiche. &nbsp; ✦
+<div class="responsible-note">
+  Lettura culturale e ricreativa: i numeri non sono una previsione e non garantiscono alcun risultato.
+  Usali come curiosità legata alla tradizione, sempre con equilibrio.
 </div>
 """, unsafe_allow_html=True)
 
@@ -792,11 +1364,10 @@ if analyze and dream_input.strip():
     # ────────────────────────────────────────────────────────────────────────
 
     st.markdown("""
-<div class="simboli-header">🎴 I simboli del tuo sogno</div>
+<div class="simboli-header">I simboli riconosciuti</div>
 <div style="color:#9e8a6a; font-size:1.05rem; margin-bottom:1.5rem; font-style:italic; line-height:1.7;">
-  Il sogno parla per immagini. Ogni elemento che hai vissuto stanotte — una figura, un luogo,
-  un animale, un colore — è un simbolo che le tradizioni esoteriche interpretano da secoli.
-  Qui trovi la lettura di ciascuno, con i numeri che gli appartengono.
+  Qui vedi da quali immagini del sogno nasce la lettura. Ogni simbolo porta con sé
+  una o più corrispondenze numeriche nella tradizione.
 </div>
 """, unsafe_allow_html=True)
 
@@ -825,7 +1396,7 @@ if analyze and dream_input.strip():
   </div>
   <div style="font-family:'Crimson Text',serif; font-size:1rem; color:#c8b89a;
               line-height:1.7; margin-bottom:0.5rem; font-style:italic;">
-    {match.entry.definition if hasattr(match.entry, 'definition') and match.entry.definition else
+    {_html.escape(match.entry.detail) if match.entry.detail else
      f"Simbolo onirico tramandato dalla tradizione — {simbolo.lower()} porta con sé un'energia numerica precisa."}
   </div>
   <div class="simbolo-numeri" style="margin-bottom:0.3rem;">
@@ -857,10 +1428,27 @@ if analyze and dream_input.strip():
     )
     timestamp_fn = _dt.now().strftime("%Y%m%d_%H%M%S")
 
+    share_text = _format_share_text(dream, lotto, matches)
+    st.markdown("""
+<div class="share-panel">
+  <div class="micro-title">Vuoi condividerlo?</div>
+  <div class="micro-copy">
+    Qui sotto trovi un testo già pronto da copiare e mandare su WhatsApp o salvare nelle note.
+  </div>
+</div>
+""", unsafe_allow_html=True)
+    st.text_area(
+        "Testo pronto da copiare",
+        value=share_text,
+        height=160,
+        label_visibility="collapsed",
+        key=f"share_{timestamp_fn}",
+    )
+
     col_dl, col_kofi = st.columns(2)
     with col_dl:
         st.download_button(
-            label="📥  Salva l'analisi sul tuo computer",
+            label="Salva l'analisi",
             data=md_content.encode("utf-8"),
             file_name=f"sogno_{timestamp_fn}.md",
             mime="text/markdown",
