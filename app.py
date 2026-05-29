@@ -37,51 +37,12 @@ except ImportError:
 # ══════════════════════════════════════════════════════════════════════════════
 
 st.set_page_config(
-    page_title="Sogni d'Oro — Raccontami il tuo sogno",
+    page_title="Sogni e Numeri — Interpreta il tuo sogno",
     page_icon="🌙",
     layout="centered",
     initial_sidebar_state="collapsed",
 )
 
-# ── Age-gate 18+ obbligatorio ────────────────────────────────────────────────
-if "eta_confermata" not in st.session_state:
-    st.session_state["eta_confermata"] = False
-
-if not st.session_state["eta_confermata"]:
-    st.markdown("""
-<div style="min-height:100vh; display:flex; align-items:center; justify-content:center;
-            background:#0d0d1a; flex-direction:column; gap:2rem; padding:2rem;">
-  <div style="font-family:'Cinzel',serif; font-size:clamp(2rem,5vw,3.5rem);
-              color:#c9a84c; text-align:center; text-shadow:0 0 30px rgba(201,168,76,0.4);">
-    🌙 Sogni d'Oro
-  </div>
-  <div style="background:#1a1a2e; border:1px solid #c9a84c33; border-radius:16px;
-              padding:2.5rem 3rem; max-width:500px; text-align:center;">
-    <div style="font-family:'Cinzel',serif; font-size:1.3rem; color:#c9a84c; margin-bottom:1rem;">
-      🔞 Accesso riservato ai maggiorenni
-    </div>
-    <div style="font-family:'Crimson Text',serif; font-size:1.05rem; color:#9e8a6a;
-                line-height:1.7; margin-bottom:1.5rem;">
-      Questa applicazione contiene riferimenti a giochi con vincite in denaro.<br>
-      <strong style="color:#cc5555;">Il gioco è vietato ai minori di 18 anni</strong><br>
-      e può causare dipendenza patologica.<br><br>
-      Numero Verde gratuito: <strong style="color:#ff9999;">800 274 274</strong>
-    </div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
-
-    confermato = st.checkbox(
-        "✅  Confermo di avere almeno 18 anni e di aver letto l'avviso sul gioco responsabile",
-        key="check_18"
-    )
-
-    col1, col2, col3 = st.columns([1,2,1])
-    with col2:
-        if st.button("Entra in Sogni d'Oro →", type="primary", use_container_width=True, disabled=not confermato):
-            st.session_state["eta_confermata"] = True
-            st.rerun()
-    st.stop()
 
 # ══════════════════════════════════════════════════════════════════════════════
 # CSS — ACCESSIBILE, FONT GRANDI, BOTTONI ENORMI
@@ -602,12 +563,18 @@ def _render_combo_gioco(label: str, combo: tuple[int, ...], nota: str = "") -> N
 
 st.markdown("""
 <div class="app-header">
-  <div class="app-title">🌙 Sogni d'Oro</div>
-  <div class="app-tagline">✨ I sogni della notte diventano la tua lettura simbolica</div>
+  <div style="display:flex; justify-content:center; margin-bottom:1.2rem;">
+    <img src="app/static/logo_sogni_numeri.png"
+         style="width:200px; height:200px; object-fit:contain; filter:drop-shadow(0 0 30px rgba(201,168,76,0.35));"
+         alt="Sogni e Numeri">
+  </div>
+  <div class="app-title">Sogni e Numeri</div>
+  <div class="app-tagline">✨ Ogni sogno porta un messaggio — scopri cosa ti vuole dire</div>
   <div class="app-welcome">
-    Benvenuto! Questo strumento è semplice da usare: ti basta scrivere
-    quello che hai sognato — anche poche parole vanno benissimo —
-    e poi premere il bottone. Farà tutto lui.
+    Benvenuto nel portale dell'interpretazione onirica. Racconta il tuo sogno con parole semplici:
+    persone, animali, luoghi, oggetti, sensazioni. Il sistema consulterà sette fonti antiche
+    — dalla Smorfia napoletana alla Cabala ebraica — per restituirti il significato simbolico
+    nascosto nella tua notte.
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -754,9 +721,9 @@ if analyze and dream_input.strip():
     # ────────────────────────────────────────────────────────────────────────
 
     st.markdown("""
-<div class="numeri-header">⭐ I TUOI NUMERI DI OGGI ⭐</div>
+<div class="numeri-header">✦ I NUMERI DEL TUO SOGNO ✦</div>
 <div class="numeri-sottotitolo">
-  Questi sono i numeri che il tuo sogno suggerisce, in ordine di importanza
+  Ogni simbolo onirico porta con sé un numero — radice della sua energia nella tradizione simbolica
 </div>
 """, unsafe_allow_html=True)
 
@@ -802,20 +769,19 @@ if analyze and dream_input.strip():
     # ────────────────────────────────────────────────────────────────────────
 
     st.markdown("""
-<div class="numeri-header" style="font-size:1.3rem;">🎱 SEQUENZE NUMERICHE DAL TUO SOGNO</div>
+<div class="numeri-header" style="font-size:1.3rem;">🔢 SEQUENZE SIMBOLICHE DEL SOGNO</div>
 <div class="numeri-sottotitolo">
-  Qui trovi le sequenze già pronte, elaborate dalla lettura simbolica
+  Combinazioni numeriche generate dall'energia simbolica dei tuoi elementi onirici
 </div>
 """, unsafe_allow_html=True)
 
-    _render_combo_gioco("Sequenza 5 numeri — da 1 a 90", lotto)
-    _render_combo_gioco("Sequenza 5 numeri — da 1 a 55", millionday)
-    _render_combo_gioco("Sequenza 6 numeri — da 1 a 90", superenalotto)
+    _render_combo_gioco("Sequenza di 5 numeri — radici 1–90", lotto)
+    _render_combo_gioco("Sequenza di 5 numeri — radici 1–55", millionday)
+    _render_combo_gioco("Sequenza di 6 numeri — radici 1–90", superenalotto)
 
     st.markdown("""
 <div class="avviso">
-  ✦ &nbsp; Questa è una lettura simbolica: non è una previsione di numeri vincenti.
-  Gioca sempre con responsabilità. &nbsp; ✦
+  ✦ &nbsp; Questa è una lettura simbolica basata su tradizioni esoteriche antiche. &nbsp; ✦
 </div>
 """, unsafe_allow_html=True)
 
@@ -827,19 +793,47 @@ if analyze and dream_input.strip():
 
     st.markdown("""
 <div class="simboli-header">🎴 I simboli del tuo sogno</div>
-<div style="color:#9e8a6a; font-size:1rem; margin-bottom:1rem; font-style:italic;">
-  Questi sono gli elementi che ho trovato nel tuo racconto e i numeri a loro legati.
+<div style="color:#9e8a6a; font-size:1.05rem; margin-bottom:1.5rem; font-style:italic; line-height:1.7;">
+  Il sogno parla per immagini. Ogni elemento che hai vissuto stanotte — una figura, un luogo,
+  un animale, un colore — è un simbolo che le tradizioni esoteriche interpretano da secoli.
+  Qui trovi la lettura di ciascuno, con i numeri che gli appartengono.
 </div>
 """, unsafe_allow_html=True)
 
+    # Mappa fonte → descrizione narrativa
+    _fonte_desc = {
+        "smorfia":    "Smorfia Napoletana — la voce del popolo del Sud",
+        "capacelli":  "Capacelli 1881 — il grande libro dei sogni dell'Ottocento",
+        "sepharial":  "Sepharial 1920 — numerologia planetaria",
+        "ronchetti":  "Ronchetti 1922 — dizionario illustrato dei simboli",
+        "cabala":     "Cabala — tradizione esoterica ebraica",
+        "sefer":      "Sefer Yetzira — il Libro della Formazione",
+    }
+
     for idx, match in enumerate(matches[:15], 1):
-        nums_str = "  ·  ".join(str(n) for n in match.entry.numbers)
-        src = _dc.source_short(match.entry.source)
+        nums_str = "  ·  ".join(f"<strong>{n}</strong>" for n in match.entry.numbers)
+        src_raw  = _dc.source_short(match.entry.source).lower()
+        src_desc = next((v for k, v in _fonte_desc.items() if k in src_raw), f"Fonte: {_dc.source_short(match.entry.source)}")
+        simbolo  = match.entry.symbol.capitalize()
+
         st.markdown(f"""
-<div class="simbolo-riga">
-  <div class="simbolo-nome">{idx}. {match.entry.symbol}</div>
-  <div class="simbolo-numeri">Numeri: <strong>{nums_str}</strong></div>
-  <div class="simbolo-fonte">Fonte: {src}</div>
+<div class="simbolo-riga" style="padding:1.2rem 1.4rem; margin-bottom:1rem;
+     border-left:3px solid #c9a84c55; border-radius:0 12px 12px 0;">
+  <div class="simbolo-nome" style="font-size:1.25rem; margin-bottom:0.4rem;">
+    <span style="color:#c9a84c44; font-size:0.9rem; margin-right:0.5rem;">{idx:02d}</span>
+    {simbolo}
+  </div>
+  <div style="font-family:'Crimson Text',serif; font-size:1rem; color:#c8b89a;
+              line-height:1.7; margin-bottom:0.5rem; font-style:italic;">
+    {match.entry.definition if hasattr(match.entry, 'definition') and match.entry.definition else
+     f"Simbolo onirico tramandato dalla tradizione — {simbolo.lower()} porta con sé un'energia numerica precisa."}
+  </div>
+  <div class="simbolo-numeri" style="margin-bottom:0.3rem;">
+    Numeri associati: {nums_str}
+  </div>
+  <div class="simbolo-fonte" style="font-size:0.85rem; color:#5a4a35;">
+    📖 {src_desc}
+  </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -975,18 +969,6 @@ if analyze and dream_input.strip():
     st.markdown('<div style="height:2rem"></div>', unsafe_allow_html=True)
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# AVVISO GIOCO RESPONSABILE — primo accesso (toast)
-# ══════════════════════════════════════════════════════════════════════════════
-
-if "disclaimer_shown" not in st.session_state:
-    st.session_state["disclaimer_shown"] = True
-    st.toast(
-        "⚠️ Sogni d'Oro è solo intrattenimento. "
-        "Il gioco è vietato ai minori di 18 anni e può causare dipendenza. "
-        "Numero verde gratuito: 800 274 274",
-        icon="🔞",
-    )
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -995,71 +977,35 @@ if "disclaimer_shown" not in st.session_state:
 
 st.markdown('<div style="height: 2rem"></div>', unsafe_allow_html=True)
 
-with st.expander("⚖️  Informazioni legali e disclaimer — leggimi"):
+with st.expander("⚖️  Note legali e informazioni"):
     st.markdown("""
 <div style="font-family:'Crimson Text',Georgia,serif; font-size:1rem;
             color:#9e8a6a; line-height:1.8;">
 
-<div style="background:#1a0a0a; border:1px solid #ff444433; border-radius:10px;
-            padding:1rem 1.2rem; margin-bottom:1.5rem; text-align:center;">
-  <span style="font-family:'Cinzel',serif; color:#ff7777; font-size:1.1rem; font-weight:700;">
-    🔞 VIETATO AI MINORI DI 18 ANNI
-  </span><br>
-  <span style="font-size:0.95rem; color:#cc5555;">
-    Il gioco è vietato ai minori di 18 anni e può causare dipendenza patologica.<br>
-    Se hai un problema con il gioco, chiama il <strong style="color:#ff9999;">Numero Verde 800 274 274</strong>
-    (gratuito, attivo 24h su 24 — ADM Agenzia delle Dogane e dei Monopoli).
-  </span>
-</div>
-
-<p><strong style="color:#c9a84c;">1. Solo intrattenimento</strong><br>
-Sogni d'Oro è un'applicazione a scopo <em>puramente ricreativo e culturale</em>.
+<p><strong style="color:#c9a84c;">1. Scopo culturale e ricreativo</strong><br>
+Sogni e Numeri è un'applicazione a scopo <em>puramente culturale ed esplorativo</em>.
 Le corrispondenze tra sogni e numeri si basano su tradizioni popolari italiane e testi
-di pubblico dominio (Smorfia napoletana, Libro dei sogni di Capacelli 1881, Sefer Yetzira,
-Sepharial 1920, Ronchetti 1922). Nessun algoritmo ha capacità predittive reali sulle
-estrazioni di qualsiasi gioco con vincite in denaro.</p>
+di pubblico dominio (Smorfia napoletana, Capacelli 1881, Sefer Yetzira,
+Sepharial 1920, Ronchetti 1922). I numeri prodotti sono frutto di lettura simbolica
+e non hanno alcuna valenza predittiva.</p>
 
-<p><strong style="color:#c9a84c;">2. Nessuna consulenza di gioco</strong><br>
-I numeri proposti dall'app <em>non costituiscono</em> consulenza finanziaria, strategia di
-gioco o previsione di estrazioni. L'app non ha alcun legame con alcun concessionario
-autorizzato dall'ADM. Non siamo un servizio di pronostici.</p>
+<p><strong style="color:#c9a84c;">2. Privacy e dati personali</strong><br>
+Sogni e Numeri <em>non raccoglie, non archivia e non trasmette</em> dati personali.
+Il testo del sogno viene elaborato in tempo reale e non viene conservato.
+Non utilizziamo cookie di profilazione. La piattaforma di hosting è Streamlit
+Community Cloud (Snowflake Inc.) —
+<a href="https://streamlit.io/privacy-policy" target="_blank" style="color:#c9a84c;">Privacy Policy</a>.</p>
 
-<p><strong style="color:#c9a84c;">3. Nessuna responsabilità per perdite</strong><br>
-Il gestore di Sogni d'Oro non è responsabile, in nessun caso e in nessuna misura,
-per perdite economiche, danni diretti o indiretti derivanti dall'utilizzo dei numeri
-suggeriti. L'utente gioca liberamente e sotto la propria esclusiva responsabilità.
-<em>Non giocare più di quanto puoi permetterti di perdere.</em></p>
+<p><strong style="color:#c9a84c;">3. Proprietà intellettuale</strong><br>
+Le fonti (Smorfia napoletana, Capacelli 1881, Sefer Yetzira, Sepharial 1920, Ronchetti 1922)
+sono opere di pubblico dominio. Il codice e la grafica sono di proprietà del gestore.
+È vietata la riproduzione senza autorizzazione scritta.</p>
 
-<p><strong style="color:#c9a84c;">4. Gioco responsabile</strong><br>
-Il gioco eccessivo può diventare una dipendenza. Stabilisci in anticipo un budget
-massimo. Se il gioco smette di essere un divertimento, fermati e chiedi aiuto:<br>
-📞 <strong>800 274 274</strong> — Numero Verde Gioco Responsabile (gratuito)<br>
-🌐 <a href="https://www.adm.gov.it" target="_blank" style="color:#c9a84c;">www.adm.gov.it</a>
-&nbsp;·&nbsp;
-<a href="https://www.giocaresponsabile.it" target="_blank" style="color:#c9a84c;">www.giocaresponsabile.it</a></p>
-
-<p><strong style="color:#c9a84c;">5. Privacy e dati personali</strong><br>
-Sogni d'Oro <em>non raccoglie, non archivia e non trasmette</em> dati personali degli
-utenti. Il testo del sogno inserito viene elaborato in tempo reale e non viene
-conservato su alcun server. Non utilizziamo cookie di profilazione. La piattaforma
-di hosting è Streamlit Community Cloud (Snowflake Inc.) — consulta la loro
-<a href="https://streamlit.io/privacy-policy" target="_blank" style="color:#c9a84c;">Privacy Policy</a>
-per i dettagli tecnici.</p>
-
-<p><strong style="color:#c9a84c;">6. Proprietà intellettuale</strong><br>
-Le fonti utilizzate (Smorfia napoletana, Capacelli 1881, Sefer Yetzira, Sepharial 1920,
-Ronchetti 1922) sono opere di pubblico dominio. Il codice dell'applicazione e la sua
-presentazione grafica sono di proprietà del gestore. È vietata la riproduzione totale
-o parziale senza autorizzazione scritta.</p>
-
-<p><strong style="color:#c9a84c;">7. Legge applicabile</strong><br>
-L'applicazione è gestita dall'Italia. Per qualsiasi controversia è competente
-il Tribunale del Foro del gestore. Si applica la legge italiana.</p>
+<p><strong style="color:#c9a84c;">4. Legge applicabile</strong><br>
+L'applicazione è gestita dall'Italia. Si applica la legge italiana.</p>
 
 <p style="color:#5a4a35; font-size:0.85rem; margin-top:1.5rem; border-top:1px solid #2a2a3a; padding-top:1rem;">
-  <em>Ultimo aggiornamento: 2026. Questo disclaimer può essere modificato in qualsiasi
-  momento. Continuando a usare l'app, l'utente dichiara di aver letto e accettato
-  questi termini e di avere almeno 18 anni di età.</em>
+  <em>Ultimo aggiornamento: 2026.</em>
 </p>
 
 </div>
@@ -1070,18 +1016,6 @@ il Tribunale del Foro del gestore. Si applica la legge italiana.</p>
 # BANNER GIOCO RESPONSABILE (fisso in fondo — sempre visibile)
 # ══════════════════════════════════════════════════════════════════════════════
 
-st.markdown("""
-<div style="background:#1a0808; border-top:2px solid #ff444422;
-            padding:0.8rem 1.5rem; text-align:center;
-            font-family:'Crimson Text',serif; font-size:0.88rem;
-            color:#995555; line-height:1.8; margin-top:1rem;">
-  🔞 <strong>Il gioco è vietato ai minori di 18 anni e può causare dipendenza patologica.</strong>
-  &nbsp;·&nbsp; Numero Verde gratuito: <strong>800 274 274</strong>
-  &nbsp;·&nbsp; Solo intrattenimento — nessuna previsione reale di estrazioni.
-  &nbsp;·&nbsp; <a href="https://www.adm.gov.it" style="color:#cc5555;">adm.gov.it</a>
-  &nbsp;·&nbsp; <a href="https://www.giocaresponsabile.it" style="color:#cc5555;">giocaresponsabile.it</a>
-</div>
-""", unsafe_allow_html=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1092,12 +1026,12 @@ st.markdown('<div style="height: 1rem"></div>', unsafe_allow_html=True)
 st.markdown("""
 <div style="text-align:center; color:#2a2a4a; font-size:0.82rem; font-style:italic;
             border-top:1px solid #1a1a35; padding-top:1.2rem; line-height:2.2;">
-  🌙 Sogni d'Oro — Solo intrattenimento · Vietato ai minori di 18 anni<br>
+  🌙 Sogni e Numeri — Lettura simbolica dei sogni<br>
   7 fonti esoteriche &nbsp;·&nbsp; Smorfia napoletana &nbsp;·&nbsp; Capacelli 1881
   &nbsp;·&nbsp; Sefer Yetzira &nbsp;·&nbsp; Sepharial (1920) &nbsp;·&nbsp; Ronchetti (1922)<br>
   <a href="https://ko-fi.com/sognienumeri" target="_blank"
      style="color:#c9a84c55; text-decoration:none; font-size:0.75rem;">
-    ☕ ko-fi.com/sognienumeri
+    ☕ Sostieni il progetto — ko-fi.com/sognienumeri
   </a>
 </div>
 """, unsafe_allow_html=True)
