@@ -936,16 +936,123 @@ if analyze and dream_input.strip():
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# AVVISO GIOCO RESPONSABILE — primo accesso (toast)
+# ══════════════════════════════════════════════════════════════════════════════
+
+if "disclaimer_shown" not in st.session_state:
+    st.session_state["disclaimer_shown"] = True
+    st.toast(
+        "⚠️ Sogni d'Oro è solo intrattenimento. "
+        "Il gioco è vietato ai minori di 18 anni e può causare dipendenza. "
+        "Numero verde gratuito: 800 274 274",
+        icon="🔞",
+    )
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# DISCLAIMER COMPLETO
+# ══════════════════════════════════════════════════════════════════════════════
+
+st.markdown('<div style="height: 2rem"></div>', unsafe_allow_html=True)
+
+with st.expander("⚖️  Informazioni legali e disclaimer — leggimi"):
+    st.markdown("""
+<div style="font-family:'Crimson Text',Georgia,serif; font-size:1rem;
+            color:#9e8a6a; line-height:1.8;">
+
+<div style="background:#1a0a0a; border:1px solid #ff444433; border-radius:10px;
+            padding:1rem 1.2rem; margin-bottom:1.5rem; text-align:center;">
+  <span style="font-family:'Cinzel',serif; color:#ff7777; font-size:1.1rem; font-weight:700;">
+    🔞 VIETATO AI MINORI DI 18 ANNI
+  </span><br>
+  <span style="font-size:0.95rem; color:#cc5555;">
+    Il gioco è vietato ai minori di 18 anni e può causare dipendenza patologica.<br>
+    Se hai un problema con il gioco, chiama il <strong style="color:#ff9999;">Numero Verde 800 274 274</strong>
+    (gratuito, attivo 24h su 24 — ADM Agenzia delle Dogane e dei Monopoli).
+  </span>
+</div>
+
+<p><strong style="color:#c9a84c;">1. Solo intrattenimento</strong><br>
+Sogni d'Oro è un'applicazione a scopo <em>puramente ricreativo e culturale</em>.
+Le corrispondenze tra sogni e numeri si basano su tradizioni popolari italiane e testi
+di pubblico dominio (Smorfia napoletana, Libro dei sogni di Capacelli 1881, Sefer Yetzira,
+Sepharial 1920, Ronchetti 1922). Nessun algoritmo ha capacità predittive reali sulle
+estrazioni del Lotto, SuperEnalotto, MillionDAY o di qualsiasi altro gioco.</p>
+
+<p><strong style="color:#c9a84c;">2. Nessuna consulenza di gioco</strong><br>
+I numeri proposti dall'app <em>non costituiscono</em> consulenza finanziaria, strategia di
+gioco o previsione di estrazioni. L'app non ha alcun legame con Lottomatica, Sisal,
+o qualsiasi concessionario autorizzato dall'ADM. Non siamo un servizio di pronostici.</p>
+
+<p><strong style="color:#c9a84c;">3. Nessuna responsabilità per perdite</strong><br>
+Il gestore di Sogni d'Oro non è responsabile, in nessun caso e in nessuna misura,
+per perdite economiche, danni diretti o indiretti derivanti dall'utilizzo dei numeri
+suggeriti. L'utente gioca liberamente e sotto la propria esclusiva responsabilità.
+<em>Non giocare più di quanto puoi permetterti di perdere.</em></p>
+
+<p><strong style="color:#c9a84c;">4. Gioco responsabile</strong><br>
+Il gioco eccessivo può diventare una dipendenza. Stabilisci in anticipo un budget
+massimo. Se il gioco smette di essere un divertimento, fermati e chiedi aiuto:<br>
+📞 <strong>800 274 274</strong> — Numero Verde Gioco Responsabile (gratuito)<br>
+🌐 <a href="https://www.adm.gov.it" target="_blank" style="color:#c9a84c;">www.adm.gov.it</a>
+&nbsp;·&nbsp;
+<a href="https://www.giocaresponsabile.it" target="_blank" style="color:#c9a84c;">www.giocaresponsabile.it</a></p>
+
+<p><strong style="color:#c9a84c;">5. Privacy e dati personali</strong><br>
+Sogni d'Oro <em>non raccoglie, non archivia e non trasmette</em> dati personali degli
+utenti. Il testo del sogno inserito viene elaborato in tempo reale e non viene
+conservato su alcun server. Non utilizziamo cookie di profilazione. La piattaforma
+di hosting è Streamlit Community Cloud (Snowflake Inc.) — consulta la loro
+<a href="https://streamlit.io/privacy-policy" target="_blank" style="color:#c9a84c;">Privacy Policy</a>
+per i dettagli tecnici.</p>
+
+<p><strong style="color:#c9a84c;">6. Proprietà intellettuale</strong><br>
+Le fonti utilizzate (Smorfia napoletana, Capacelli 1881, Sefer Yetzira, Sepharial 1920,
+Ronchetti 1922) sono opere di pubblico dominio. Il codice dell'applicazione e la sua
+presentazione grafica sono di proprietà del gestore. È vietata la riproduzione totale
+o parziale senza autorizzazione scritta.</p>
+
+<p><strong style="color:#c9a84c;">7. Legge applicabile</strong><br>
+L'applicazione è gestita dall'Italia. Per qualsiasi controversia è competente
+il Tribunale del Foro del gestore. Si applica la legge italiana.</p>
+
+<p style="color:#5a4a35; font-size:0.85rem; margin-top:1.5rem; border-top:1px solid #2a2a3a; padding-top:1rem;">
+  <em>Ultimo aggiornamento: 2026. Questo disclaimer può essere modificato in qualsiasi
+  momento. Continuando a usare l'app, l'utente dichiara di aver letto e accettato
+  questi termini e di avere almeno 18 anni di età.</em>
+</p>
+
+</div>
+""", unsafe_allow_html=True)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# BANNER GIOCO RESPONSABILE (fisso in fondo — sempre visibile)
+# ══════════════════════════════════════════════════════════════════════════════
+
+st.markdown("""
+<div style="background:#1a0808; border-top:2px solid #ff444422;
+            padding:0.8rem 1.5rem; text-align:center;
+            font-family:'Crimson Text',serif; font-size:0.88rem;
+            color:#995555; line-height:1.8; margin-top:1rem;">
+  🔞 <strong>Il gioco è vietato ai minori di 18 anni e può causare dipendenza patologica.</strong>
+  &nbsp;·&nbsp; Numero Verde gratuito: <strong>800 274 274</strong>
+  &nbsp;·&nbsp; Solo intrattenimento — nessuna previsione reale di estrazioni.
+</div>
+""", unsafe_allow_html=True)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # FOOTER
 # ══════════════════════════════════════════════════════════════════════════════
 
-st.markdown('<div style="height: 3rem"></div>', unsafe_allow_html=True)
+st.markdown('<div style="height: 1rem"></div>', unsafe_allow_html=True)
 st.markdown("""
-<div style="text-align:center; color:#2a2a4a; font-size:0.85rem; font-style:italic;
+<div style="text-align:center; color:#2a2a4a; font-size:0.82rem; font-style:italic;
             border-top:1px solid #1a1a35; padding-top:1.2rem; line-height:2.2;">
-  🌙 Sogni d'Oro — Il Sistema dei Sogni<br>
-  7 fonti esoteriche &nbsp;·&nbsp; Smorfia napoletana &nbsp;·&nbsp; Capacelli 1881 &nbsp;·&nbsp; Sefer Yetzira
-  &nbsp;·&nbsp; Sepharial (1920) &nbsp;·&nbsp; Ronchetti (1922)<br>
+  🌙 Sogni d'Oro — Solo intrattenimento · Vietato ai minori di 18 anni<br>
+  7 fonti esoteriche &nbsp;·&nbsp; Smorfia napoletana &nbsp;·&nbsp; Capacelli 1881
+  &nbsp;·&nbsp; Sefer Yetzira &nbsp;·&nbsp; Sepharial (1920) &nbsp;·&nbsp; Ronchetti (1922)<br>
   <a href="https://ko-fi.com/sognidoro" target="_blank"
      style="color:#c9a84c55; text-decoration:none; font-size:0.75rem;">
     ☕ ko-fi.com/sognidoro
