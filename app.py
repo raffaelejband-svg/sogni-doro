@@ -457,6 +457,44 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 ::-webkit-scrollbar-track { background: #0d0d1a; }
 ::-webkit-scrollbar-thumb { background: #c9a84c44; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #c9a84c88; }
+
+/* ══ BOTTONE FISSO "TORNA SU" ══ */
+.btn-torna-su {
+    position: fixed;
+    bottom: 1.8rem;
+    right: 1.8rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #8b6914, #c9a84c);
+    color: #0d0d1a !important;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 900;
+    text-decoration: none !important;
+    box-shadow: 0 4px 24px rgba(201,168,76,0.5);
+    z-index: 1000;
+    transition: transform 0.2s, box-shadow 0.2s;
+    line-height: 1;
+}
+.btn-torna-su:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(201,168,76,0.7);
+}
+.btn-torna-su-etichetta {
+    position: fixed;
+    bottom: 5rem;
+    right: 1.3rem;
+    font-size: 0.7rem;
+    color: #c9a84c88;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.05em;
+    text-align: center;
+    width: 70px;
+    z-index: 1000;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -464,6 +502,12 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 _css60_path = ROOT / "static" / "style_60plus.css"
 if _css60_path.exists():
     st.markdown(f"<style>{_css60_path.read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
+
+# ── Bottone fisso "Torna su" — sempre visibile ────────────────────────────────
+st.markdown("""
+<a href="#" class="btn-torna-su" title="Torna all'inizio">▲</a>
+<div class="btn-torna-su-etichetta">Torna su</div>
+""", unsafe_allow_html=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -875,6 +919,20 @@ if analyze and dream_input.strip():
                     unsafe_allow_html=True,
                 )
                 st.code(lettura.albero_ascii, language=None)
+
+    # ── BOTTONE: ANALIZZA UN ALTRO SOGNO ────────────────────────────────────
+    st.markdown('<div style="height:2rem"></div>', unsafe_allow_html=True)
+    st.markdown("""
+<div style="text-align:center; font-family:'Crimson Text',serif; font-size:1.1rem;
+            color:#7a6a50; font-style:italic; margin-bottom:1rem;">
+  Vuoi analizzare un altro sogno?
+</div>
+""", unsafe_allow_html=True)
+    col_r1, col_r2, col_r3 = st.columns([1, 2, 1])
+    with col_r2:
+        if st.button("🔄  Analizza un altro sogno", use_container_width=True):
+            st.rerun()
+    st.markdown('<div style="height:2rem"></div>', unsafe_allow_html=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
