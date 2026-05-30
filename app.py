@@ -64,7 +64,7 @@ NEWSLETTER_URL = "https://sognienumeri.substack.com/subscribe"
 SOCIAL_LINKS = {
     "Instagram": "https://instagram.com/sognienumeri",
     "TikTok": "",
-    "Facebook": "",
+    "Facebook": "https://www.facebook.com/profile.php?id=61590696982495",
     "YouTube": "",
     "Telegram": "",
 }
