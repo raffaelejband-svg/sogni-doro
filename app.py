@@ -65,7 +65,7 @@ SOCIAL_LINKS = {
     "Instagram": "https://instagram.com/sognienumeri",
     "TikTok": "",
     "Facebook": "https://www.facebook.com/profile.php?id=61590696982495",
-    "YouTube": "",
+    "YouTube": "https://youtube.com/@sognienumerispace",
     "Telegram": "",
 }
 
