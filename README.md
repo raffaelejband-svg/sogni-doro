@@ -1,6 +1,8 @@
-# 🌙 Sogni d'Oro
+# 🌙 Sogni e Numeri
 
 > Racconti un sogno → riconosce simboli → consulta 7 fonti esoteriche → propone numeri per Lotto, MillionDAY e SuperEnalotto.
+>
+> **Live:** [sognienumeri.space](https://sognienumeri.space) · Community/SEO: vedi [MARKETING_SEO.md](MARKETING_SEO.md)
 
 ---
 

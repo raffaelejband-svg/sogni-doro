@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""app.py — Interfaccia web Sogni d'Oro (Streamlit).
+"""app.py — Interfaccia web Sogni e Numeri (Streamlit).
 
 Design accessibile per utenti over 60:
 - Una sola pagina scorrevole, nessun tab
@@ -46,6 +46,80 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed",
 )
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CONFIGURAZIONE COMMUNITY & SOCIAL
+# ──────────────────────────────────────────────────────────────────────────────
+# Un solo punto in cui aggiornare tutti i link. Sostituisci i segnaposto con i
+# tuoi indirizzi reali quando crei gli account. Lascia "" per nascondere un link.
+# ══════════════════════════════════════════════════════════════════════════════
+
+SITE_NAME = "Sogni e Numeri"
+SITE_URL = "https://sognienumeri.space"
+
+# Newsletter / iscrizione community (es. pagina beehiiv o Substack).
+# Esempio beehiiv:  https://sognienumeri.beehiiv.com/subscribe
+# Esempio Substack: https://sognienumeri.substack.com
+NEWSLETTER_URL = "https://sognienumeri.beehiiv.com/subscribe"
+
+SOCIAL_LINKS = {
+    "Instagram": "https://instagram.com/sognienumeri",
+    "TikTok": "https://tiktok.com/@sognienumeri",
+    "Facebook": "https://facebook.com/sognienumeri",
+    "YouTube": "https://youtube.com/@sognienumeri",
+    "Telegram": "https://t.me/sognienumeri",
+}
+
+# Emoji/etichetta usate per i bottoni social compatti
+_SOCIAL_ICONS = {
+    "Instagram": "📷",
+    "TikTok": "🎵",
+    "Facebook": "👍",
+    "YouTube": "▶️",
+    "Telegram": "✈️",
+}
+
+
+def _social_buttons_html(size: str = "normal") -> str:
+    """Restituisce la fila di bottoni social (solo per i link valorizzati)."""
+    pad = "0.7rem 1.1rem" if size == "normal" else "0.5rem 0.85rem"
+    font = "1rem" if size == "normal" else "0.85rem"
+    items = []
+    for name, url in SOCIAL_LINKS.items():
+        if not url:
+            continue
+        icon = _SOCIAL_ICONS.get(name, "✦")
+        items.append(
+            f'<a href="{url}" target="_blank" rel="noopener" '
+            f'style="display:inline-flex;align-items:center;gap:0.45rem;'
+            f'padding:{pad};margin:0.25rem;border-radius:999px;'
+            f'background:rgba(154,123,46,0.10);border:1px solid #9a7b2e55;'
+            f'color:#7a5a10;font-family:\'Cinzel\',serif;font-size:{font};'
+            f'font-weight:600;text-decoration:none;">'
+            f'<span style="font-size:1.1em;">{icon}</span>{name}</a>'
+        )
+    return (
+        '<div style="display:flex;flex-wrap:wrap;justify-content:center;'
+        'gap:0.2rem;margin:0.6rem 0;">' + "".join(items) + "</div>"
+    )
+
+
+def _community_panel_html() -> str:
+    """Pannello 'Iscriviti alla community' (sostituisce il vecchio caffè)."""
+    return f"""
+<div class="community-panel">
+  <div class="community-eyebrow">✦ &nbsp;Entra nella community&nbsp; ✦</div>
+  <div class="community-title">Ricevi le nuove interpretazioni e rivelazioni</div>
+  <div class="community-copy">
+    Iscriviti gratis: ogni settimana nuove letture dei sogni, numeri commentati,
+    simboli e curiosità dalla tradizione. Niente spam, disiscrizione con un clic.
+  </div>
+  <a class="community-cta" href="{NEWSLETTER_URL}" target="_blank" rel="noopener">
+    ✉️ &nbsp;Iscriviti alla community
+  </a>
+  {_social_buttons_html("normal")}
+</div>
+"""
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -944,6 +1018,61 @@ textarea:focus {
     margin: 1.2rem 0;
 }
 
+/* ── pannello community / newsletter ── */
+.community-panel {
+    text-align: center;
+    border: 1px solid rgba(154,123,46, 0.45);
+    border-radius: 20px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(255,250,235,0.7), transparent 70%),
+        rgba(240,231,206, 0.85);
+    box-shadow: 0 8px 30px rgba(80,60,35,0.12);
+    padding: 1.8rem 1.4rem 1.4rem;
+    margin: 1.6rem 0;
+}
+.community-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    color: #9a7b2e;
+    margin-bottom: 0.4rem;
+}
+.community-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.4rem, 3.6vw, 1.95rem);
+    color: #6f5410;
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+}
+.community-copy {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.08rem;
+    color: #5a4a35;
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 0 auto 1.1rem;
+}
+.community-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 58px;
+    padding: 0.85rem 2rem;
+    background: linear-gradient(135deg, #7a5a10, #b8932f);
+    color: #fff6e2 !important;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 6px 24px rgba(150,118,40,0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.community-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 9px 30px rgba(150,118,40,0.45);
+}
+
 .responsible-note {
     border: 1px solid rgba(176,138,46, 0.22);
     border-left: 5px solid #7a5e18;
@@ -1540,7 +1669,7 @@ if analyze and dream_input.strip():
     st.markdown('<div class="sep">✦ &nbsp; ✦ &nbsp; ✦</div>', unsafe_allow_html=True)
 
     # ────────────────────────────────────────────────────────────────────────
-    # SCARICA + KO-FI
+    # SCARICA + COMMUNITY
     # ────────────────────────────────────────────────────────────────────────
 
     full_response = _dc.render_response(dream, matches)
@@ -1549,7 +1678,7 @@ if analyze and dream_input.strip():
         "tags: [sogni, numeri, lettura-simbolica, output]\n"
         f"data: {_dt.now().isoformat(timespec='seconds')}\n"
         "---\n\n"
-        "# Sogno analizzato — Sogni d'Oro\n\n"
+        "# Sogno analizzato — Sogni e Numeri\n\n"
         f"> {dream}\n\n"
         "```\n"
         f"{full_response}\n"
@@ -1574,7 +1703,7 @@ if analyze and dream_input.strip():
         key=f"share_{timestamp_fn}",
     )
 
-    col_dl, col_kofi = st.columns(2)
+    col_dl, col_comm = st.columns(2)
     with col_dl:
         st.download_button(
             label="Salva l'analisi",
@@ -1583,21 +1712,26 @@ if analyze and dream_input.strip():
             mime="text/markdown",
             use_container_width=True,
         )
-    with col_kofi:
+    with col_comm:
         st.markdown(
-            """<a href="https://ko-fi.com/sognienumeri" target="_blank"
+            f"""<a href="{NEWSLETTER_URL}" target="_blank" rel="noopener"
                style="display:flex; align-items:center; justify-content:center;
                       min-height:60px; text-align:center;
-                      background:linear-gradient(135deg,#7a5a10,#9a7b2e);
-                      color:#2b2114; font-family:'Cinzel',serif; font-weight:700;
+                      background:linear-gradient(135deg,#7a5a10,#b8932f);
+                      color:#fff6e2; font-family:'Cinzel',serif; font-weight:700;
                       font-size:1.1rem; padding:0.8rem 1rem; border-radius:10px;
                       text-decoration:none; box-shadow:0 4px 20px rgba(150,118,40,0.3);">
-               ☕ Offrimi un caffè — grazie!
+               ✉️ Ricevi le novità
             </a>""",
             unsafe_allow_html=True,
         )
 
     st.markdown('<div style="height:1.5rem"></div>', unsafe_allow_html=True)
+
+    # ── PANNELLO COMMUNITY — iscrizione newsletter + social ──────────────────
+    st.markdown(_community_panel_html(), unsafe_allow_html=True)
+
+    st.markdown('<div style="height:1rem"></div>', unsafe_allow_html=True)
 
     # ────────────────────────────────────────────────────────────────────────
     # SEZIONE D — OPZIONALE: "Vuoi sapere di più?"
@@ -1707,11 +1841,13 @@ Sepharial 1920, Ronchetti 1922). I numeri prodotti sono frutto di lettura simbol
 e non hanno alcuna valenza predittiva.</p>
 
 <p><strong style="color:#9a7b2e;">2. Privacy e dati personali</strong><br>
-Sogni e Numeri <em>non raccoglie, non archivia e non trasmette</em> dati personali.
-Il testo del sogno viene elaborato in tempo reale e non viene conservato.
-Non utilizziamo cookie di profilazione. La piattaforma di hosting è Streamlit
-Community Cloud (Snowflake Inc.) —
-<a href="https://streamlit.io/privacy-policy" target="_blank" style="color:#9a7b2e;">Privacy Policy</a>.</p>
+Il testo del sogno viene elaborato <em>in tempo reale e non viene conservato</em>
+sui nostri server. Non utilizziamo cookie di profilazione.
+L'iscrizione alla community è <em>facoltativa</em>: se decidi di iscriverti, la tua
+email viene gestita dal nostro provider di newsletter, che la conserva al solo scopo
+di inviarti gli aggiornamenti. Puoi disiscriverti in qualsiasi momento dal link
+presente in ogni email. L'applicazione è ospitata su un server dedicato gestito
+dal titolare del progetto.</p>
 
 <p><strong style="color:#9a7b2e;">3. Proprietà intellettuale</strong><br>
 Le fonti (Smorfia napoletana, Capacelli 1881, Sefer Yetzira, Sepharial 1920, Ronchetti 1922)
@@ -1739,16 +1875,20 @@ L'applicazione è gestita dall'Italia. Si applica la legge italiana.</p>
 # FOOTER
 # ══════════════════════════════════════════════════════════════════════════════
 
+# ── Pannello community sempre visibile (fondo pagina) ───────────────────────
+st.markdown(_community_panel_html(), unsafe_allow_html=True)
+
 st.markdown('<div style="height: 1rem"></div>', unsafe_allow_html=True)
-st.markdown("""
-<div style="text-align:center; color:#e6d8ba; font-size:0.82rem; font-style:italic;
-            border-top:1px solid #f0e4ca; padding-top:1.2rem; line-height:2.2;">
+st.markdown(f"""
+<div style="text-align:center; color:#8a724a; font-size:0.82rem; font-style:italic;
+            border-top:1px solid #d8c79c; padding-top:1.2rem; line-height:2.2;">
   🌙 Sogni e Numeri — Lettura simbolica dei sogni<br>
-  7 fonti esoteriche &nbsp;·&nbsp; Smorfia napoletana &nbsp;·&nbsp; Capacelli 1881
-  &nbsp;·&nbsp; Sefer Yetzira &nbsp;·&nbsp; Sepharial (1920) &nbsp;·&nbsp; Ronchetti (1922)<br>
-  <a href="https://ko-fi.com/sognienumeri" target="_blank"
-     style="color:#9a7b2e55; text-decoration:none; font-size:0.75rem;">
-    ☕ Sostieni il progetto — ko-fi.com/sognienumeri
-  </a>
+  7 fonti &nbsp;·&nbsp; Smorfia napoletana &nbsp;·&nbsp; Capacelli 1881
+  &nbsp;·&nbsp; Sefer Yetzira &nbsp;·&nbsp; Sepharial (1920) &nbsp;·&nbsp; Ronchetti (1922)
+</div>
+{_social_buttons_html("small")}
+<div style="text-align:center; color:#9a8460; font-size:0.72rem; padding-top:0.4rem;">
+  © 2026 Sogni e Numeri · <a href="{NEWSLETTER_URL}" target="_blank" rel="noopener"
+  style="color:#9a7b2e; text-decoration:none;">Iscriviti alla community</a>
 </div>
 """, unsafe_allow_html=True)
