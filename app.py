@@ -57,10 +57,8 @@ st.set_page_config(
 SITE_NAME = "Sogni e Numeri"
 SITE_URL = "https://sognienumeri.space"
 
-# Newsletter / iscrizione community (es. pagina beehiiv o Substack).
-# Esempio beehiiv:  https://sognienumeri.beehiiv.com/subscribe
-# Esempio Substack: https://sognienumeri.substack.com
-NEWSLETTER_URL = "https://sognienumeri.beehiiv.com/subscribe"
+# Newsletter / iscrizione community (Substack).
+NEWSLETTER_URL = "https://sognienumeri.substack.com/subscribe"
 
 SOCIAL_LINKS = {
     "Instagram": "https://instagram.com/sognienumeri",
