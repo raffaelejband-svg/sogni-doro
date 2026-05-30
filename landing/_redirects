@@ -1,0 +1,4 @@
+# Cloudflare Pages — redirect verso l'app Streamlit
+# sognienumeri.space/app  ->  app Streamlit (URL reale del deploy)
+/app      https://sogni-doro-cugkdkvfw9r5sdmudwnufp.streamlit.app/   302
+/app/*    https://sogni-doro-cugkdkvfw9r5sdmudwnufp.streamlit.app/   302
