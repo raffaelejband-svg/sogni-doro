@@ -63,7 +63,7 @@ NEWSLETTER_URL = "https://sognienumeri.substack.com/subscribe"
 # Metti l'URL quando l'account esiste; lascia "" per nascondere il bottone.
 SOCIAL_LINKS = {
     "Instagram": "https://instagram.com/sognienumeri",
-    "TikTok": "",
+    "TikTok": "https://www.tiktok.com/@sognienumeri",
     "Facebook": "https://www.facebook.com/profile.php?id=61590696982495",
     "YouTube": "https://youtube.com/@sognienumerispace",
     "Telegram": "",
