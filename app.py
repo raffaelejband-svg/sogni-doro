@@ -60,12 +60,13 @@ SITE_URL = "https://sognienumeri.space"
 # Newsletter / iscrizione community (Substack).
 NEWSLETTER_URL = "https://sognienumeri.substack.com/subscribe"
 
+# Metti l'URL quando l'account esiste; lascia "" per nascondere il bottone.
 SOCIAL_LINKS = {
     "Instagram": "https://instagram.com/sognienumeri",
-    "TikTok": "https://tiktok.com/@sognienumeri",
-    "Facebook": "https://facebook.com/sognienumeri",
-    "YouTube": "https://youtube.com/@sognienumeri",
-    "Telegram": "https://t.me/sognienumeri",
+    "TikTok": "",
+    "Facebook": "",
+    "YouTube": "",
+    "Telegram": "",
 }
 
 # Emoji/etichetta usate per i bottoni social compatti
