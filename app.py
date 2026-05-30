@@ -66,7 +66,6 @@ SOCIAL_LINKS = {
     "TikTok": "https://www.tiktok.com/@sognienumeri",
     "Facebook": "https://www.facebook.com/profile.php?id=61590696982495",
     "YouTube": "https://youtube.com/@sognienumerispace",
-    "Telegram": "",
 }
 
 # Emoji/etichetta usate per i bottoni social compatti
@@ -75,7 +74,6 @@ _SOCIAL_ICONS = {
     "TikTok": "🎵",
     "Facebook": "👍",
     "YouTube": "▶️",
-    "Telegram": "✈️",
 }
 
 
