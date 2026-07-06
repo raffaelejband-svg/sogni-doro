@@ -169,13 +169,13 @@ footer { display: none !important; }
     filter: drop-shadow(0 6px 14px rgba(80,60,35,0.18));
 }
 .app-title {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(2.4rem, 6vw, 4.5rem);
-    color: #9a7b2e;
+    font-family: 'Cinzel', serif !important;
+    font-size: clamp(2.4rem, 6vw, 4.5rem) !important;
+    color: #7a5e18 !important;
     letter-spacing: 0.15em;
     text-shadow: 0 0 40px rgba(150,118,40,0.4);
-    margin: 0;
-    line-height: 1.1;
+    margin: 0 !important;
+    line-height: 1.1 !important;
 }
 .app-tagline {
     font-family: 'Crimson Text', serif;
@@ -196,9 +196,10 @@ footer { display: none !important; }
 
 /* ── passo / step label ── */
 .step-label {
-    font-family: 'Cinzel', serif;
-    font-size: 1.3rem;
-    color: #9a7b2e;
+    font-family: 'Cinzel', serif !important;
+    font-weight: 400 !important;
+    font-size: 1.3rem !important;
+    color: #7a5e18 !important;
     letter-spacing: 0.1em;
     margin: 2rem 0 0.6rem;
     display: flex;
@@ -266,7 +267,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 /* ── bottoni secondari ── */
 [data-testid="stButton"] > button:not([kind="primary"]) {
     background: #f3e8cf !important;
-    color: #9a7b2e !important;
+    color: #7a5e18 !important;
     border: 2px solid #9a7b2e55 !important;
     border-radius: 10px !important;
     font-family: 'Cinzel', serif !important;
@@ -277,7 +278,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 /* ── download button ── */
 [data-testid="stDownloadButton"] > button {
     background: #f3e8cf !important;
-    color: #9a7b2e !important;
+    color: #7a5e18 !important;
     border: 2px solid #9a7b2e55 !important;
     border-radius: 10px !important;
     font-family: 'Cinzel', serif !important;
@@ -288,9 +289,10 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 
 /* ── sezione risultati: NUMERI GRANDI ── */
 .numeri-header {
-    font-family: 'Cinzel', serif;
-    font-size: 1.6rem;
-    color: #9a7b2e;
+    font-family: 'Cinzel', serif !important;
+    font-weight: 400 !important;
+    font-size: 1.6rem !important;
+    color: #7a5e18 !important;
     text-align: center;
     letter-spacing: 0.12em;
     margin: 2rem 0 0.5rem;
@@ -318,7 +320,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .num-grande-cifra {
     font-family: 'Cinzel', serif;
     font-size: 3.5rem;
-    color: #9a7b2e;
+    color: #7a5e18;
     line-height: 1;
     text-shadow: 0 0 24px rgba(150,118,40,0.5);
     font-weight: 700;
@@ -332,9 +334,10 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 
 /* ── sezione giochi ── */
 .gioco-header {
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-    color: #9a7b2e;
+    font-family: 'Cinzel', serif !important;
+    font-weight: 400 !important;
+    font-size: 1.1rem !important;
+    color: #7a5e18 !important;
     letter-spacing: 0.08em;
     margin: 1.8rem 0 0.5rem;
     padding-bottom: 0.3rem;
@@ -359,7 +362,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .num-gioco-cifra {
     font-family: 'Cinzel', serif;
     font-size: 2.2rem;
-    color: #9a7b2e;
+    color: #7a5e18;
     line-height: 1;
     font-weight: 700;
 }
@@ -371,9 +374,10 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 
 /* ── sezione simboli ── */
 .simboli-header {
-    font-family: 'Cinzel', serif;
-    font-size: 1.4rem;
-    color: #9a7b2e;
+    font-family: 'Cinzel', serif !important;
+    font-weight: 400 !important;
+    font-size: 1.4rem !important;
+    color: #7a5e18 !important;
     letter-spacing: 0.1em;
     margin: 2.5rem 0 0.5rem;
     padding-bottom: 0.5rem;
@@ -381,15 +385,15 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 }
 .simbolo-riga {
     background: #f5ecd6;
-    border-left: 4px solid #9a7b2e;
-    border-radius: 0 10px 10px 0;
+    border: 1px solid #9a7b2e33;
+    border-radius: 12px;
     padding: 0.9rem 1.2rem;
     margin: 0.5rem 0;
     font-size: 1.05rem;
 }
 .simbolo-nome {
     font-family: 'Cinzel', serif;
-    color: #9a7b2e;
+    color: #7a5e18;
     font-weight: 700;
     font-size: 1.1rem;
 }
@@ -419,9 +423,10 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     color: #4a3a24;
 }
 .eso-titolo-sezione {
-    font-family: 'Cinzel', serif;
-    color: #9a7b2e;
-    font-size: 0.85rem;
+    font-family: 'Cinzel', serif !important;
+    font-weight: 400 !important;
+    color: #7a5e18 !important;
+    font-size: 0.85rem !important;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 0.7rem;
@@ -457,7 +462,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     font-size: 0.8rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #9a7b2e;
+    color: #7a5e18;
     opacity: 0.75;
     text-align: center;
     margin-bottom: 0.6rem;
@@ -477,13 +482,14 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     font-size: 1.18rem;
     line-height: 1.85;
     color: #4a3a24;
-    padding: 0.9rem 0 0.9rem 1.3rem;
-    border-left: 3px solid #9a7b2e55;
+    padding: 0.9rem 1.3rem;
+    background: rgba(154,123,46,0.05);
+    border-radius: 10px;
     margin: 0.5rem 0;
     animation: interpret-entra 0.7s ease both;
 }
 .interpret-simbolo b {
-    color: #9a7b2e;
+    color: #7a5e18;
     font-family: 'Cinzel', serif;
     font-weight: 600;
 }
@@ -503,7 +509,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     font-family: 'Cinzel', serif;
     font-size: 1.05rem;
     letter-spacing: 0.04em;
-    color: #9a7b2e;
+    color: #7a5e18;
     text-align: center;
     margin: 1.6rem auto 0;
     opacity: 0.9;
@@ -511,7 +517,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .reveal-arrow {
     text-align: center;
     font-size: 2rem;
-    color: #9a7b2e;
+    color: #7a5e18;
     margin: 0.8rem 0 0.4rem;
     animation: reveal-bob 1.8s ease-in-out infinite;
 }
@@ -529,7 +535,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 }
 [data-testid="stExpander"] summary {
     font-family: 'Cinzel', serif !important;
-    color: #9a7b2e !important;
+    color: #7a5e18 !important;
     font-size: 1.2rem !important;
     padding: 1rem 1.4rem !important;
 }
@@ -577,18 +583,25 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
     pointer-events: none;
     overflow: hidden;
 }
-@keyframes caduta {
-    0%   { transform: translateY(-120px) scale(0.8); opacity: 0; }
-    8%   { opacity: 1; }
-    85%  { opacity: 0.7; }
-    100% { transform: translateY(110vh) scale(1.1); opacity: 0; }
+/* Deriva lenta e ondeggiante — non una "caduta" verticale: niente che
+   ricordi monete o simboli da slot machine, in linea con il vincolo
+   legale (Decreto Dignità) oltre che di gusto. */
+@keyframes fluttua {
+    0%   { transform: translate(0, -40px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.85; }
+    50%  { transform: translate(14px, 45vh) rotate(6deg); }
+    88%  { opacity: 0.6; }
+    100% { transform: translate(-10px, 92vh) rotate(-4deg); opacity: 0; }
 }
-.moneta {
+.simbolo-fluttuante {
     position: absolute;
-    top: -80px;
-    color: #9a7b2e;
-    animation: caduta linear infinite;
+    top: -40px;
+    color: #7a5e18;
+    animation: fluttua ease-in-out infinite;
     user-select: none;
+}
+@media (prefers-reduced-motion: reduce) {
+    .simbolo-fluttuante { animation: none; opacity: 0.5; }
 }
 @keyframes brilla-msg {
     0%, 100% { opacity: 0.75; text-shadow: 0 0 20px rgba(150,118,40,0.4); }
@@ -598,7 +611,7 @@ textarea::placeholder { color: #5a4a35 !important; font-style: italic !important
 .loading-titolo {
     font-family: 'Cinzel', serif;
     font-size: clamp(1.8rem, 4vw, 3rem);
-    color: #9a7b2e;
+    color: #7a5e18;
     z-index: 2;
     text-align: center;
     padding: 0 1.5rem;
@@ -760,10 +773,11 @@ html, body, [data-testid="stApp"] {
 }
 
 .app-title {
+    font-family: 'Cinzel', serif !important;
     font-size: clamp(2.15rem, 6vw, 3.35rem) !important;
     letter-spacing: 0.045em !important;
-    color: #b0892e !important;
-    white-space: nowrap;
+    color: #7a5e18 !important;
+    text-wrap: balance;
 }
 
 .app-tagline {
@@ -809,7 +823,7 @@ html, body, [data-testid="stApp"] {
 }
 
 .micro-title {
-    color: #b0892e;
+    color: #7a5e18;
     font-family: "Cinzel", serif;
     font-weight: 700;
     letter-spacing: 0.04em;
@@ -825,12 +839,12 @@ html, body, [data-testid="stApp"] {
 }
 
 .step-label {
-    color: #b0892e !important;
+    color: #7a5e18 !important;
     letter-spacing: 0.04em !important;
 }
 
 .step-num {
-    background: linear-gradient(135deg, #b0892e, #7a5e18) !important;
+    background: linear-gradient(135deg, #b18a2e, #a9842c) !important;
 }
 
 .step-instruction {
@@ -850,8 +864,15 @@ textarea:focus {
     box-shadow: 0 0 0 4px rgba(154,123,46, 0.14), 0 18px 50px rgba(80,60,35,0.22) !important;
 }
 
+/* Nasconde l'hint tecnico nativo "Press ⌘+Enter to apply" — gergo in inglese,
+   incomprensibile per il pubblico over-60. Il bottone "Genera la lettura"
+   resta l'unica azione richiesta per procedere. */
+[data-testid="InputInstructions"] {
+    display: none !important;
+}
+
 [data-testid="stButton"] > button[kind="primary"] {
-    background: linear-gradient(135deg, #b0892e, #7a5e18) !important;
+    background: linear-gradient(135deg, #b18a2e, #a9842c) !important;
     color: #2b2114 !important;
     letter-spacing: 0.06em !important;
     border-radius: 16px !important;
@@ -894,7 +915,7 @@ textarea:focus {
 }
 
 .loading-titolo {
-    color: #b0892e !important;
+    color: #7a5e18 !important;
     max-width: 780px;
 }
 
@@ -1006,7 +1027,7 @@ textarea:focus {
 
 .num-grande-cifra,
 .num-gioco-cifra {
-    color: #b0892e !important;
+    color: #7a5e18 !important;
 }
 
 .num-grande-da,
@@ -1044,7 +1065,7 @@ textarea:focus {
     font-family: 'Cinzel', serif;
     font-size: 0.95rem;
     letter-spacing: 0.12em;
-    color: #9a7b2e;
+    color: #7a5e18;
     margin-bottom: 0.4rem;
 }
 .community-title {
@@ -1068,7 +1089,7 @@ textarea:focus {
     justify-content: center;
     min-height: 58px;
     padding: 0.85rem 2rem;
-    background: linear-gradient(135deg, #7a5a10, #b8932f);
+    background: linear-gradient(135deg, #7a5a10, #8a6e23);
     color: #fff6e2 !important;
     font-family: 'Cinzel', serif;
     font-weight: 700;
@@ -1084,8 +1105,7 @@ textarea:focus {
 }
 
 .responsible-note {
-    border: 1px solid rgba(176,138,46, 0.22);
-    border-left: 5px solid #7a5e18;
+    border: 2px solid rgba(122,94,24, 0.35);
     background: rgba(255,255,255,0.045);
     border-radius: 12px;
     padding: 0.8rem 1rem;
@@ -1119,6 +1139,34 @@ textarea:focus {
     .number-grid,
     .number-grid.compact {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Focus da tastiera sempre visibile — nessun elemento interattivo deve
+   restare "invisibile" per chi naviga con Tab (requisito PRODUCT.md). */
+[data-testid="stButton"] > button:focus-visible,
+[data-testid="stDownloadButton"] > button:focus-visible,
+a:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #9a7b2e !important;
+    outline-offset: 3px !important;
+}
+
+/* Rispetta la preferenza di movimento ridotto: tutte le animazioni
+   infinite dell'app diventano statiche o si limitano a una dissolvenza. */
+@media (prefers-reduced-motion: reduce) {
+    .reveal-arrow,
+    .simbolo-fluttuante,
+    .loading-titolo,
+    .loading-sub,
+    .loading-ruota,
+    .stream-track,
+    .app-header::before {
+        animation: none !important;
+    }
+    .puntini::after {
+        content: '…' !important;
+        animation: none !important;
     }
 }
 </style>
@@ -1321,7 +1369,7 @@ def _sp_info(numero: int) -> tuple[str, str, str]:
 # ══════════════════════════════════════════════════════════════════════════════
 
 def _render_combo_gioco(label: str, combo: tuple[int, ...], nota: str = "") -> None:
-    st.markdown(f'<div class="gioco-header">🎱 {label}</div>', unsafe_allow_html=True)
+    st.markdown(f'<h3 class="gioco-header">🎱 {label}</h3>', unsafe_allow_html=True)
     if nota:
         st.markdown(f'<div class="gioco-nota">{nota}</div>', unsafe_allow_html=True)
     cards: list[str] = []
@@ -1340,13 +1388,13 @@ def _render_combo_gioco(label: str, combo: tuple[int, ...], nota: str = "") -> N
 # HEADER PRINCIPALE
 # ══════════════════════════════════════════════════════════════════════════════
 
-# ── Logo: caricato dal file (st.image è affidabile su Streamlit Cloud,
-#    a differenza del base64 inline che veniva scartato nel rendering HTML) ──
-_logo_file = ROOT / "static" / "logo_pergamena.png"
-_lc1, _lc2, _lc3 = st.columns([1, 2, 1])
-with _lc2:
-    if _logo_file.exists():
-        st.image(str(_logo_file), use_container_width=True)
+# ── Titolo: vero heading semantico (non più un'immagine con alt text vuoto).
+#    Uno screen reader ora legge "Sogni e Numeri" e può saltarci direttamente
+#    con la navigazione per intestazioni. ──
+st.markdown(
+    '<h1 class="app-title" style="text-align:center;">🌙 Sogni e Numeri</h1>',
+    unsafe_allow_html=True,
+)
 
 st.markdown("""
 <div class="app-header" style="padding-top:0.8rem; border-top:none;">
@@ -1371,10 +1419,10 @@ st.markdown("""
 # ══════════════════════════════════════════════════════════════════════════════
 
 st.markdown("""
-<div class="step-label">
+<h2 class="step-label">
   <span class="step-num">1</span>
   &nbsp;Racconta il sogno
-</div>
+</h2>
 <div class="dream-console">
   <div class="micro-title">Bastano poche parole</div>
   <div class="micro-copy">
@@ -1414,10 +1462,10 @@ dream_input = st.text_area(
 # ══════════════════════════════════════════════════════════════════════════════
 
 st.markdown("""
-<div class="step-label">
+<h2 class="step-label">
   <span class="step-num">2</span>
   &nbsp;Avvia la lettura
-</div>
+</h2>
 """, unsafe_allow_html=True)
 
 analyze = st.button("GENERA LA LETTURA DEL SOGNO", type="primary", use_container_width=True)
@@ -1440,30 +1488,29 @@ if analyze and not dream_input.strip():
 if analyze and dream_input.strip():
     dream = dream_input.strip()
 
-    # ── SCHERMATA DI CARICAMENTO — pioggia dorata ────────────────────────────
-    _MONETE = [
+    # ── SCHERMATA DI CARICAMENTO — deriva di simboli mistici ─────────────────
+    # Solo glifi (luna, stelle, scintille): nessuna cifra numerica in caduta,
+    # per non ricordare un tabellone da gioco o una slot machine.
+    _SIMBOLI_FLUTTUANTI = [
         # (left%, simbolo, font-size, delay-s, duration-s)
-        ( 3, "✦",  "1.3rem", 0.0, 2.8), ( 9, "7",   "2.2rem", 0.5, 3.4),
-        (15, "☽",  "1.6rem", 1.0, 2.5), (21, "★",   "2.0rem", 1.7, 3.1),
-        (27, "22", "1.5rem", 0.2, 2.9), (33, "✨",  "2.4rem", 1.3, 3.6),
-        (39, "90", "1.8rem", 0.8, 2.7), (45, "☆",   "1.4rem", 2.0, 3.2),
-        (51, "33", "2.1rem", 0.4, 2.6), (57, "✦",   "1.6rem", 1.5, 3.0),
-        (63, "★",  "1.9rem", 0.9, 2.4), (69, "☽",   "2.3rem", 2.2, 3.5),
-        (75, "77", "1.7rem", 0.3, 2.8), (81, "✨",  "1.5rem", 1.1, 3.3),
-        (87, "13", "2.0rem", 1.8, 2.6), (93, "✦",   "1.4rem", 0.6, 3.1),
-        ( 6, "★",  "1.8rem", 2.5, 2.9), (12, "☆",   "2.2rem", 2.8, 3.4),
-        (18, "7",  "1.5rem", 2.1, 2.5), (24, "✦",   "1.9rem", 3.0, 3.2),
-        (30, "☽",  "1.6rem", 2.4, 2.7), (36, "★",   "2.0rem", 3.2, 3.6),
-        (42, "44", "1.7rem", 2.7, 2.8), (48, "✨",  "1.4rem", 3.4, 3.0),
-        (54, "☆",  "2.1rem", 2.9, 3.3), (60, "90",  "1.8rem", 3.1, 2.6),
-        (66, "✦",  "1.5rem", 3.5, 2.9), (72, "★",   "2.3rem", 2.6, 3.5),
-        (78, "☽",  "1.6rem", 3.3, 2.7), (84, "7",   "2.0rem", 2.3, 3.1),
-        (90, "✦",  "1.7rem", 3.8, 2.8), (96, "✨",  "1.9rem", 3.6, 3.4),
+        ( 3, "✦", "1.3rem", 0.0, 6.5), ( 9, "☆", "2.0rem", 0.8, 7.4),
+        (15, "☽", "1.6rem", 1.6, 6.0), (21, "★", "1.8rem", 2.4, 7.8),
+        (27, "✨", "1.5rem", 0.4, 6.8), (33, "✦", "2.1rem", 2.0, 7.2),
+        (39, "☆", "1.7rem", 1.2, 6.4), (45, "★", "1.4rem", 3.0, 7.6),
+        (51, "✨", "1.9rem", 0.6, 6.9), (57, "☽", "1.6rem", 2.2, 7.0),
+        (63, "✦", "1.8rem", 1.4, 6.6), (69, "☆", "2.1rem", 3.2, 7.4),
+        (75, "★", "1.5rem", 0.9, 6.2), (81, "✨", "1.7rem", 2.6, 7.8),
+        (87, "☽", "1.9rem", 1.8, 6.7), (93, "✦", "1.4rem", 0.3, 7.1),
+        ( 6, "★", "1.7rem", 2.8, 6.5), (12, "☆", "2.0rem", 1.0, 7.5),
+        (18, "✨", "1.5rem", 3.4, 6.3), (24, "✦", "1.8rem", 1.6, 7.7),
+        (30, "☽", "1.6rem", 2.4, 6.9), (36, "★", "1.9rem", 3.6, 7.3),
+        (42, "✨", "1.7rem", 0.7, 6.6), (48, "☆", "1.4rem", 2.9, 7.0),
+        (54, "✦", "2.0rem", 1.3, 7.6), (60, "★", "1.8rem", 3.1, 6.4),
     ]
     _pioggia_html = "".join(
-        f'<span class="moneta" style="left:{l}%;font-size:{fs};'
+        f'<span class="simbolo-fluttuante" style="left:{l}%;font-size:{fs};'
         f'animation-delay:{d}s;animation-duration:{dur}s">{ch}</span>'
-        for l, ch, fs, d, dur in _MONETE
+        for l, ch, fs, d, dur in _SIMBOLI_FLUTTUANTI
     )
     _stream_html = _word_stream_html(dream)
     _loading = st.empty()
@@ -1515,10 +1562,10 @@ if analyze and dream_input.strip():
     # ════════════════════════════════════════════════════════════════════════
 
     st.markdown("""
-<div class="step-label">
+<h2 class="step-label">
   <span class="step-num">3</span>
   &nbsp;La tua lettura è pronta
-</div>
+</h2>
 """, unsafe_allow_html=True)
 
     if not matches:
@@ -1559,7 +1606,7 @@ if analyze and dream_input.strip():
     st.markdown("""
 <div class="result-spotlight">
   <div class="result-kicker">E adesso… i numeri</div>
-  <div class="numeri-header">I numeri del tuo sogno</div>
+  <h3 class="numeri-header">I numeri del tuo sogno</h3>
 <div class="numeri-sottotitolo">
   I numeri più forti emersi dai simboli che hai scritto
 </div>
@@ -1601,65 +1648,67 @@ if analyze and dream_input.strip():
 """)
             st.markdown(f'<div class="number-grid compact">{"".join(cards2)}</div>', unsafe_allow_html=True)
 
+    st.markdown("""
+<div class="responsible-note">
+  Lettura culturale e ricreativa: i numeri non sono una previsione e non garantiscono alcun risultato.
+  Usali come curiosità legata alla tradizione, sempre con equilibrio.
+  Il gioco è vietato ai minori di 18 anni — dettagli completi nelle note legali in fondo alla pagina.
+</div>
+""", unsafe_allow_html=True)
+
     st.markdown('<div class="sep">· · ·</div>', unsafe_allow_html=True)
 
     # ────────────────────────────────────────────────────────────────────────
-    # SEZIONE B — COMBINAZIONI PER GIOCO
+    # SEZIONI B + C — dietro un tocco esplicito: meno tutto-insieme, un solo
+    # numero "principale" resta il primo piano della schermata (P1 critique:
+    # sovraccarico cognitivo da 4 insiemi di numeri diversi mostrati assieme).
     # ────────────────────────────────────────────────────────────────────────
 
-    st.markdown("""
-<div class="numeri-header" style="font-size:1.3rem;">Sequenze simboliche del sogno</div>
+    with st.expander("✦  Vedi anche: le sequenze per gioco e tutti i simboli riconosciuti"):
+
+        # SEZIONE B — COMBINAZIONI PER GIOCO
+        st.markdown("""
+<h3 class="numeri-header" style="font-size:1.3rem;">Sequenze simboliche del sogno</h3>
 <div class="numeri-sottotitolo">
   Tre sequenze pronte, generate dai simboli più rilevanti
 </div>
 """, unsafe_allow_html=True)
 
-    _render_combo_gioco("5 numeri tradizionali — 1-90", lotto)
-    _render_combo_gioco("5 numeri compatti — 1-55", millionday)
-    _render_combo_gioco("6 numeri tradizionali — 1-90", superenalotto)
+        _render_combo_gioco("5 numeri tradizionali — 1-90", lotto)
+        _render_combo_gioco("5 numeri compatti — 1-55", millionday)
+        _render_combo_gioco("6 numeri tradizionali — 1-90", superenalotto)
 
-    st.markdown("""
-<div class="responsible-note">
-  Lettura culturale e ricreativa: i numeri non sono una previsione e non garantiscono alcun risultato.
-  Usali come curiosità legata alla tradizione, sempre con equilibrio.
-</div>
-""", unsafe_allow_html=True)
+        st.markdown('<div class="sep">✦ &nbsp; ✦ &nbsp; ✦</div>', unsafe_allow_html=True)
 
-    st.markdown('<div class="sep">✦ &nbsp; ✦ &nbsp; ✦</div>', unsafe_allow_html=True)
-
-    # ────────────────────────────────────────────────────────────────────────
-    # SEZIONE C — I SIMBOLI DEL TUO SOGNO
-    # ────────────────────────────────────────────────────────────────────────
-
-    st.markdown("""
-<div class="simboli-header">I simboli riconosciuti</div>
+        # SEZIONE C — I SIMBOLI DEL TUO SOGNO
+        st.markdown("""
+<h3 class="simboli-header">I simboli riconosciuti</h3>
 <div style="color:#6f5a3a; font-size:1.05rem; margin-bottom:1.5rem; font-style:italic; line-height:1.7;">
   Qui vedi da quali immagini del sogno nasce la lettura. Ogni simbolo porta con sé
   una o più corrispondenze numeriche nella tradizione.
 </div>
 """, unsafe_allow_html=True)
 
-    # Mappa fonte → descrizione narrativa
-    _fonte_desc = {
-        "smorfia":    "Smorfia Napoletana — la voce del popolo del Sud",
-        "capacelli":  "Capacelli 1881 — il grande libro dei sogni dell'Ottocento",
-        "sepharial":  "Sepharial 1920 — numerologia planetaria",
-        "ronchetti":  "Ronchetti 1922 — dizionario illustrato dei simboli",
-        "cabala":     "Cabala — tradizione esoterica ebraica",
-        "sefer":      "Sefer Yetzira — il Libro della Formazione",
-    }
+        # Mappa fonte → descrizione narrativa
+        _fonte_desc = {
+            "smorfia":    "Smorfia Napoletana — la voce del popolo del Sud",
+            "capacelli":  "Capacelli 1881 — il grande libro dei sogni dell'Ottocento",
+            "sepharial":  "Sepharial 1920 — numerologia planetaria",
+            "ronchetti":  "Ronchetti 1922 — dizionario illustrato dei simboli",
+            "cabala":     "Cabala — tradizione esoterica ebraica",
+            "sefer":      "Sefer Yetzira — il Libro della Formazione",
+        }
 
-    for idx, match in enumerate(matches[:15], 1):
-        nums_str = "  ·  ".join(f"<strong>{n}</strong>" for n in match.entry.numbers)
-        src_raw  = _dc.source_short(match.entry.source).lower()
-        src_desc = next((v for k, v in _fonte_desc.items() if k in src_raw), f"Fonte: {_dc.source_short(match.entry.source)}")
-        simbolo  = match.entry.symbol.capitalize()
+        for idx, match in enumerate(matches[:15], 1):
+            nums_str = "  ·  ".join(f"<strong>{n}</strong>" for n in match.entry.numbers)
+            src_raw  = _dc.source_short(match.entry.source).lower()
+            src_desc = next((v for k, v in _fonte_desc.items() if k in src_raw), f"Fonte: {_dc.source_short(match.entry.source)}")
+            simbolo  = match.entry.symbol.capitalize()
 
-        st.markdown(f"""
-<div class="simbolo-riga" style="padding:1.2rem 1.4rem; margin-bottom:1rem;
-     border-left:3px solid #9a7b2e55; border-radius:0 12px 12px 0;">
+            st.markdown(f"""
+<div class="simbolo-riga" style="padding:1.2rem 1.4rem; margin-bottom:1rem; border-radius:12px;">
   <div class="simbolo-nome" style="font-size:1.25rem; margin-bottom:0.4rem;">
-    <span style="color:#9a7b2e44; font-size:0.9rem; margin-right:0.5rem;">{idx:02d}</span>
+    <span style="color:#7a5e18; font-size:0.9rem; margin-right:0.5rem;">{idx:02d}</span>
     {simbolo}
   </div>
   <div style="font-family:'Crimson Text',serif; font-size:1rem; color:#4a3a24;
@@ -1727,7 +1776,7 @@ if analyze and dream_input.strip():
             f"""<a href="{NEWSLETTER_URL}" target="_blank" rel="noopener"
                style="display:flex; align-items:center; justify-content:center;
                       min-height:60px; text-align:center;
-                      background:linear-gradient(135deg,#7a5a10,#b8932f);
+                      background:linear-gradient(135deg,#7a5a10,#8a6e23);
                       color:#fff6e2; font-family:'Cinzel',serif; font-weight:700;
                       font-size:1.1rem; padding:0.8rem 1rem; border-radius:10px;
                       text-decoration:none; box-shadow:0 4px 20px rgba(150,118,40,0.3);">
@@ -1803,14 +1852,14 @@ if analyze and dream_input.strip():
                     if not content.strip():
                         continue
                     st.markdown(
-                        f'<div class="eso-titolo-sezione">{"✦ " + title if title else "✦ Lettura"}</div>',
+                        f'<h3 class="eso-titolo-sezione">{"✦ " + title if title else "✦ Lettura"}</h3>',
                         unsafe_allow_html=True,
                     )
                     st.markdown(f'<div class="eso-container">{content}</div>', unsafe_allow_html=True)
 
             if hasattr(lettura, "albero_ascii") and lettura.albero_ascii:
                 st.markdown(
-                    '<div class="eso-titolo-sezione">🌳 Albero della Vita — Sefirot</div>',
+                    '<h3 class="eso-titolo-sezione">🌳 Albero della Vita — Sefirot</h3>',
                     unsafe_allow_html=True,
                 )
                 st.code(lettura.albero_ascii, language=None)
@@ -1843,14 +1892,14 @@ with st.expander("⚖️  Note legali e informazioni"):
 <div style="font-family:'Crimson Text',Georgia,serif; font-size:1rem;
             color:#6f5a3a; line-height:1.8;">
 
-<p><strong style="color:#9a7b2e;">1. Scopo culturale e ricreativo</strong><br>
+<p><strong style="color: #7a5e18;">1. Scopo culturale e ricreativo</strong><br>
 Sogni e Numeri è un'applicazione a scopo <em>puramente culturale ed esplorativo</em>.
 Le corrispondenze tra sogni e numeri si basano su tradizioni popolari italiane e testi
 di pubblico dominio (Smorfia napoletana, Capacelli 1881, Sefer Yetzira,
 Sepharial 1920, Ronchetti 1922). I numeri prodotti sono frutto di lettura simbolica
 e non hanno alcuna valenza predittiva.</p>
 
-<p><strong style="color:#9a7b2e;">2. Privacy e dati personali</strong><br>
+<p><strong style="color: #7a5e18;">2. Privacy e dati personali</strong><br>
 Il testo del sogno viene elaborato <em>in tempo reale e non viene conservato</em>
 sui nostri server. Non utilizziamo cookie di profilazione.
 L'iscrizione alla community è <em>facoltativa</em>: se decidi di iscriverti, la tua
@@ -1859,12 +1908,12 @@ di inviarti gli aggiornamenti. Puoi disiscriverti in qualsiasi momento dal link
 presente in ogni email. L'applicazione è ospitata su un server dedicato gestito
 dal titolare del progetto.</p>
 
-<p><strong style="color:#9a7b2e;">3. Proprietà intellettuale</strong><br>
+<p><strong style="color: #7a5e18;">3. Proprietà intellettuale</strong><br>
 Le fonti (Smorfia napoletana, Capacelli 1881, Sefer Yetzira, Sepharial 1920, Ronchetti 1922)
 sono opere di pubblico dominio. Il codice e la grafica sono di proprietà del gestore.
 È vietata la riproduzione senza autorizzazione scritta.</p>
 
-<p><strong style="color:#9a7b2e;">4. Legge applicabile</strong><br>
+<p><strong style="color: #7a5e18;">4. Legge applicabile</strong><br>
 L'applicazione è gestita dall'Italia. Si applica la legge italiana.</p>
 
 <p style="color:#5a4a35; font-size:0.85rem; margin-top:1.5rem; border-top:1px solid #e6d8ba; padding-top:1rem;">
@@ -1899,6 +1948,6 @@ st.markdown(f"""
 {_social_buttons_html("small")}
 <div style="text-align:center; color:#9a8460; font-size:0.72rem; padding-top:0.4rem;">
   © 2026 Sogni e Numeri · <a href="{NEWSLETTER_URL}" target="_blank" rel="noopener"
-  style="color:#9a7b2e; text-decoration:none;">Iscriviti alla community</a>
+  style="color: #7a5e18; text-decoration:none;">Iscriviti alla community</a>
 </div>
 """, unsafe_allow_html=True)

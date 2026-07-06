@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-06T08:13:40Z",
+  "title": "Design System: Sogni e Numeri",
+  "extensions": {
+    "colorMeta": {
+      "amber-antica": {
+        "role": "primary",
+        "displayName": "Ambra Antica",
+        "canonical": "#b0892e",
+        "tonalRamp": ["#2e2408", "#4a3a0d", "#6b5613", "#8a6f1c", "#a97f27", "#b0892e", "#c9a656", "#e6d3a0"]
+      },
+      "amber-bruciata-profonda": {
+        "role": "primary-deep",
+        "displayName": "Ambra Bruciata Profonda",
+        "canonical": "#7a5e18",
+        "tonalRamp": ["#1f1808", "#332810", "#4d3b16", "#664e1a", "#7a5e18", "#94741f", "#b18f30", "#cdb060"]
+      },
+      "amber-legacy": {
+        "role": "secondary",
+        "displayName": "Ambra Legacy",
+        "canonical": "#9a7b2e",
+        "tonalRamp": ["#26200c", "#403313", "#5c481b", "#795e23", "#9a7b2e", "#b6963f", "#d1b567", "#e8d69e"]
+      },
+      "paper-crema": {
+        "role": "neutral-bg",
+        "displayName": "Carta Crema",
+        "canonical": "#f3e8cf",
+        "tonalRamp": ["#3a3120", "#5c4f33", "#7f6e47", "#a5915f", "#c6b481", "#e0d1a8", "#f3e8cf", "#faf4e6"]
+      },
+      "avorio-superficie": {
+        "role": "neutral-surface",
+        "displayName": "Superficie Avorio",
+        "canonical": "#f5ecd6",
+        "tonalRamp": ["#3d3423", "#5f5236", "#83714a", "#a89263", "#c9b686", "#e3d5ac", "#f5ecd6", "#fbf6ea"]
+      },
+      "inchiostro": {
+        "role": "text-primary",
+        "displayName": "Inchiostro",
+        "canonical": "#2b2114",
+        "tonalRamp": ["#0e0b07", "#1b150c", "#2b2114", "#453620", "#5f4c30", "#7a6541", "#988156", "#b89f72"]
+      },
+      "inchiostro-tenue": {
+        "role": "text-secondary",
+        "displayName": "Inchiostro Tenue",
+        "canonical": "#5c4a30",
+        "tonalRamp": ["#1e1810", "#332818", "#4a3a22", "#5c4a30", "#755f3f", "#907953", "#ab9469", "#c6b085"]
+      },
+      "lavanda-enfasi": {
+        "role": "accent-cool",
+        "displayName": "Lavanda Enfasi",
+        "canonical": "#b8a0d0",
+        "tonalRamp": ["#241d2e", "#3c304b", "#584869", "#78668b", "#9885ac", "#b8a0d0", "#d3c3e3", "#eae0f2"]
+      },
+      "errore": {
+        "role": "error",
+        "displayName": "Errore",
+        "canonical": "#e05a5a",
+        "tonalRamp": ["#3a1010", "#5c1a1a", "#832727", "#ac3535", "#d04747", "#e05a5a", "#e97f7f", "#f2a8a8"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display / Cinzel", "purpose": "Titolo principale dell'app (h1, .smorfia-title). Solo uno per pagina." },
+      "headline": { "displayName": "Headline / Cinzel", "purpose": "Titoli di sezione (h2)." },
+      "title": { "displayName": "Title / Cinzel", "purpose": "Sottotitoli, etichette dei passi, micro-titoli dei box." },
+      "body": { "displayName": "Body / Crimson Text", "purpose": "Testo di lettura: paragrafi, letture simboliche, note. Max 72ch." },
+      "label": { "displayName": "Label / Cinzel", "purpose": "Testo dei bottoni e delle etichette dei campi." }
+    },
+    "shadows": [
+      { "name": "bagliore-riposo", "value": "0 4px 24px rgba(150,118,40,0.35)", "purpose": "Stato di default di bottoni primari e contenitori principali." },
+      { "name": "bagliore-hover", "value": "0 8px 36px rgba(150,118,40,0.55)", "purpose": "Intensificazione al passaggio del mouse/tocco, con lieve sollevamento." },
+      { "name": "bagliore-attivo", "value": "0 2px 12px rgba(150,118,40,0.4)", "purpose": "Compressione al click." },
+      { "name": "bagliore-struttura", "value": "0 16px 44px rgba(80,60,35,0.16)", "purpose": "Ombra diffusa e ampia per header e contenitori strutturali di grandi dimensioni." }
+    ],
+    "motion": [
+      { "name": "ease-standard", "value": "ease", "purpose": "Transizione di default per hover/focus dei bottoni (0.2-0.22s)." },
+      { "name": "lift-hover", "value": "translateY(-2px) a translateY(-4px)", "purpose": "Sollevamento all'hover di bottoni e card numero." }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Bottone Primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Azione principale del flusso (es. \"Genera la lettura del sogno\").",
+      "html": "<button class=\"ds-btn-primary\">GENERA LA LETTURA DEL SOGNO</button>",
+      "css": ".ds-btn-primary { background: linear-gradient(135deg, #b0892e, #7a5e18); color: #2b2114; font-family: Cinzel, Georgia, serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.06em; border: none; border-radius: 16px; padding: 1rem 2.8rem; min-height: 64px; box-shadow: 0 14px 44px rgba(154,123,46,0.22), 0 10px 38px rgba(176,138,46,0.28); cursor: pointer; transition: box-shadow 0.22s ease, transform 0.22s ease; } .ds-btn-primary:hover { box-shadow: 0 8px 40px rgba(150,118,40,0.60); transform: translateY(-3px); } .ds-btn-primary:focus-visible { outline: 3px solid #9a7b2e; outline-offset: 3px; }"
+    },
+    {
+      "name": "Bottone Secondario",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Azione secondaria (es. download, reset).",
+      "html": "<button class=\"ds-btn-secondary\">Analizza un altro sogno</button>",
+      "css": ".ds-btn-secondary { background: rgba(240,231,206,0.82); color: #2b2114; font-family: Cinzel, Georgia, serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.06em; border: 2px solid rgba(154,123,46,0.34); border-radius: 12px; padding: 0.75rem 1.8rem; min-height: 52px; cursor: pointer; transition: border-color 0.2s ease, background 0.2s ease; } .ds-btn-secondary:hover { border-color: #9a7b2e; } .ds-btn-secondary:focus-visible { outline: 3px solid #9a7b2e; outline-offset: 3px; }"
+    },
+    {
+      "name": "Campo Sogno (textarea)",
+      "kind": "input",
+      "refersTo": "input-textarea",
+      "description": "Campo di racconto libero del sogno.",
+      "html": "<textarea class=\"ds-textarea\" placeholder=\"Per esempio: ho sognato un cavallo bianco che correva sul mare...\"></textarea>",
+      "css": ".ds-textarea { background: rgba(245,236,214,0.92); color: #2b2114; font-family: 'Crimson Text', Georgia, serif; font-size: 1.2rem; line-height: 1.8; border: 2px solid rgba(176,138,46,0.38); border-radius: 14px; padding: 1rem 1.2rem; min-height: 120px; width: 100%; box-sizing: border-box; transition: border-color 0.2s, box-shadow 0.2s; } .ds-textarea::placeholder { color: #6f5a3a; font-style: italic; } .ds-textarea:focus { outline: none; border-color: #7a5e18; box-shadow: 0 0 0 4px rgba(154,123,46,0.14), 0 18px 50px rgba(80,60,35,0.22); }"
+    },
+    {
+      "name": "Chip di Fiducia",
+      "kind": "chip",
+      "refersTo": "chip-fiducia",
+      "description": "Badge informativo sotto l'header (es. \"Nessuna registrazione\").",
+      "html": "<span class=\"ds-chip\">Nessuna registrazione</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; border: 1px solid rgba(154,123,46,0.35); color: #2b2114; background: rgba(240,231,206,0.64); border-radius: 999px; padding: 0.35rem 0.7rem; font-family: 'Crimson Text', Georgia, serif; font-size: 0.85rem; line-height: 1.2; }"
+    },
+    {
+      "name": "Card Numero",
+      "kind": "card",
+      "refersTo": "card-numero",
+      "description": "Card che mostra un numero suggerito dal sogno con la sua etichetta simbolica.",
+      "html": "<div class=\"ds-card-numero\"><span class=\"ds-card-numero-cifra\">50</span><span class=\"ds-card-numero-etichetta\">Cavallo</span></div>",
+      "css": ".ds-card-numero { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(145deg, #efe2c6 0%, #f0e4ca 100%); border: 2px solid #9a7b2e; border-radius: 18px; padding: 1.4rem 1.2rem 1rem; min-width: 100px; min-height: 110px; box-shadow: 0 0 24px rgba(150,118,40,0.30), 0 6px 30px rgba(80,60,35,0.5); transition: transform 0.18s, box-shadow 0.18s; } .ds-card-numero:hover { transform: translateY(-4px); box-shadow: 0 0 40px rgba(150,118,40,0.50), 0 12px 40px rgba(80,60,35,0.6); } .ds-card-numero-cifra { font-family: Cinzel, Georgia, serif; font-size: 3.5rem; font-weight: 700; color: #9a7b2e; line-height: 1; text-shadow: 0 0 20px rgba(150,118,40,0.6); } .ds-card-numero-etichetta { font-family: 'Crimson Text', Georgia, serif; font-size: 0.85rem; color: #6f5a3a; margin-top: 0.5rem; letter-spacing: 0.04em; }"
+    },
+    {
+      "name": "Cerchio Passo",
+      "kind": "custom",
+      "refersTo": "step-badge",
+      "description": "Badge circolare numerato per i passi del flusso lineare (1, 2, 3).",
+      "html": "<div class=\"ds-step-badge\">1</div>",
+      "css": ".ds-step-badge { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #b0892e, #7a5e18); color: #2b2114; font-family: Cinzel, Georgia, serif; font-size: 1.5rem; font-weight: 700; box-shadow: 0 0 18px rgba(150,118,40,0.45); line-height: 1; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Il Libro dei Sogni Antico",
+    "overview": "Sogni e Numeri si presenta come un volume rilegato consultato con cura, non come un'app o un gioco. Ogni schermata rievoca la pagina di un libro storico dei sogni: fondo carta color crema, testo inchiostro scuro, titoli in oro inciso, margini generosi che invitano a leggere con calma. Il sistema esiste per servire un pubblico over-60 che deve sentirsi accolto da una fonte autorevole, non intrattenuto da un'interfaccia ludica. Il sistema rifiuta esplicitamente due estremi: l'esoterismo da bancarella (sfere di cristallo pacchiane, font horror, decorazioni new-age a buon mercato) e l'estetica da casinò/lotteria (monete lampeggianti, linguaggio da scommessa, urgenza al gioco — vincolo anche legale, non solo di gusto). Tra questi due poli, il sistema sceglie la terza via: la serietà calda di un testo di riferimento.",
+    "keyCharacteristics": [
+      "Palette crema/oro (Ambra Antica) che richiama pagine antiche e inchiostro dorato, mai neon né pastello.",
+      "Serif per tutto: Cinzel per i titoli, Crimson Text per il corpo.",
+      "Bagliore, non ombra: elevazione espressa con luce calda diffusa, mai ombre grigie neutre.",
+      "Densità bassa, spaziatura generosa, pensata per occhi e mani over-60."
+    ],
+    "rules": [
+      { "name": "La Regola dell'Unico Oro", "body": "Un solo accento ad alta presenza (Ambra Antica) per schermata. Non introdurre un secondo colore saturo per \"variare\"; la varietà viene da tipografia e spaziatura.", "section": "colors" },
+      { "name": "La Regola del Serif Doppio", "body": "Mai un sans-serif nell'interfaccia. Cinzel per ciò che va annunciato, Crimson Text per ciò che va letto.", "section": "typography" },
+      { "name": "La Regola della Luce Calda", "body": "Nessuna ombra grigia neutra, mai. Ogni elevazione è un bagliore nella tonalità dell'oro o un bruno caldissimo per le ombre più diffuse.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usare Cinzel esclusivamente per titoli, numeri-passo e testo dei bottoni; Crimson Text per tutto il resto del testo leggibile.",
+      "Do esprimere ogni elevazione con bagliore caldo nella tonalità dell'oro, mai con un'ombra grigia neutra.",
+      "Do mantenere un solo accento saturo per schermata (Ambra Antica).",
+      "Do garantire touch target minimo 48×48px e focus visibile in oro pieno su ogni elemento interattivo.",
+      "Do mantenere line-height generoso (1.7-1.9) e corpo testo ≥20px equivalenti."
+    ],
+    "donts": [
+      "Don't introdurre sfere di cristallo, font horror o decorazioni new-age a buon mercato.",
+      "Don't usare linguaggio, iconografia o animazioni da slot machine/casinò.",
+      "Don't introdurre dashboard asettiche, card identiche ripetute o palette blu-corporate da tool B2B.",
+      "Don't usare ombre grigie neutre in nessun punto del sistema.",
+      "Don't lasciare gradienti residui verso il blu-notte (#1e1e40, #16163a) nelle card.",
+      "Don't usare font sans-serif in qualunque punto dell'interfaccia."
+    ]
+  }
+}

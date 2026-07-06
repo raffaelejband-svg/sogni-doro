@@ -11,6 +11,7 @@ import argparse
 import csv
 import hashlib
 import re
+import sys
 import unicodedata
 from collections import Counter, defaultdict
 from dataclasses import dataclass
@@ -50,60 +51,71 @@ REPORT_DIR = VAULT / "06_Output" / "Sogni analizzati"
 SYNONYMS_PATH = ROOT / "synonyms.yml"
 
 STOPWORDS = {
-    "a",
-    "ad",
-    "al",
-    "alla",
-    "alle",
-    "allo",
-    "anche",
-    "che",
-    "chi",
-    "ci",
-    "col",
-    "con",
-    "da",
-    "dal",
-    "dalla",
-    "delle",
-    "di",
-    "e",
-    "era",
-    "ero",
-    "gli",
-    "ha",
-    "ho",
-    "i",
-    "il",
-    "in",
-    "io",
-    "la",
-    "le",
-    "lo",
-    "ma",
-    "mi",
-    "mia",
-    "mio",
-    "nel",
-    "nella",
-    "non",
-    "o",
-    "per",
-    "poi",
-    "si",
-    "sono",
-    "su",
-    "tra",
-    "un",
-    "una",
-    "uno",
-    "vedere",
-    "vedevo",
-    "visto",
-    "sognato",
-    "sognavo",
-    "sogno",
+    # articoli, preposizioni articolate
+    "a", "ad", "al", "alla", "alle", "allo", "agli", "ai",
+    "col", "coi", "con", "da", "dal", "dalla", "dallo", "dagli", "dai",
+    "del", "dei", "degli", "dello", "delle", "di", "in", "nel", "nella",
+    "nello", "negli", "nei", "sul", "sulla", "sullo", "sugli", "sui",
+    "il", "la", "le", "lo", "gli", "i", "un", "una", "uno", "e", "o",
+    # congiunzioni, avverbi di uso comune
+    "anche", "che", "chi", "cui", "ci", "ma", "mi", "non", "per", "poi",
+    "si", "su", "tra", "fra",
+    "quando", "come", "dove", "perche", "percio", "quindi", "allora",
+    "mentre", "dopo", "prima", "sempre", "gia", "piu", "meno", "molto",
+    "poco", "troppo", "tanto", "tanta", "tanti", "tante", "tutto",
+    "tutti", "tutta", "tutte", "ogni", "altro", "altra", "altri",
+    "altre", "cosi", "pure", "invece", "oppure", "cioe",
+    # pronomi e aggettivi possessivi/dimostrativi
+    "mia", "mio", "tuo", "tua", "tuoi", "tue", "suo", "sua", "suoi",
+    "sue", "nostro", "nostra", "nostri", "nostre", "vostro", "vostra",
+    "vostri", "vostre", "stesso", "stessa", "stessi", "stesse",
+    "cosa", "qualcosa", "qualcuno", "nessuno", "niente",
+    "questo", "questa", "questi", "queste", "quello", "quella",
+    "quelli", "quelle", "quel", "quei", "quegli",
+    "lui", "lei", "loro", "noi", "voi", "io",
+    # ausiliari coniugati (essere, avere, stare) usati nel racconto del sogno
+    "era", "ero", "eri", "eravamo", "eravate", "erano", "sono", "sara",
+    "sarai", "sarebbe", "stato", "stata", "stati", "state", "essendo",
+    "sto", "stai", "sta", "stiamo", "stanno", "stavo", "stavi", "stava",
+    "stavamo", "stavate", "stavano", "stando",
+    "ha", "ho", "hai", "abbiamo", "avete", "hanno", "avevo", "avevi",
+    "aveva", "avevamo", "avevate", "avevano", "avendo", "avuto",
+    "avuta", "avuti", "avute",
+    # verbi/participi del racconto onirico, senza valore simbolico
+    "vedere", "vedevo", "visto", "sognato", "sognavo", "sogno",
 }
+
+
+def _warn_duplicate_top_level_keys(path: Path) -> None:
+    """Warn if synonyms YAML contains duplicate top-level keys."""
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        return
+
+    key_re = re.compile(r"^([^\s#][^:]*):\s*$")
+    seen: dict[str, int] = {}
+    duplicates: list[tuple[str, int, int]] = []
+
+    for line_no, raw in enumerate(text.splitlines(), start=1):
+        m = key_re.match(raw)
+        if not m:
+            continue
+        key = m.group(1).strip()
+        first = seen.get(key)
+        if first is None:
+            seen[key] = line_no
+        else:
+            duplicates.append((key, first, line_no))
+
+    for key, first, second in duplicates:
+        print(
+            (
+                f"[synonyms] chiave duplicata '{key}' in {path.name}: "
+                f"righe {first} e {second}. Usata solo l'ultima."
+            ),
+            file=sys.stderr,
+        )
 
 def _carica_sinonimi() -> dict[str, set[str]]:
     """Carica il dizionario sinonimi da synonyms.yml se disponibile.
@@ -111,6 +123,7 @@ def _carica_sinonimi() -> dict[str, set[str]]:
     Fallback: dizionario base hardcoded per compatibilità.
     """
     if _YAML_OK and SYNONYMS_PATH.exists():
+        _warn_duplicate_top_level_keys(SYNONYMS_PATH)
         with SYNONYMS_PATH.open(encoding="utf-8") as f:
             raw = yaml.safe_load(f) or {}
         aliases: dict[str, set[str]] = {}
@@ -177,7 +190,6 @@ def expanded_tokens(text: str) -> set[str]:
         norm_variants = {normalize(item) for item in variants}
         if norm_canonical in result or result.intersection(norm_variants):
             result.add(norm_canonical)
-            result.update(norm_variants)
     return result
 
 
@@ -240,10 +252,18 @@ def find_matches(dream: str, entries: list[SymbolEntry], limit: int) -> list[Mat
         detail_tokens = tokens(entry.detail)
         score = 0.0
         reasons: list[str] = []
+        exact_hit = False
 
-        if entry.symbol_norm and re.search(rf"\b{re.escape(entry.symbol_norm)}\b", dream_norm):
+        symbol_has_content = any(
+            word not in STOPWORDS and len(word) > 2 for word in entry.symbol_norm.split()
+        )
+        if (
+            symbol_has_content
+            and re.search(rf"\b{re.escape(entry.symbol_norm)}\b", dream_norm)
+        ):
             score += 9.0
             reasons.append("simbolo esatto")
+            exact_hit = True
 
         symbol_overlap = dream_tokens.intersection(symbol_tokens)
         if symbol_overlap:
@@ -263,6 +283,11 @@ def find_matches(dream: str, entries: list[SymbolEntry], limit: int) -> list[Mat
             if best_ratio >= 0.82:
                 score += 3.0 * best_ratio
                 reasons.append("somiglianza lessicale")
+
+        # Gate anti-rumore: blocca match troppo deboli, lasciando passare
+        # solo segnali con aggancio simbolico reale.
+        if score < 4.0 and not exact_hit and not symbol_overlap:
+            continue
 
         if score > 0:
             score *= source_weight(entry.source)
@@ -375,6 +400,24 @@ def format_combo(numbers: tuple[int, ...]) -> str:
     return " ".join(f"{number:02d}" for number in numbers)
 
 
+def reading_quality(matches: list[Match]) -> tuple[str, str]:
+    """Valuta la qualità complessiva del segnale della lettura."""
+    if not matches:
+        return ("bassa", "nessuna evidenza simbolica solida")
+
+    top = matches[:8]
+    avg_score = sum(m.score for m in top) / len(top)
+    exact_hits = sum(1 for m in top if "simbolo esatto" in m.reason)
+    symbolic_hits = sum(1 for m in top if "parole nel simbolo" in m.reason)
+    strong = exact_hits + symbolic_hits
+
+    if avg_score >= 9.0 and strong >= 4:
+        return ("alta", f"score medio top-{len(top)} {avg_score:.1f}, agganci simbolici forti {strong}")
+    if avg_score >= 6.0 and strong >= 2:
+        return ("media", f"score medio top-{len(top)} {avg_score:.1f}, evidenza mista {strong}")
+    return ("bassa", f"score medio top-{len(top)} {avg_score:.1f}, segnale fragile")
+
+
 def _ronchetti_nota(simbolo: str) -> str | None:
     """Restituisce la nota Ronchetti per un simbolo, se disponibile."""
     if not _CABALA_OK:
@@ -456,6 +499,8 @@ def render_response(dream: str, matches: list[Match]) -> str:
         if source_counts
         else "nessuna corrispondenza",
     ]
+    quality, quality_reason = reading_quality(matches)
+    lines.extend(["Qualita lettura:", f"{quality} ({quality_reason})"])
 
     # ------------------------------------------------------------------ simboli
     lines.append("")

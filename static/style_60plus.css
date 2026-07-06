@@ -45,7 +45,7 @@ div {
 h1 {
     font-family: 'Cinzel', serif;
     font-size: clamp(2.8rem, 5vw, 4rem);
-    color: #9a7b2e;
+    color: #7a5e18;
     letter-spacing: 0.2em;
     line-height: 1.15;
     margin-bottom: 1rem;
@@ -55,7 +55,7 @@ h1 {
 h2 {
     font-family: 'Cinzel', serif;
     font-size: clamp(2rem, 4vw, 2.8rem);
-    color: #9a7b2e;
+    color: #7a5e18;
     letter-spacing: 0.12em;
     line-height: 1.2;
     margin-bottom: 0.9rem;
@@ -134,7 +134,7 @@ textarea::placeholder {
 [data-testid="stTextInput"] label p {
     font-family: 'Cinzel', serif !important;
     font-size: 1.1rem !important;
-    color: #9a7b2e !important;
+    color: #7a5e18 !important;
     letter-spacing: 0.06em;
     margin-bottom: 0.5rem !important;
 }
@@ -183,7 +183,7 @@ textarea::placeholder {
 /* Bottone secondario */
 [data-testid="stButton"] > button:not([kind="primary"]) {
     background: #f3e8cf !important;
-    color: #9a7b2e !important;
+    color: #7a5e18 !important;
     border: 2px solid #9a7b2e55 !important;
     min-height: 52px !important;
     font-size: 1.1rem !important;
@@ -209,7 +209,7 @@ textarea::placeholder {
 }
 
 [data-testid="stTabs"] [data-testid="stTab"][aria-selected="true"] {
-    color: #9a7b2e !important;
+    color: #7a5e18 !important;
     border-bottom: 3px solid #9a7b2e !important;
 }
 
@@ -240,7 +240,7 @@ textarea::placeholder {
 
 [data-testid="stMetricValue"] {
     font-family: 'Cinzel', serif !important;
-    color: #9a7b2e !important;
+    color: #7a5e18 !important;
     font-size: 2.5rem !important;
 }
 
@@ -281,7 +281,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
    ══════════════════════════════════════════════ */
 
 [data-testid="stSpinner"] > div {
-    color: #9a7b2e !important;
+    color: #7a5e18 !important;
     font-size: 1.1rem !important;
 }
 
@@ -363,7 +363,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
     font-family: 'Cinzel', serif;
     font-size: 3.5rem;
     font-weight: 700;
-    color: #9a7b2e;
+    color: #7a5e18;
     line-height: 1;
     text-shadow:
         0 0 20px rgba(150,118,40,0.6),
@@ -409,7 +409,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
 .risultato-principale .titolo-risultato {
     font-family: 'Cinzel', serif;
     font-size: 1.4rem;
-    color: #9a7b2e;
+    color: #7a5e18;
     letter-spacing: 0.1em;
     margin-bottom: 1rem;
     padding-bottom: 0.6rem;
@@ -463,7 +463,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
 /* Variante secondaria del bottone grande */
 .bottone-grande.secondario {
     background: transparent;
-    color: #9a7b2e;
+    color: #7a5e18;
     border: 2px solid #9a7b2e;
     box-shadow: none;
 }
@@ -471,7 +471,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
 .bottone-grande.secondario:hover {
     background: #9a7b2e15;
     box-shadow: 0 4px 20px rgba(150,118,40,0.25);
-    color: #9a7b2e;
+    color: #7a5e18;
 }
 
 /* ── .testo-semplice ──
@@ -494,7 +494,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
 
 .testo-semplice strong,
 .testo-semplice b {
-    color: #9a7b2e;
+    color: #7a5e18;
     font-weight: 700;
 }
 
@@ -510,18 +510,18 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
 /* Card simbolo — più spaziosa */
 .sym-card {
     background: linear-gradient(135deg, #f4ead2 0%, #f5ecd6 100%);
-    border-left: 4px solid #9a7b2e;
-    border-radius: 0 14px 14px 0;
+    border: 1px solid #9a7b2e33;
+    border-radius: 14px;
     padding: 1.2rem 1.6rem;
     margin: 0.8rem 0;
     transition: border-color 0.2s;
 }
 
-.sym-card:hover { border-left-color: #e8c86c; }
+.sym-card:hover { border-color: #e8c86c; }
 
 .sym-name {
     font-family: 'Cinzel', serif;
-    color: #9a7b2e;
+    color: #7a5e18;
     font-weight: 700;
     font-size: 1.2rem;
 }
@@ -572,7 +572,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
 .num-big {
     font-family: 'Cinzel', serif;
     font-size: 3.5rem;
-    color: #9a7b2e;
+    color: #7a5e18;
     line-height: 1;
     text-shadow: 0 0 24px rgba(150,118,40,0.5);
 }
@@ -606,7 +606,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
 
 .score-num {
     font-family: 'Cinzel', serif;
-    color: #9a7b2e;
+    color: #7a5e18;
     font-size: 1.6rem;
     min-width: 48px;
     text-align: right;
@@ -672,7 +672,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
 .smorfia-title {
     font-family: 'Cinzel', serif;
     font-size: clamp(2.8rem, 5vw, 4rem);
-    color: #9a7b2e;
+    color: #7a5e18;
     letter-spacing: 0.2em;
     text-shadow: 0 0 40px rgba(150,118,40,0.35), 0 0 80px rgba(150,118,40,0.1);
     margin: 0;
@@ -711,7 +711,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
 
 .eso-section-title {
     font-family: 'Cinzel', serif;
-    color: #9a7b2e;
+    color: #7a5e18;
     font-size: 0.95rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -728,7 +728,7 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
     margin: 0 4px;
 }
 
-.badge-gold { background: #9a7b2e22; color: #9a7b2e; border: 1px solid #9a7b2e44; }
+.badge-gold { background: #9a7b2e22; color: #7a5e18; border: 1px solid #9a7b2e44; }
 .badge-blue { background: #6f5a3a22; color: #6f5a3a; border: 1px solid #6f5a3a44; }
 
 /* Comparison items */
@@ -743,14 +743,14 @@ div[data-testid="stAlert"] > div[data-testid="alertWarning"] {
     line-height: 1.6;
 }
 
-.comparison-item strong { color: #9a7b2e; }
+.comparison-item strong { color: #7a5e18; }
 .shared-nums { color: #6f5a3a; font-weight: 600; }
 
 /* Combo header */
 .combo-header {
     font-family: 'Cinzel', serif;
     font-size: 1.2rem;
-    color: #9a7b2e;
+    color: #7a5e18;
     letter-spacing: 0.1em;
     margin: 2rem 0 1rem;
     padding-bottom: 0.5rem;
