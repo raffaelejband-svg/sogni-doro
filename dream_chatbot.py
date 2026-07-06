@@ -183,6 +183,19 @@ def tokens(text: str) -> set[str]:
     return {token for token in normalize(text).split() if token not in STOPWORDS and len(token) > 2}
 
 
+def _variante_genere_singolare(token: str) -> str | None:
+    """Variante o<->a (accordo di genere singolare) di un token, per
+    agganciare simboli scritti al genere opposto nel dataset (es. il sogno
+    dice "defunta", il simbolo in archivio e' "Defunto"). Solo o<->a, non
+    plurali (i/e): allargare ai plurali moltiplica le collisioni accidentali
+    (es. "Giovanna"/"Giovanni" sono persone diverse). Soglia di lunghezza a
+    6 caratteri: i sostantivi brevi dove lo scambio cambia la persona/il
+    significato (es. "zia"/"zio", "cane") restano sotto soglia."""
+    if len(token) < 6 or token[-1] not in "oa":
+        return None
+    return token[:-1] + ("a" if token[-1] == "o" else "o")
+
+
 def expanded_tokens(text: str) -> set[str]:
     result = set(tokens(text))
     for canonical, variants in ALIASES.items():
@@ -269,6 +282,18 @@ def find_matches(dream: str, entries: list[SymbolEntry], limit: int) -> list[Mat
         if symbol_overlap:
             score += 5.0 + len(symbol_overlap)
             reasons.append("parole nel simbolo: " + ", ".join(sorted(symbol_overlap)))
+
+        # Segnale debole: accordo di genere singolare (es. "defunta" nel
+        # sogno aggancia il simbolo "Defunto"). Punteggio modesto e non
+        # cumulabile con symbol_overlap: emerge solo quando non c'e' gia'
+        # un aggancio piu' solido, per limitare i falsi positivi su coppie
+        # di parole diverse che condividono solo la desinenza (es. "bilancia"
+        # non deve agganciare "bilancio").
+        if not symbol_overlap and len(symbol_tokens) == 1:
+            simbolo_unico = next(iter(symbol_tokens))
+            if any(_variante_genere_singolare(t) == simbolo_unico for t in base_tokens):
+                score += 4.0
+                reasons.append("accordo di genere")
 
         detail_overlap = base_tokens.intersection(detail_tokens)
         if detail_overlap:
