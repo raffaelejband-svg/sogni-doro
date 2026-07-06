@@ -810,5 +810,10 @@ torre:
   - rocca
   - campanile
 
+defunto:
+  - defunta
+  - defunti
+  - defunte
+
 # Fine synonyms.yml — versione con aggiunte Ronchetti 2026-05-28
   - albero da frutto

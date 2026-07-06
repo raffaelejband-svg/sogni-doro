@@ -655,23 +655,52 @@ def build_interpretation(dream: str, matches: list[Match]) -> dict:
             "n_simboli": 0,
         }
 
+    # Raggruppa i match per nome simbolo: quando più voci condividono lo
+    # stesso simbolo con qualificatori diversi e incompatibili (es. "Braccia"
+    # sporche/sottili/doloranti), non va narrato a caso il primo per punteggio
+    # se il suo qualificatore non compare da nessuna parte nel sogno.
+    dream_tok = tokens(dream)
+    per_simbolo: dict[str, list[Match]] = defaultdict(list)
+    for m in matches:
+        per_simbolo[normalize(m.entry.symbol)].append(m)
+
+    def _qualificatore(detail: str) -> str:
+        return detail.split(":", 1)[0].strip() if ":" in detail else ""
+
+    def _dettaglio_confermato(m: Match) -> bool:
+        """Il dettaglio specifico di questa voce è davvero confermato dal
+        sogno, o rischia di affermare qualcosa che l'utente non ha detto?
+        Es. "Braccia Sporche" -> "avere significa miseria" non va narrato
+        come fatto solo perché la parola "braccia" compare nel sogno: serve
+        che "sporche" (o l'intero nome del simbolo) sia davvero presente."""
+        qualificatore = _qualificatore(m.entry.detail or "")
+        if qualificatore:
+            return bool(tokens(qualificatore) & dream_tok)
+        return "simbolo esatto" in m.reason
+
     # I simboli principali (i primi per rilevanza), deduplicati per nome
-    principali: list[Match] = []
+    principali: list[tuple[Match, bool]] = []  # (match, dettaglio_confermato)
     visti: set[str] = set()
     for m in matches:
         chiave = normalize(m.entry.symbol)
         if chiave in visti:
             continue
         visti.add(chiave)
-        principali.append(m)
+        candidati = per_simbolo[chiave]
+        scelto, confermato = m, _dettaglio_confermato(m)
+        if len(candidati) > 1 and not confermato:
+            aderenti = [c for c in candidati if _dettaglio_confermato(c)]
+            if aderenti:
+                scelto, confermato = aderenti[0], True
+        principali.append((scelto, confermato))
         if len(principali) >= 4:
             break
 
     simboli_narrati: list[tuple[str, str]] = []
-    for i, m in enumerate(principali):
+    for i, (m, confermato) in enumerate(principali):
         nome = m.entry.symbol.strip().capitalize()
         connettivo = _pick(_CONNETTIVI, seed, salt=i).format(sim=f"«{nome}»")
-        dettaglio = (m.entry.detail or "").strip()
+        dettaglio = (m.entry.detail or "").strip() if confermato else ""
         if dettaglio:
             # Ripulisci e accorcia il dettaglio della fonte
             dettaglio = dettaglio[0].upper() + dettaglio[1:]
