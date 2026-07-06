@@ -31,6 +31,25 @@ try:
 except ImportError:
     _CABALA_OK = False
 
+try:
+    import simplemma
+    _LEMMI_OK = True
+except ImportError:
+    _LEMMI_OK = False
+
+
+def _lemma(parola: str) -> str:
+    """Forma base (lemma) di una parola italiana: unifica plurali, genere e
+    coniugazioni verbali (es. "correva"/"correre", "cavalli"/"cavallo") usando
+    un dizionario linguistico reale invece di euristiche sulle desinenze.
+    Fallback: la parola stessa se simplemma non è installato."""
+    if not _LEMMI_OK:
+        return parola
+    try:
+        return simplemma.lemmatize(parola, lang="it")
+    except Exception:
+        return parola
+
 
 ROOT = Path(__file__).resolve().parent
 VAULT = ROOT / "Obsidian Vault SMORFIA"
@@ -163,6 +182,7 @@ class SymbolEntry:
     source: str
     symbol_norm: str
     searchable: str
+    symbol_lemmi: frozenset[str]
 
 
 @dataclass(frozen=True)
@@ -240,6 +260,7 @@ def load_indexes(paths: tuple[Path, ...] = INDEXES) -> list[SymbolEntry]:
                 detail = row["detail"].strip()
                 symbol_norm = normalize(symbol)
                 searchable = normalize(f"{symbol} {detail}")
+                symbol_lemmi = frozenset(_lemma(w) for w in symbol_norm.split())
                 entries.append(
                     SymbolEntry(
                         symbol=symbol,
@@ -249,6 +270,7 @@ def load_indexes(paths: tuple[Path, ...] = INDEXES) -> list[SymbolEntry]:
                         source=row["source"],
                         symbol_norm=symbol_norm,
                         searchable=searchable,
+                        symbol_lemmi=symbol_lemmi,
                     )
                 )
     return entries
@@ -258,6 +280,7 @@ def find_matches(dream: str, entries: list[SymbolEntry], limit: int) -> list[Mat
     dream_norm = normalize(dream)
     base_tokens = tokens(dream)
     dream_tokens = expanded_tokens(dream)
+    dream_lemmi = {_lemma(t) for t in base_tokens}
     matches: list[Match] = []
 
     for entry in entries:
@@ -283,13 +306,24 @@ def find_matches(dream: str, entries: list[SymbolEntry], limit: int) -> list[Mat
             score += 5.0 + len(symbol_overlap)
             reasons.append("parole nel simbolo: " + ", ".join(sorted(symbol_overlap)))
 
+        # Lemma affine: unifica plurali, genere e coniugazioni verbali usando
+        # un dizionario linguistico reale (es. "correva"/"correre",
+        # "cavalli"/"cavallo") invece di euristiche sulle desinenze. Punteggio
+        # pieno perche' il dizionario e' affidabile, non una supposizione.
+        lemma_overlap: set[str] = set()
+        if not symbol_overlap:
+            lemma_overlap = dream_lemmi.intersection(entry.symbol_lemmi)
+            if lemma_overlap:
+                score += 5.0 + len(lemma_overlap)
+                reasons.append("lemma affine: " + ", ".join(sorted(lemma_overlap)))
+
         # Segnale debole: accordo di genere singolare (es. "defunta" nel
-        # sogno aggancia il simbolo "Defunto"). Punteggio modesto e non
-        # cumulabile con symbol_overlap: emerge solo quando non c'e' gia'
-        # un aggancio piu' solido, per limitare i falsi positivi su coppie
-        # di parole diverse che condividono solo la desinenza (es. "bilancia"
-        # non deve agganciare "bilancio").
-        if not symbol_overlap and len(symbol_tokens) == 1:
+        # sogno aggancia il simbolo "Defunto") per i rari casi in cui il
+        # dizionario lemmi non collega le due forme. Punteggio modesto e non
+        # cumulabile con i due agganci precedenti, per limitare i falsi
+        # positivi su coppie di parole diverse che condividono solo la
+        # desinenza (es. "bilancia" non deve agganciare "bilancio").
+        if not symbol_overlap and not lemma_overlap and len(symbol_tokens) == 1:
             simbolo_unico = next(iter(symbol_tokens))
             if any(_variante_genere_singolare(t) == simbolo_unico for t in base_tokens):
                 score += 4.0
@@ -300,7 +334,10 @@ def find_matches(dream: str, entries: list[SymbolEntry], limit: int) -> list[Mat
             score += min(4.0, len(detail_overlap) * 0.8)
             reasons.append("dettaglio affine: " + ", ".join(sorted(detail_overlap)[:4]))
 
-        if not symbol_overlap and not detail_overlap and entry.symbol_norm:
+        # Il lemma affine copre ormai i casi grammaticali (plurali, genere,
+        # coniugazioni): la somiglianza lessicale resta solo per i refusi,
+        # e non serve calcolarla se un aggancio migliore e' gia' scattato.
+        if not symbol_overlap and not detail_overlap and not lemma_overlap and entry.symbol_norm:
             best_ratio = max(
                 (SequenceMatcher(None, token, entry.symbol_norm).ratio() for token in dream_tokens),
                 default=0.0,
@@ -685,6 +722,7 @@ def build_interpretation(dream: str, matches: list[Match]) -> dict:
     # sporche/sottili/doloranti), non va narrato a caso il primo per punteggio
     # se il suo qualificatore non compare da nessuna parte nel sogno.
     dream_tok = tokens(dream)
+    dream_lemmi = {_lemma(t) for t in dream_tok}
     per_simbolo: dict[str, list[Match]] = defaultdict(list)
     for m in matches:
         per_simbolo[normalize(m.entry.symbol)].append(m)
@@ -697,11 +735,14 @@ def build_interpretation(dream: str, matches: list[Match]) -> dict:
         sogno, o rischia di affermare qualcosa che l'utente non ha detto?
         Es. "Braccia Sporche" -> "avere significa miseria" non va narrato
         come fatto solo perché la parola "braccia" compare nel sogno: serve
-        che "sporche" (o l'intero nome del simbolo) sia davvero presente."""
+        che "sporche" (o l'intero nome del simbolo) sia davvero presente.
+        Il confronto passa dai lemmi, cosi' "sporco" nel sogno conferma
+        anche un qualificatore scritto "sporche" nella fonte, e viceversa."""
         qualificatore = _qualificatore(m.entry.detail or "")
         if qualificatore:
-            return bool(tokens(qualificatore) & dream_tok)
-        return "simbolo esatto" in m.reason
+            qual_lemmi = {_lemma(t) for t in tokens(qualificatore)}
+            return bool(qual_lemmi & dream_lemmi) or bool(tokens(qualificatore) & dream_tok)
+        return "simbolo esatto" in m.reason or "lemma affine" in m.reason
 
     # I simboli principali (i primi per rilevanza), deduplicati per nome
     principali: list[tuple[Match, bool]] = []  # (match, dettaglio_confermato)
